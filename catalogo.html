@@ -348,6 +348,15 @@
 <p>Integración con infraestructura existente; hardware especial aparte.</p>
 <div class="price">$7.500 inicial · $1.800 / año</div>
 </a>
+<a class="product" href="booking-system-hardware.html" aria-label="Ver BOOKING SYSTEM HARDWARE">
+<div class="product-top">
+<span>HARDWARE</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</div>
+<h3>BOOKING SYSTEM HARDWARE</h3>
+<p>Gateway Edge para reservas, accesos y continuidad operativa local.</p>
+<div class="price">Precio según configuración</div>
+</a>
 <a class="product" href="industrial-io-iohub-01.html" aria-label="Ver INDUSTRIAL I/O · IOHUB-01">
 <div class="product-top">
 <span>PRODUCTO</span>
@@ -356,6 +365,15 @@
 <h3>INDUSTRIAL I/O · IOHUB-01</h3>
 <p>Módulo de entradas y salidas industriales.</p>
 <div class="price">$6.000 inicial · $1.200 / año</div>
+</a>
+<a class="product" href="industrial-io-software.html" aria-label="Ver INDUSTRIAL I/O SOFTWARE">
+<div class="product-top">
+<span>SOFTWARE</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</div>
+<h3>INDUSTRIAL I/O SOFTWARE</h3>
+<p>Runtime Edge OS para integración, supervisión, prueba y evidencia de I/O industrial.</p>
+<div class="price">Precio según alcance</div>
 </a>
 <a class="product" href="process-control-engine-pce.html">
 <div class="product-top">
@@ -476,3 +494,4 @@
 <script>document.getElementById('year').textContent=new Date().getFullYear();const menu=document.getElementById('menu'),links=document.getElementById('links');menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});links.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')});const rememberCatalogPosition=product=>{if(!product)return;const destination=product.getAttribute('href')||product.querySelector('a[href]')?.getAttribute('href');if(destination&&destination.endsWith('.html')){sessionStorage.setItem('adnekoCatalogScrollY',String(window.scrollY));sessionStorage.setItem('adnekoCatalogReturn','1')}};document.addEventListener('click',event=>rememberCatalogPosition(event.target.closest('.product')));document.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')rememberCatalogPosition(event.target.closest('.product'))});if(sessionStorage.getItem('adnekoCatalogReturn')==='1'){const savedPosition=Number(sessionStorage.getItem('adnekoCatalogScrollY')||0);sessionStorage.removeItem('adnekoCatalogReturn');requestAnimationFrame(()=>window.scrollTo(0,savedPosition))}</script>
 </body>
 </html>
+
