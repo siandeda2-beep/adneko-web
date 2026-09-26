@@ -47,8 +47,14 @@ header{background:#07101eea;border-bottom:1px solid #9fb5d139;position:relative;
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .card{min-height:255px;background:#07152491;border:1px solid #9fb5d15c;backdrop-filter:blur(5px);padding:30px;display:flex;flex-direction:column;justify-content:space-between;transition:background .2s}
 .card:hover{background:#1b2a44ef}
-.card.visual-feature{position:relative;isolation:isolate;background:url('visual-systems-principal.png') center/cover no-repeat;overflow:hidden}
-.card.visual-feature:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#02071170 0%,#02071145 35%,#020711e8 100%)}
+.card.card-image{position:relative;isolation:isolate;background:var(--card-image) center/cover no-repeat;overflow:hidden}
+.card.card-image:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#02071170 0%,#02071145 35%,#020711e8 100%)}
+.card-software{--card-image:url('card-software-saas.png')}
+.card-ecosistemas{--card-image:url('card-ecosistemas.png')}
+.card-magazine{--card-image:url('card-magazine.png')}
+.card-inteligencia{--card-image:url('card-inteligencia.png')}
+.card-industria{--card-image:url('card-industria.png')}
+.card-servicios{--card-image:url('card-servicios-digitales.png')}
 .card.visual-feature:hover{background-image:linear-gradient(#17345555,#17345555),url('visual-systems-principal.png')}
 .card small{color:#a9c3ef;letter-spacing:.14em;font-size:11px}
 .card h3{font-size:clamp(23px,2vw,30px);font-weight:300;letter-spacing:-.045em;margin:12px 0}
@@ -130,49 +136,49 @@ footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:
 <p>Una arquitectura de productos conectados para operaciones, territorios y nuevas empresas inteligentes.</p>
 </div>
 <div class="grid">
-<a class="card wide" href="catalogo.html#grupo-1" aria-label="Ver Software y SaaS">
+<a class="card card-image card-software wide" href="catalogo.html#grupo-1" aria-label="Ver Software y SaaS">
 <small>CATÁLOGO</small>
 <div>
 <h3>Software &amp; SaaS</h3>
 <p>Aplicaciones para operar y crecer.</p>
 </div>
 </a>
-<a class="card" href="catalogo.html#grupo-2" aria-label="Ver Ecosistemas territoriales">
+<a class="card card-image card-ecosistemas" href="catalogo.html#grupo-2" aria-label="Ver Ecosistemas territoriales">
 <small>CATÁLOGO</small>
 <div>
 <h3>Ecosistemas territoriales</h3>
 <p>Infraestructura digital para sectores y regiones.</p>
 </div>
 </a>
-<a class="card" href="catalogo.html#grupo-3" aria-label="Ver Magazine OS">
+<a class="card card-image card-magazine" href="catalogo.html#grupo-3" aria-label="Ver Magazine OS">
 <small>CATÁLOGO</small>
 <div>
 <h3>Magazine OS</h3>
 <p>Plataformas editoriales digitales.</p>
 </div>
 </a>
-<a class="card" href="catalogo.html#grupo-4" aria-label="Ver Inteligencia y autonomía">
+<a class="card card-image card-inteligencia" href="catalogo.html#grupo-4" aria-label="Ver Inteligencia y autonomía">
 <small>CATÁLOGO</small>
 <div>
 <h3>Inteligencia &amp; autonomía</h3>
 <p>Sistemas y componentes de IA para operaciones reales.</p>
 </div>
 </a>
-<a class="card" href="catalogo.html#grupo-5" aria-label="Ver Edge e industria">
+<a class="card card-image card-industria" href="catalogo.html#grupo-5" aria-label="Ver Edge e industria">
 <small>CATÁLOGO</small>
 <div>
 <h3>Edge &amp; industria</h3>
 <p>Sistemas industriales y hardware IA nativo.</p>
 </div>
 </a>
-<a class="card visual-feature" href="catalogo.html#grupo-6" aria-label="Ver Visual Systems">
+<a class="card card-image visual-feature" href="catalogo.html#grupo-6" aria-label="Ver Visual Systems">
 <small>CATÁLOGO</small>
 <div>
 <h3>Visual Systems</h3>
 <p>Tecnología visual de fabricantes internacionales.</p>
 </div>
 </a>
-<a class="card" href="catalogo.html#grupo-7" aria-label="Ver Servicios digitales">
+<a class="card card-image card-servicios" href="catalogo.html#grupo-7" aria-label="Ver Servicios digitales">
 <small>CATÁLOGO</small>
 <div>
 <h3>Servicios digitales</h3>
