@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07101e">
+  <title>Blog | ADNEKO</title>
+  <meta name="description" content="Blog de ADNEKO sobre innovación, inteligencia artificial, aplicaciones, ecosistemas, Visual Systems, hardware y soluciones.">
+  <style>
+    :root{font-family:Arial,Helvetica,sans-serif;color:#f2f5fc;background:#07101e;scroll-behavior:smooth}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background-color:#07101e;background-image:linear-gradient(180deg,#0308179c,#030817c7),url('blog-principal-fondo.webp');background-position:center top;background-size:cover;background-attachment:fixed;background-repeat:no-repeat}
+    a{color:inherit;text-decoration:none}
+    .shell{width:min(100%,1380px);margin:auto;padding-inline:clamp(22px,5vw,78px)}
+    header{position:sticky;top:0;z-index:20;background:#07101eef;border-bottom:1px solid #9fb5d139;backdrop-filter:blur(12px)}
+    .nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{font-size:17px;letter-spacing:.22em;font-weight:500}
+    .links{display:flex;align-items:center;gap:28px;color:#cbd4e6;font-size:13px;letter-spacing:.06em}
+    .nav-cta{border:1px solid #c0cde480;padding:12px 18px}
+    .hero{text-align:center;padding:clamp(90px,13vw,165px) 0 clamp(65px,8vw,105px)}
+    .eyebrow{font-size:11px;letter-spacing:.28em;color:#afc5e8}
+    h1{font-size:clamp(52px,9vw,126px);font-weight:300;letter-spacing:-.075em;line-height:.9;margin:25px 0}
+    .hero p{font-size:clamp(17px,2vw,23px);line-height:1.6;color:#d7e1ef;max-width:790px;margin:0 auto}
+    .topics{margin-top:30px;color:#9fb4d3;font-size:12px;letter-spacing:.12em;line-height:1.8}
+    .listing{padding-bottom:110px}
+    .section-head{border-bottom:1px solid #9fb5d139;padding-bottom:22px;margin-bottom:26px;display:flex;justify-content:space-between;align-items:end;gap:25px}
+    .section-head h2{font-size:clamp(30px,4vw,52px);font-weight:300;letter-spacing:-.05em;margin:10px 0 0}
+    .label{font-size:11px;letter-spacing:.23em;color:#afc5e8}
+    .section-head p{max-width:430px;color:#b9c7da;line-height:1.6;margin:0}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .card{display:grid;grid-template-columns:1.08fr .92fr;min-height:390px;background:#071321db;border:1px solid #a8c1e44f;overflow:hidden;transition:transform .25s ease,border-color .25s ease}
+    .card:hover{transform:translateY(-4px);border-color:#c9dbf09a}
+    .card-media{min-height:100%;overflow:hidden;background:#050a11}
+    .card-media img{width:100%;height:100%;object-fit:cover;display:block}
+    .card-copy{padding:clamp(25px,4vw,48px);display:flex;flex-direction:column;justify-content:center}
+    .card h2{font-size:clamp(28px,3vw,45px);line-height:1.06;font-weight:300;letter-spacing:-.05em;margin:18px 0}
+    .card p{color:#c4d0df;line-height:1.7;margin:0}
+    .author{margin-top:28px;color:#91abd0;font-size:12px;letter-spacing:.1em}
+    .read{margin-top:30px;font-size:12px;letter-spacing:.12em;color:#e5edf8}
+    footer{border-top:1px solid #a2b7d139;padding:32px 0;color:#abb9cf;font-size:13px;background:#06101bea}
+    .foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    @media(max-width:950px){.grid{grid-template-columns:1fr}.card{grid-template-columns:1fr 1fr}}
+    @media(max-width:650px){.links a:not(.nav-cta){display:none}.hero{padding-top:80px}.card{grid-template-columns:1fr}.card-media{min-height:230px}.card-copy{padding:28px}.section-head{display:block}.section-head p{margin-top:16px}body{background-size:100% auto;background-attachment:scroll;background-repeat:repeat-y}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header><div class="shell nav"><a class="brand" href="index.html">ADNEKO</a><nav class="links" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="catalogo.html">Catálogo</a><a href="blog.html" aria-current="page">Blog</a><a href="brand-space.html">Brand Space</a><a href="contacto.html" class="nav-cta">Hablemos</a></nav></div></header>
+  <main>
+    <section class="hero shell"><div class="eyebrow">ADNEKO / CONOCIMIENTO Y EVOLUCIÓN</div><h1>Blog.</h1><p>Ideas, análisis y visión sobre innovación, inteligencia artificial, aplicaciones, ecosistemas, Visual Systems, sistemas de hardware y soluciones para la próxima evolución.</p><div class="topics">INNOVACIÓN · IA · APP · ECOSISTEMAS · VISUAL SYSTEMS · HARDWARE · SOLUCIONES</div></section>
+    <section class="shell listing">
+      <div class="section-head"><div><div class="label">PUBLICACIONES</div><h2>Perspectivas ADNEKO.</h2></div><p>Información estratégica para comprender el cambio tecnológico y convertirlo en capacidad real.</p></div>
+      <div class="grid">
+        <a class="card" href="blog-inteligencia-artificial-el-cambio-que-ya-comenzo.html" aria-label="Leer La inteligencia artificial: El cambio que ya comenzó">
+          <div class="card-media"><img src="blog-card-inteligencia-artificial.webp" alt="Fondo tecnológico de inteligencia artificial" loading="eager"></div>
+          <div class="card-copy"><div class="label">INTELIGENCIA ARTIFICIAL</div><h2>La inteligencia artificial: “El cambio que ya comenzó”</h2><p>Por qué las empresas deben rediseñar su núcleo antes de que la autonomía artificial transforme la economía.</p><div class="author">DE ADNEKO BLOGGERS</div><div class="read">LEER ARTÍCULO →</div></div>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer><div class="shell foot"><span>© <span id="year"></span> ADNEKO · Blog</span><span>Innovación · Inteligencia · Sistemas</span><a href="contacto.html">Contactar ADNEKO</a></div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>

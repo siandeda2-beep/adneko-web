@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La inteligencia artificial: el cambio que ya comenzó — ADNEKO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0d;
+    --bg-panel: #19191b;
+    --line: rgba(255,255,255,0.09);
+    --chrome: #cfcdc6;
+    --warm: #d8c9a3;
+    --warm-glow: rgba(216,201,163,0.55);
+    --text: #ececec;
+    --text-muted: #97969b;
+    --text-faint: #616166;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #0c0c0d; --bg-panel: #19191b; --text: #ececec; --text-muted: #97969b;
+  } }
+  :root[data-theme="dark"] {
+    --bg: #0c0c0d; --bg-panel: #19191b; --text: #ececec; --text-muted: #97969b;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(180deg, rgba(12,12,13,0.94), rgba(12,12,13,0.97) 40%, var(--bg) 78%),
+      url('blog-articulo-inteligencia-artificial-fondo.webp');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+  a { color: var(--warm); text-decoration-color: rgba(216,201,163,0.4); text-underline-offset: 3px; }
+  a:hover { text-decoration-color: var(--warm); }
+
+  .hero { position: relative; padding: 72px 24px 56px; }
+  .hero-inner { position: relative; max-width: 660px; margin: 0 auto; }
+  .brandline {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 13px; color: var(--text-muted); margin-bottom: 44px;
+  }
+  .brandline img.logo-mark { height: 30px; width: auto; display: block; }
+  .logo-word { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: .18em; color: var(--text); }
+  h1.title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(30px, 5.4vw, 44px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+  }
+  .subtitle {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin: 0 0 28px;
+  }
+  .meta {
+    font-size: 13px; color: var(--text-faint);
+    padding-top: 22px; border-top: 1px solid var(--line);
+  }
+
+  .article { max-width: 660px; margin: 0 auto; padding: 24px 24px 100px; position: relative; }
+  .article h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 56px 0 18px;
+    letter-spacing: -0.005em;
+  }
+  .article h2:first-child { margin-top: 0; }
+  .article p { font-size: 17px; color: var(--text); margin: 0 0 18px; max-width: 62ch; }
+
+  .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--chrome);
+    border-radius: 4px;
+    padding: 22px 24px;
+    margin: 32px 0;
+  }
+  .panel .label { font-size: 13px; font-weight: 600; color: var(--warm); margin: 0 0 8px; }
+  .panel p { margin: 0; font-size: 16px; color: var(--text); }
+  .panel p + p { margin-top: 10px; }
+
+  .conclusion {
+    background: linear-gradient(160deg, rgba(216,201,163,0.10), rgba(25,25,27,0.5));
+    border: 1px solid rgba(216,201,163,0.30);
+  }
+
+  ul.plain { margin: 0 0 20px; padding: 0; list-style: none; }
+  ul.plain li {
+    position: relative; padding-left: 22px; margin-bottom: 12px;
+    font-size: 16.5px; color: var(--text);
+  }
+  ul.plain li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border-radius: 1px;
+    background: var(--chrome);
+  }
+
+  .table-wrap { overflow-x: auto; margin: 28px 0; border: 1px solid var(--line); border-radius: 6px; }
+  table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 15px; }
+  th, td { text-align: left; padding: 13px 16px; vertical-align: top; }
+  thead th {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 13px;
+    color: var(--text-muted);
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--line);
+  }
+  tbody td { border-bottom: 1px solid var(--line); color: var(--text); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td:first-child { color: var(--chrome); font-weight: 500; white-space: nowrap; }
+
+  .sources { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .sources h2 { margin-top: 0; }
+  .sources ol { margin: 0; padding-left: 20px; color: var(--text-muted); font-size: 14.5px; }
+  .sources li { margin-bottom: 12px; }
+  .sources a { word-break: break-word; }
+
+  footer { border-top: 1px solid var(--line); padding: 40px 24px 60px; position: relative; }
+  .footer-inner { max-width: 660px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-inner img.logo-mark { height: 26px; width: auto; display: block; opacity: 0.9; }
+  .footer-inner .tag { color: var(--text-faint); font-size: 13px; }
+
+  body {
+    background-image: linear-gradient(180deg, rgba(7,13,22,.9), rgba(7,13,22,.94)), url('blog-articulo-inteligencia-artificial-fondo.webp');
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+  .site-header { position: sticky; top: 0; z-index: 20; background: rgba(7,16,30,.94); border-bottom: 1px solid rgba(159,181,209,.22); backdrop-filter: blur(12px); }
+  .site-nav { width: min(100%,1380px); min-height: 78px; margin: auto; padding-inline: clamp(22px,5vw,78px); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .site-brand { color: #f2f5fc; text-decoration: none; font-family: Arial,Helvetica,sans-serif; font-size: 17px; letter-spacing: .22em; }
+  .site-links { display: flex; align-items: center; gap: 28px; font-family: Arial,Helvetica,sans-serif; font-size: 13px; letter-spacing: .06em; }
+  .site-links a { color: #cbd4e6; text-decoration: none; }
+  .site-links .nav-cta { border: 1px solid rgba(192,205,228,.5); padding: 11px 17px; }
+  .hero { text-align: center; padding-top: clamp(72px,10vw,130px); }
+  .hero-inner { max-width: 820px; }
+  .brandline { justify-content: center; margin-bottom: 42px; }
+  h1.title { font-size: clamp(38px,6.4vw,68px); max-width: 18ch; margin: 0 auto 28px; }
+  .subtitle { max-width: 58ch; margin: 0 auto 34px; line-height: 1.65; }
+  .meta { max-width: 620px; margin: 0 auto; letter-spacing: .08em; }
+
+  @media (max-width: 480px) {
+    .site-links a:not(.nav-cta) { display: none; }
+    body { background-size: 100% auto; background-attachment: scroll; background-repeat: repeat-y; }
+    .hero { padding: 52px 20px 40px; }
+    .article { padding: 16px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-nav">
+    <a class="site-brand" href="index.html">ADNEKO</a>
+    <nav class="site-links" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="blog.html">Blog</a>
+      <a href="contacto.html" class="nav-cta">Hablemos</a>
+    </nav>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brandline">
+      <span class="logo-word">ADNEKO</span>
+      <span>Documento de visión, agosto de 2026</span>
+    </div>
+    <h1 class="title">La inteligencia artificial: el cambio que ya comenzó</h1>
+    <p class="subtitle">Por qué las empresas deben rediseñar su núcleo antes de que la autonomía artificial transforme la economía.</p>
+    <div class="meta">DE ADNEKO BLOGGERS · SEPTIEMBRE 2026</div>
+  </div>
+</header>
+
+<main class="article">
+
+  <p><strong>Tesis central.</strong> El riesgo estratégico no es que la inteligencia artificial llegue demasiado pronto. Es que las organizaciones empiecen a prepararse demasiado tarde.</p>
+
+  <h2>La conversación ya no es sobre si la IA cambiará el mundo</h2>
+  <p>Durante años, la inteligencia artificial fue presentada como una tecnología futura: prometedora, experimental y todavía distante del funcionamiento real de las empresas. Esa lectura ya no corresponde con los hechos. La IA dejó de ser únicamente una herramienta que responde preguntas. Está entrando en una etapa en la que puede investigar, crear, programar, analizar, ejecutar procesos y coordinar tareas mediante agentes con grados crecientes de autonomía.</p>
+  <p>La pregunta correcta ya no es si la inteligencia artificial producirá un cambio profundo. La pregunta es cuánto tiempo tienen las organizaciones para rediseñarse antes de que sus estructuras actuales se vuelvan lentas, costosas o incompatibles con la nueva economía.</p>
+
+  <div class="panel">
+    <p class="label">Una diferencia decisiva</p>
+    <p>Digitalizar una empresa significa usar tecnología. Convertirla en Autonomous-Ready significa diseñarla para operar con inteligencia, memoria, agentes, reglas y supervisión desde su propio núcleo.</p>
+  </div>
+
+  <h2>Lo que los datos de 2026 ya demuestran</h2>
+  <p>El AI Index 2026 de Stanford informa que la capacidad de la IA no se está estabilizando: sigue acelerándose. Más del 90% de los modelos de frontera destacados en 2025 fueron producidos por la industria; varios alcanzaron o superaron referencias humanas en ciencia de nivel doctoral, razonamiento multimodal y matemáticas de competencia. En SWE-bench Verified, una prueba relevante de programación, el rendimiento pasó aproximadamente del 60% a cerca del 100% en un solo año.</p>
+  <p>La adopción también dejó de ser marginal. Stanford reporta uso de IA en el 88% de las organizaciones encuestadas y uso de IA generativa en al menos una función empresarial en el 70%. Sin embargo, el despliegue de agentes todavía permanece en niveles bajos en casi todas las funciones. Esa brecha es estratégica: muchas empresas ya consumen IA, pero pocas están estructuradas para operar con autonomía artificial.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Señal</th><th>Lo que muestra</th><th>Implicación empresarial</th></tr></thead>
+      <tbody>
+        <tr><td>Capacidad</td><td>Mejoras rápidas en razonamiento, ciencia, programación y uso de computadoras.</td><td>Las tareas delegables aumentan y cambian con cada generación de modelos.</td></tr>
+        <tr><td>Adopción</td><td>88% de las organizaciones encuestadas ya utiliza IA.</td><td>Esperar ya no es una postura neutral: aumenta la distancia competitiva.</td></tr>
+        <tr><td>Agentes</td><td>El uso empresarial de agentes sigue siendo temprano.</td><td>Existe una ventana para diseñar la arquitectura antes de que el mercado se sature.</td></tr>
+        <tr><td>Gobernanza</td><td>La seguridad y la capacidad de gestión avanzan más lentamente que la tecnología.</td><td>La autonomía sin controles crea velocidad, pero también riesgo operativo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>La autonomía aumenta: de respuestas a trabajo completo</h2>
+  <p>METR mide el horizonte de tareas de los agentes: la duración que una tarea tomaría a un experto humano y para la cual un sistema de IA alcanza determinada probabilidad de éxito. Sus mediciones muestran una tendencia exponencial en tareas principalmente de software, aprendizaje automático y ciberseguridad. La organización advierte, correctamente, que esta medida no significa que la IA pueda realizar todos los trabajos ni que domine por igual las tareas humanas desordenadas, sociales o difíciles de evaluar.</p>
+  <p>La limitación no reduce la importancia del hallazgo; la aclara. El avance no ocurre de manera uniforme, pero sí amplía rápidamente el tamaño y la complejidad de las tareas que pueden delegarse. La frontera es irregular: un sistema puede resolver problemas sofisticados y fallar en algo aparentemente simple. Por eso la empresa del futuro no puede depender de autonomía ciega. Necesita controles, validación, trazabilidad y capacidad humana de intervenir.</p>
+  <p>El Anthropic Economic Index de junio de 2026 registra otra transición: el uso está pasando de conversaciones breves a tareas agénticas de larga duración. La unidad de valor ya no es solamente una buena respuesta. Es un resultado concreto producido mediante una secuencia de acciones.</p>
+
+  <h2>Qué significa realmente AI 2040: Plan A</h2>
+  <p>AI 2040: Plan A, publicado por AI Futures Project el 9 de julio de 2026, no debe presentarse como una profecía. Sus autores lo definen como una recomendación y un escenario posible: un camino en el que Estados Unidos y China toman medidas decisivas para retrasar la superinteligencia hasta 2040. Dentro de ese escenario, sin esas medidas, el salto habría ocurrido mucho antes, alrededor de 2030.</p>
+  <p>El valor empresarial del informe no está en aceptar literalmente cada fecha. Está en comprender la magnitud del problema: investigadores serios ya no discuten únicamente mejores asistentes digitales. Analizan sistemas que podrían superar a los mejores expertos, acelerar su propia investigación y producir una transformación económica, política y social difícil de contener con instituciones diseñadas para otro siglo.</p>
+
+  <div class="panel">
+    <p class="label">Lectura responsable</p>
+    <p>2040 no es una fecha garantizada. Es una señal de escala. Incluso si los calendarios cambian, una empresa no puede esperar certeza absoluta para comenzar una transformación que requiere arquitectura, cultura, datos, controles y tiempo.</p>
+  </div>
+
+  <h2>El error de quienes todavía esperan</h2>
+  <p>Muchas organizaciones interpretan el cambio como la llegada de una nueva herramienta que podrán comprar cuando esté madura. Esa visión confunde acceso con preparación. Todos podrán acceder a modelos potentes; no todos tendrán procesos estructurados, datos confiables, memoria institucional, permisos definidos, auditoría y una arquitectura capaz de convertir esa potencia en operación real.</p>
+  <p>La ventaja no pertenecerá necesariamente a la empresa que utilice más IA. Pertenecerá a la que sepa integrar inteligencia sin perder control, contexto, identidad ni responsabilidad.</p>
+  <ul class="plain">
+    <li>Añadir un chatbot a una estructura antigua no transforma el núcleo de la empresa.</li>
+    <li>Automatizar tareas aisladas no crea una organización coordinada.</li>
+    <li>Usar múltiples agentes sin memoria compartida produce velocidad fragmentada.</li>
+    <li>Delegar sin permisos, evidencia y supervisión multiplica errores y riesgos.</li>
+    <li>Esperar a que todo sea evidente significa competir cuando la ventaja ya fue absorbida por otros.</li>
+  </ul>
+
+  <h2>De la startup tradicional a la Startup Autonomous-Ready</h2>
+  <p>Una startup tradicional nace alrededor de fundadores, colaboradores, departamentos, herramientas y procedimientos que escalan mediante contratación. Una Startup Autonomous-Ready nace preparada para que parte de su operación pueda ser ejecutada por agentes especializados, bajo dirección humana y reglas verificables.</p>
+  <p>No significa una empresa sin personas. Significa una empresa en la que las personas concentran su energía en visión, criterio, relaciones, creatividad, negociación y decisiones de alto impacto, mientras los sistemas inteligentes sostienen la continuidad operativa, la observación, la preparación de acciones y la ejecución autorizada.</p>
+
+  <h2>El modelo propuesto por ADNEKO</h2>
+  <p>ADNEKO está modificando su propio núcleo para no limitarse a utilizar inteligencia artificial como una capa externa. El objetivo es construir una organización IA-nativa, capaz de coordinar motores, agentes, memoria, procesos y evidencia dentro de una arquitectura empresarial gobernable.</p>
+  <p>El modelo Startup Autonomous-Ready se apoya inicialmente en cuatro controladores operativos mínimos. No son simples asistentes: representan dominios de responsabilidad que deben compartir contexto, trabajar con permisos definidos y dejar evidencia de sus decisiones y acciones.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Controlador</th><th>Responsabilidad estructural</th></tr></thead>
+      <tbody>
+        <tr><td>Dirección</td><td>Prioridades, decisiones, coordinación estratégica y seguimiento del conjunto.</td></tr>
+        <tr><td>Finanzas</td><td>Presupuestos, flujo, obligaciones, alertas, control y preparación de información financiera.</td></tr>
+        <tr><td>Ventas y Comercial</td><td>Leads, oportunidades, propuestas, seguimiento, conversión y relaciones comerciales.</td></tr>
+        <tr><td>Community, Comunicación y Campañas</td><td>Posicionamiento, contenidos, campañas, comunidad, métricas y aprendizaje de mercado.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Los principios que vuelven viable la autonomía</h2>
+  <ul class="plain">
+    <li><strong>Dirección humana</strong> — la IA puede analizar, proponer y ejecutar dentro de límites; la responsabilidad estratégica permanece definida.</li>
+    <li><strong>Memoria institucional</strong> — las decisiones, sus razones, su vigencia y sus resultados deben conservarse para evitar una empresa que olvida.</li>
+    <li><strong>Verdad temporal</strong> — un dato puede ser correcto hoy y falso mañana. Cada agente debe conocer fuente, fecha, vigencia y nivel de confianza.</li>
+    <li><strong>Permisos y separación de funciones</strong> — ningún agente debe actuar fuera de su autoridad ni controlar por sí solo todo un proceso crítico.</li>
+    <li><strong>Auditoría</strong> — toda acción relevante debe dejar evidencia: qué ocurrió, quién o qué actuó, con qué información y bajo qué autorización.</li>
+    <li><strong>Intervención y reversibilidad</strong> — la organización debe poder detener, revisar, corregir o revertir operaciones cuando sea necesario.</li>
+    <li><strong>Arquitectura modular</strong> — modelos, proveedores y agentes cambiarán. El negocio no puede quedar atrapado en una sola tecnología.</li>
+  </ul>
+
+  <h2>Por qué este modelo puede convertirse en una necesidad</h2>
+  <p>Las startups operan con capital limitado, equipos pequeños y presión constante por crecer. La IA amplía su capacidad, pero también aumenta la complejidad: más herramientas, más agentes, más datos, más decisiones y más riesgos. Sin una arquitectura previa, la automatización termina creando una nueva forma de desorden.</p>
+  <p>Startup Autonomous-Ready responde a ese problema desde el diseño. No vende la fantasía de una empresa completamente automática. Propone una base para construir compañías capaces de aumentar su autonomía de manera gradual, medible y gobernada. Cada organización podrá decidir cuánto delega, en qué dominios y bajo qué controles.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Empresa que solo usa IA</th><th>Empresa Autonomous-Ready</th></tr></thead>
+      <tbody>
+        <tr><td>Herramientas aisladas</td><td>Arquitectura común</td></tr>
+        <tr><td>Prompts y conversaciones</td><td>Procesos, eventos y resultados</td></tr>
+        <tr><td>Contexto fragmentado</td><td>Memoria institucional</td></tr>
+        <tr><td>Automatización sin visión conjunta</td><td>Controladores coordinados</td></tr>
+        <tr><td>Confianza informal</td><td>Permisos, evidencia y auditoría</td></tr>
+        <tr><td>Dependencia de un proveedor</td><td>Componentes sustituibles</td></tr>
+        <tr><td>Reacción al cambio</td><td>Preparación progresiva para el cambio</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Dónde vamos</h2>
+  <p>La dirección es visible aunque el calendario exacto sea incierto. La IA continuará reduciendo el costo de producir conocimiento, software, análisis, contenido y coordinación. Los agentes asumirán tareas más extensas. La interacción pasará de solicitar respuestas a asignar objetivos.</p>
+  <p>La empresa dejará de ser solamente una estructura humana apoyada por software y se convertirá, progresivamente, en una red de personas y sistemas inteligentes que comparten responsabilidades diferenciadas.</p>
+  <p>En ese contexto, la ventaja competitiva no será únicamente tecnológica. Será arquitectónica y organizacional. Importará quién posee la memoria, cómo se valida la verdad, quién autoriza una acción, cómo se mide el resultado y cómo se mantiene el control cuando cientos o miles de decisiones pueden ejecutarse con velocidad artificial.</p>
+  <p>Habrá empresas que se adapten agregando herramientas sobre estructuras antiguas. Otras serán diseñadas desde el principio para la inteligencia operativa. ADNEKO ha decidido trabajar en la segunda categoría.</p>
+
+  <h2>Una advertencia y una oportunidad</h2>
+  <p>Este documento no afirma que toda predicción extrema se cumplirá ni que la inteligencia humana dejará de importar. Afirma algo más concreto: el ritmo observado ya es suficiente para justificar una preparación estructural inmediata. La incertidumbre no elimina la necesidad de actuar; define la forma correcta de hacerlo: modular, gradual, auditable y reversible.</p>
+  <p>Quienes comprendan temprano esta transición podrán construir organizaciones más ágiles, accesibles y capaces. Quienes la reduzcan a una moda tecnológica corren el riesgo de descubrir demasiado tarde que el cambio no consistía en usar una nueva herramienta, sino en rediseñar la empresa.</p>
+
+  <div class="panel conclusion">
+    <p class="label">Conclusión</p>
+    <p>El futuro no pertenecerá a la empresa con más inteligencia artificial. Pertenecerá a la empresa que sepa convertir inteligencia en capacidad real sin perder propósito, responsabilidad ni control.</p>
+  </div>
+
+  <h2>Posición de ADNEKO</h2>
+  <p>ADNEKO está construyendo su transición hacia un núcleo IA-nativo mediante sistemas, motores inteligentes, controladores operativos, memoria institucional y auditoría. Startup Autonomous-Ready es el modelo que articula esa visión: una base para que las startups puedan nacer y evolucionar con autonomía creciente, pero siempre dentro de una estructura gobernable.</p>
+  <p>No se trata de anticipar cada tecnología que aparecerá. Se trata de construir una organización capaz de incorporarla sin tener que reconstruirse desde cero cada vez que el mundo cambie.</p>
+
+  <div class="sources">
+    <h2>Fuentes y notas</h2>
+    <ol>
+      <li>Stanford Institute for Human-Centered Artificial Intelligence. <em>The 2026 AI Index Report.</em> <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" target="_blank" rel="noopener">hai.stanford.edu/ai-index/2026-ai-index-report</a> — Datos de capacidad, adopción, inversión, agentes, seguridad y percepción pública.</li>
+      <li>AI Futures Project. <em>AI 2040: Plan A.</em> <a href="https://blog.aifutures.org/p/ai-2040-plan-a" target="_blank" rel="noopener">blog.aifutures.org/p/ai-2040-plan-a</a> — Escenario prescriptivo publicado el 9 de julio de 2026; no constituye una predicción garantizada.</li>
+      <li>METR. <em>Task-Completion Time Horizons of Frontier AI Models.</em> <a href="https://metr.org/time-horizons/" target="_blank" rel="noopener">metr.org/time-horizons</a> — Medición de horizontes de tareas y limitaciones metodológicas; actualización del 8 de mayo de 2026.</li>
+      <li>Anthropic. <em>Anthropic Economic Index: Cadences.</em> <a href="https://www.anthropic.com/research/economic-index-june-2026-report" target="_blank" rel="noopener">anthropic.com/research/economic-index-june-2026-report</a> — Evidencia sobre el paso de conversaciones a tareas agénticas de mayor duración.</li>
+    </ol>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="logo-word">ADNEKO</span>
+    <div class="tag">Ecosistemas, sistemas y motores inteligentes · adneko.com</div>
+  </div>
+</footer>
+
+</body>
+</html>
