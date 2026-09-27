@@ -1,14 +1,9 @@
 @media (max-width:700px){
   body{
     background-size:100% 100%,100% auto!important;
-    background-position:center,center top!important;
-    background-repeat:no-repeat,no-repeat!important;
-    background-attachment:scroll!important;
-  }
-  .hero,.hero-wrap{
-    background-size:100% 100%,100% auto!important;
-    background-position:center,center top!important;
-    background-repeat:no-repeat,no-repeat!important;
+    background-position:center top,center top!important;
+    background-repeat:no-repeat,repeat-y!important;
+    background-attachment:scroll,scroll!important;
   }
   .product{
     background-size:100% 100%,100% auto!important;
