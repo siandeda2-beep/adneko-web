@@ -54,6 +54,8 @@ header{background:#07101eea;border-bottom:1px solid #9fb5d139;position:relative;
 .closing{margin:30px 0 95px;background:#1226408a;backdrop-filter:blur(5px);border:1px solid #a9bddb61;padding:45px 55px;display:flex;align-items:center;justify-content:space-between;gap:30px}
 .closing h2{font-size:clamp(28px,3vw,44px);font-weight:300;letter-spacing:-.04em;margin:12px 0}
 .closing p{color:#cbd8ea;margin:0}
+.closing-actions{display:flex;flex-direction:column;align-items:center;gap:18px;flex:0 0 auto}
+.closing-logo{display:block;width:clamp(150px,16vw,220px);height:auto;object-fit:contain;filter:drop-shadow(0 8px 18px #020710b8)}
 footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:#abb9cf;font-size:13px}
 .foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 @media(max-width:800px){body{background-size:100% 100%}
@@ -65,7 +67,7 @@ footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:
 .catalog-head{display:block}
 .grid{grid-template-columns:repeat(2,1fr)}
 .closing{display:block}
-.closing .btn{margin-top:25px}
+.closing-actions{align-items:flex-start;margin-top:25px}
 }
 @media(max-width:560px){.hero{min-height:610px}
 .hero-content{padding-top:40px}
@@ -186,7 +188,10 @@ footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:
 <h2>La próxima evolución empieza aquí.</h2>
 <p>Conversemos sobre su organización, producto o ecosistema.</p>
 </div>
+<div class="closing-actions">
+<img class="closing-logo" src="adneko-logo-contacto-nuevo.webp" alt="ADNEKO">
 <a class="btn primary" href="mailto:adneko.alianzas@adneko.com">Contactar ADNEKO</a>
+</div>
 </div>
 </section>
 </main>
