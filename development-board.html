@@ -40,7 +40,7 @@ h1{font-size:clamp(38px,6vw,74px);font-weight:300;letter-spacing:.015em;margin:1
 .dev-row{min-height:57px;padding:0 12px;border:1px solid #163347;border-left-color:#163347;border-right-color:#163347;background:#07131c;margin-bottom:4px}
 .dev-row:nth-child(even){background:#091721}
 .num{color:#497184;font-size:11px}
-.name{font-size:13px;letter-spacing:.015em}
+.name{font-size:13px;letter-spacing:.015em;display:flex;flex-direction:column;align-items:flex-start;gap:5px}.doc-link{display:inline-block;padding:5px 8px;border:1px solid #4f8cab;color:#85d4ff;font-size:8px;font-weight:700;letter-spacing:.08em;line-height:1.1;background:#071b28}.doc-link:hover{background:#0b2a3d;color:#fff}
 .objective{color:#8da5b7;font-size:10px;font-weight:700;letter-spacing:.04em}
 .objective.hardware{color:#e8a250}
 .percent{color:#a9d9f3;font-size:14px}
@@ -159,7 +159,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#526b7b;text-align
           </div>
           <div class="dev-row">
             <div class="num">08</div>
-            <div class="name">INTELLIGENCE OS</div>
+            <div class="name"><span>INTELLIGENCE OS</span><a class="doc-link" href="INTELLIGENCE_OS_DOCUMENTO_OFICIAL.pdf" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
             <div class="objective ">PRODUCCIÓN</div>
             <div class="percent ">≈99%</div>
             <div class="bar"><span class="software" style="width:99%"></span></div>
