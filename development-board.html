@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#04101a">
+<title>ADNEKO · Development Board</title>
+<meta name="description" content="ADNEKO Development Board: tablero público de desarrollos en evolución, sistemas inteligentes, software y hardware.">
+<style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#e9f2fb;background:#020a11}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+radial-gradient(circle at 50% 0,#17314a55,transparent 38%),
+linear-gradient(180deg,#07111a 0,#020a11 42%,#02080d 100%);min-height:100vh}
+a{color:inherit;text-decoration:none}
+.shell{width:min(100%,1380px);margin:auto;padding-inline:clamp(22px,5vw,78px)}
+header{position:sticky;top:0;z-index:20;background:#05101bed;border-bottom:1px solid #7dbce638;backdrop-filter:blur(12px)}
+.nav{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:26px}
+.brand{font-size:17px;letter-spacing:.22em}
+.links{display:flex;gap:26px;align-items:center;color:#c7d5e4;font-size:12px;letter-spacing:.06em}
+.nav-cta{border:1px solid #7fa9c86b;padding:11px 16px}
+.hero{padding:76px 0 38px;text-align:center;border-bottom:1px solid #153249}
+.kicker{color:#79cfff;font-size:11px;letter-spacing:.28em;text-transform:uppercase}
+h1{font-size:clamp(38px,6vw,74px);font-weight:300;letter-spacing:.015em;margin:18px 0 8px}
+.subtitle{color:#a9cbe2;letter-spacing:.42em;font-size:12px;margin-left:.42em}
+.hero p{max-width:950px;margin:31px auto 0;color:#c2d0dc;font-size:16px;line-height:1.7}
+.statement{margin-top:14px;color:#e9f5ff;font-size:13px;letter-spacing:.18em}
+.checkpoint-wrap{padding:24px 0 18px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end}
+.checkpoint-copy strong{display:block;color:#7fd2ff;font-size:12px;letter-spacing:.08em;margin-bottom:8px}
+.checkpoint-copy p{margin:0;color:#b8c7d3;font-size:13px;line-height:1.6}
+.dates{font-size:11px;line-height:1.9;color:#9aaebb;text-align:right;white-space:nowrap}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0 22px}
+.stat{border:1px solid #23506b;background:#071721cc;padding:20px 20px 18px;border-radius:6px}
+.stat b{display:block;font-size:28px;font-weight:400;margin-bottom:10px}
+.stat span{font-size:10px;letter-spacing:.08em;color:#849baa;font-weight:700}
+.board{padding:8px 0 80px}
+.board-head,.dev-row{display:grid;grid-template-columns:42px minmax(270px,2.5fr) minmax(175px,1.15fr) 80px minmax(170px,1fr);gap:14px;align-items:center}
+.board-head{padding:10px 12px;color:#7891a0;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.dev-row{min-height:57px;padding:0 12px;border:1px solid #163347;border-left-color:#163347;border-right-color:#163347;background:#07131c;margin-bottom:4px}
+.dev-row:nth-child(even){background:#091721}
+.num{color:#497184;font-size:11px}
+.name{font-size:13px;letter-spacing:.015em}
+.objective{color:#8da5b7;font-size:10px;font-weight:700;letter-spacing:.04em}
+.objective.hardware{color:#e8a250}
+.percent{color:#a9d9f3;font-size:14px}
+.percent.complete{color:#58e3b6}
+.bar{height:5px;background:#102637;overflow:hidden}
+.bar span{display:block;height:100%;background:#5ac7ff}
+.bar span.hardware{background:#e3a055}
+.bar span.complete{background:#55e3b0}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin:18px 0 0;color:#8da5b7;font-size:11px}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:7px;background:#5ac7ff}
+.legend .hw i{background:#e3a055}.legend .done i{background:#55e3b0}
+footer{border-top:1px solid #153249;padding:34px 0 44px;color:#526b7b;text-align:center;font-size:10px;letter-spacing:.08em}
+@media(max-width:900px){
+.links{gap:13px;font-size:11px}.links a:nth-child(3),.links a:nth-child(4){display:none}
+.checkpoint-wrap{grid-template-columns:1fr}.dates{text-align:left}
+.stats{grid-template-columns:repeat(2,1fr)}
+.board{overflow-x:auto}.board-head,.dev-row{min-width:920px}
+}
+@media(max-width:560px){.hero{padding-top:55px}.subtitle{letter-spacing:.25em}.stats{grid-template-columns:1fr 1fr}.stat{padding:16px}.stat b{font-size:24px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="shell nav">
+    <a class="brand" href="index.html">ADNEKO</a>
+    <nav class="links" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="blog.html">Blog</a>
+      <a href="brand-space.html">Brand Space</a>
+      <a href="contacto.html" class="nav-cta">Hablemos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="shell">
+    <div class="kicker">Laboratorio ADNEKO · Seguimiento público</div>
+    <h1>ADNEKO · DEVELOPMENT BOARD</h1>
+    <div class="subtitle">desarrollos en evolución</div>
+    <p>Sistemas inteligentes, plataformas, software y hardware avanzando en paralelo desde arquitectura y desarrollo hasta producción. Un tablero vivo que refleja el progreso real de cada proyecto, cada etapa y cada cierre.</p>
+    <div class="statement">DEL CONCEPTO A LA REALIDAD.</div>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="checkpoint-wrap">
+    <div class="checkpoint-copy">
+      <strong>LABORATORIO ADNEKO · SEGUIMIENTO PÚBLICO</strong>
+      <p>Cada porcentaje representa avance comprobado. Sistemas hasta producción; hardware hasta diseño listo para fabricación.</p>
+    </div>
+    <div class="dates">CHECKPOINT · 27 SEP 2026<br>SIGUIENTE · 28 SEP 2026</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>23</b><span>DESARROLLOS ACTIVOS</span></div>
+    <div class="stat"><b>2</b><span>CIERRES COMPLETOS</span></div>
+    <div class="stat"><b>24 h</b><span>CICLO DE REVISIÓN</span></div>
+    <div class="stat"><b>REAL</b><span>AVANCE VERIFICABLE</span></div>
+  </div>
+
+  <section class="board" aria-label="Estado de desarrollos ADNEKO">
+    <div class="board-head">
+      <div>#</div><div>Desarrollo</div><div>Objetivo</div><div>Progreso</div><div></div>
+    </div>
+    
+          <div class="dev-row">
+            <div class="num">01</div>
+            <div class="name">PROCESS CONTROL</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">63–65%</div>
+            <div class="bar"><span class="software" style="width:65%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">02</div>
+            <div class="name">BOOKING SYSTEM</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">92–95%</div>
+            <div class="bar"><span class="software" style="width:95%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">03</div>
+            <div class="name">INDUSTRIAL SAFETY MODULE · ISM-01</div>
+            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
+            <div class="percent ">90–92%</div>
+            <div class="bar"><span class="hardware" style="width:92%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">04</div>
+            <div class="name">VISIONFIND EDGE</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">≈60%</div>
+            <div class="bar"><span class="software" style="width:60%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">05</div>
+            <div class="name">AUTONOMOUS COMPANY</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">96–97%</div>
+            <div class="bar"><span class="software" style="width:97%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">06</div>
+            <div class="name">NEKO VOICE</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">93–95%</div>
+            <div class="bar"><span class="software" style="width:95%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">07</div>
+            <div class="name">AUTONOMOUS AGENT</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">≈84%</div>
+            <div class="bar"><span class="software" style="width:84%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">08</div>
+            <div class="name">INTELLIGENCE OS</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">≈99%</div>
+            <div class="bar"><span class="software" style="width:99%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">09</div>
+            <div class="name">NEKO PHYSICAL INTELLIGENCE</div>
+            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
+            <div class="percent ">≈86%</div>
+            <div class="bar"><span class="hardware" style="width:86%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">10</div>
+            <div class="name">FACE AGENT / NEKO-01</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">≈95%</div>
+            <div class="bar"><span class="software" style="width:95%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">11</div>
+            <div class="name">CREADOR IA OS</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">87–89%</div>
+            <div class="bar"><span class="software" style="width:89%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">12</div>
+            <div class="name">ADVANCED OS</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">85–90%</div>
+            <div class="bar"><span class="software" style="width:90%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">13</div>
+            <div class="name">VISIONFIND SOFTWARE</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">≈88%</div>
+            <div class="bar"><span class="software" style="width:88%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">14</div>
+            <div class="name">NEXUS COMMIT SOFTWARE</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">78–80%</div>
+            <div class="bar"><span class="software" style="width:80%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">15</div>
+            <div class="name">KIRA SOFTWARE</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">98–99%</div>
+            <div class="bar"><span class="software" style="width:99%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">16</div>
+            <div class="name">NEXUS COMMIT HARDWARE / FARD</div>
+            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
+            <div class="percent ">≈90%</div>
+            <div class="bar"><span class="hardware" style="width:90%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">17</div>
+            <div class="name">EDGE OS VS TERMINAL / EDGE TERMINAL</div>
+            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
+            <div class="percent ">≈96%</div>
+            <div class="bar"><span class="hardware" style="width:96%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">18</div>
+            <div class="name">INDUSTRIAL I/O SOFTWARE</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">≈75%</div>
+            <div class="bar"><span class="software" style="width:75%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">19</div>
+            <div class="name">INDUSTRIAL I/O HARDWARE</div>
+            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
+            <div class="percent ">≈99%</div>
+            <div class="bar"><span class="hardware" style="width:99%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">20</div>
+            <div class="name">EDGE INTEGRATION</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent complete">100%</div>
+            <div class="bar"><span class="complete" style="width:100%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">21</div>
+            <div class="name">EDGE PLATFORM</div>
+            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
+            <div class="percent ">≈97%</div>
+            <div class="bar"><span class="hardware" style="width:97%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">22</div>
+            <div class="name">EDGE OS</div>
+            <div class="objective ">PRODUCCIÓN</div>
+            <div class="percent ">96–98%</div>
+            <div class="bar"><span class="software" style="width:98%"></span></div>
+          </div>
+          <div class="dev-row">
+            <div class="num">23</div>
+            <div class="name">KIRA HARDWARE</div>
+            <div class="objective ">DISEÑO / FABRICACIÓN</div>
+            <div class="percent complete">100%</div>
+            <div class="bar"><span class="complete" style="width:100%"></span></div>
+          </div>
+    <div class="legend">
+      <span><i></i>Software / producción</span>
+      <span class="hw"><i></i>Hardware / diseño-fabricación</span>
+      <span class="done"><i></i>Cierre completo</span>
+    </div>
+  </section>
+</section>
+</main>
+<footer><div class="shell">ADNEKO · INNOVACIÓN · APP · ECOSISTEMAS · LA EMPRESA DEL FUTURO, HOY.</div></footer>
+</body>
+</html>
