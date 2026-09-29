@@ -60,6 +60,49 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#526b7b;text-align
 .board{overflow-x:auto}.board-head,.dev-row{min-width:920px}
 }
 @media(max-width:560px){.hero{min-height:560px;background-position:center}.hero .shell{padding-top:70px;padding-bottom:38px}.subtitle{letter-spacing:.25em}.stats{grid-template-columns:1fr 1fr}.stat{padding:16px}.stat b{font-size:24px}}
+
+/* ADNEKO global visual system — homepage reference */
+.hero h1{margin:18px 0 8px;color:#fff}
+.hero-brand,.hero-board-title{display:block;color:#fff}
+.hero-board-title{white-space:nowrap;font-size:clamp(28px,5.4vw,68px);line-height:1.05;margin-top:4px}
+body,.kicker,.subtitle,.hero p,.statement,.checkpoint-copy strong,.checkpoint-copy p,.dates,.stat span,.board-head,.num,.doc-link,.objective,.objective.hardware,.percent,.percent.complete,.board-group h2,.board-group p,.legend,footer{color:#fff}
+
+.stat,.dev-row,.board-group{
+  background:#06101b38;
+  border:1px solid transparent;
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.dev-row:nth-child(even){background:#06101b38}
+.board-group{background:#06101b38}
+.stat:before,.dev-row:before,.board-group:before{
+  content:"";position:absolute;inset:0;padding:.35px;
+  background:conic-gradient(from var(--edge-angle,0deg),#24394b 0 70%,#4d8fb2 78%,#8ee7ff 84%,#ffffff 87%,#54d5ff 90%,#467995 95%,#24394b 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  pointer-events:none;z-index:2;
+  filter:drop-shadow(0 0 .6px #63d9ff33);
+  animation:edgeSweep 5.8s linear infinite;
+}
+.stat:after,.dev-row:after,.board-group:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent 35%,#b9ecff0a 49%,transparent 63%);
+  transform:translateX(-120%);transition:transform .8s ease;
+  pointer-events:none;z-index:-1;
+}
+.stat:hover,.dev-row:hover,.board-group:hover{
+  background:#06101b38;
+  box-shadow:0 12px 32px #02091480,0 0 22px #63d9ff2e;
+}
+.stat:hover:after,.dev-row:hover:after,.board-group:hover:after{transform:translateX(120%)}
+@property --edge-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes edgeSweep{to{--edge-angle:360deg}}
+@media(prefers-reduced-motion:reduce){.stat:before,.dev-row:before,.board-group:before{animation:none}}
+@media(max-width:560px){.hero-board-title{font-size:clamp(25px,8.2vw,38px)}}
+
 </style>
 <script src="/adneko-header.js" defer></script>
 </head>
@@ -70,7 +113,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#526b7b;text-align
 <section class="hero">
   <div class="shell">
     <div class="kicker">Laboratorio ADNEKO · Seguimiento público</div>
-    <h1>ADNEKO · DEVELOPMENT BOARD</h1>
+    <h1><span class="hero-brand">ADNEKO</span><span class="hero-board-title">DEVELOPMENT BOARD</span></h1>
     <div class="subtitle">desarrollos en evolución</div>
     <p>Sistemas inteligentes, plataformas, software y hardware avanzando en paralelo desde arquitectura y desarrollo hasta producción. Un tablero vivo que refleja el progreso real de cada proyecto, cada etapa y cada cierre.</p>
     <div class="statement">DEL CONCEPTO A LA REALIDAD.</div>
