@@ -222,5 +222,6 @@ footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:
 <script>document.getElementById('year').textContent=new Date().getFullYear();const menu=document.getElementById('menu'),links=document.getElementById('links');menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))}
 );links.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')}
 );const welcome=document.querySelector('.intro h2');if(welcome){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){welcome.classList.add('is-visible');observer.unobserve(welcome)}})},{threshold:.35});observer.observe(welcome)}</script>
+<!-- deployment-sync: unified-header-2026-09-29 -->
 </body>
 </html>
