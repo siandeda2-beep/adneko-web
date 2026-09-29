@@ -9,7 +9,7 @@
   <style>
     :root{font-family:Arial,Helvetica,sans-serif;color:#f2f5fc;background:#07101e;scroll-behavior:smooth}
     *{box-sizing:border-box}
-    body{margin:0;min-height:100vh;background-color:#07101e;background-image:linear-gradient(180deg,#0308179c,#030817c7),url('blog-principal-fondo.webp');background-position:center top;background-size:cover;background-attachment:fixed;background-repeat:no-repeat}
+    body{margin:0;min-height:100vh;background-color:#120e0c;background-image:linear-gradient(180deg,#120e0c75,#0d0a09b8),url('blog-principal-fondo.webp');background-position:center top;background-size:cover;background-attachment:fixed;background-repeat:no-repeat}
     a{color:inherit;text-decoration:none}
     .shell{width:min(100%,1380px);margin:auto;padding-inline:clamp(22px,5vw,78px)}
     header{position:sticky;top:0;z-index:20;background:#07101eef;border-bottom:1px solid #9fb5d139;backdrop-filter:blur(12px)}
@@ -42,7 +42,7 @@
     @media(max-width:950px){.grid{grid-template-columns:1fr}.card{grid-template-columns:1fr 1fr}}
     @media(max-width:650px){.links a:not(.nav-cta){display:none}.hero{padding-top:80px}.card{grid-template-columns:1fr}.card-media{min-height:230px}.card-copy{padding:28px}.section-head{display:block}.section-head p{margin-top:16px}body{background-size:100% auto;background-attachment:scroll;background-repeat:repeat-y}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-  </style>
+  @media(prefers-reduced-motion:reduce){.card:before{animation:none!important}}</style>
 </head>
 <body>
   <header><div class="shell nav"><a class="brand" href="index.html">ADNEKO</a><nav class="links" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="catalogo.html">Catálogo</a><a href="blog.html" aria-current="page">Blog</a><a href="brand-space.html">Brand Space</a><a href="contacto.html" class="nav-cta">Hablemos</a></nav></div></header>
