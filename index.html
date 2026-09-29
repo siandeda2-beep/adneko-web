@@ -63,7 +63,7 @@ header{background:#07101eea;border-bottom:1px solid #9fb5d139;position:relative;
 .card h3{font-size:clamp(23px,2vw,30px);font-weight:300;letter-spacing:-.045em;margin:12px 0}
 .card p{font-size:14px;color:#c1cde0;line-height:1.5;margin:0}
 .wide{grid-column:span 2}
-.closing{margin:30px 0 95px;background:#1226408a;backdrop-filter:blur(5px);border:1px solid #a9bddb61;padding:45px 55px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.closing{margin:30px 0 95px;background:#06101b38;backdrop-filter:blur(5px);border:1px solid transparent;padding:45px 55px;display:flex;align-items:center;justify-content:space-between;gap:30px;position:relative;isolation:isolate;overflow:hidden}.closing:before{content:"";position:absolute;inset:0;padding:1px;background:conic-gradient(from var(--edge-angle,0deg),#24394b 0 70%,#4d8fb2 78%,#8ee7ff 84%,#fff 87%,#54d5ff 90%,#467995 95%,#24394b 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:2;filter:drop-shadow(0 0 3px #63d9ff99);animation:edgeSweep 5.8s linear infinite}
 .closing h2{font-size:clamp(28px,3vw,44px);font-weight:300;letter-spacing:-.04em;margin:12px 0}
 .closing p{color:#cbd8ea;margin:0}
 .closing-actions{display:flex;flex-direction:column;align-items:center;gap:18px;flex:0 0 auto}
@@ -90,7 +90,7 @@ footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:
 .card{min-height:210px}
 .closing{padding:30px;margin-bottom:65px}
 }
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.card:before{animation:none!important}.intro h2{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}.intro h2:after{animation:none!important}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.card:before,.closing:before{animation:none!important}.intro h2{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}.intro h2:after{animation:none!important}
 }
 
 </style>
