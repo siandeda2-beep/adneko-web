@@ -52,10 +52,10 @@ header{background:#07101eea;border-bottom:1px solid #9fb5d139;position:relative;
 .catalog-head{background:linear-gradient(90deg,#06101b7a,#06101b2d);backdrop-filter:blur(4px);border:1px solid #c1d0ed22;padding:30px 36px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:end;gap:30px}
 .catalog-head p{max-width:330px;color:#d0d9e8;line-height:1.6}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.card{min-height:255px;background:#06101b7a;border:1px solid transparent;backdrop-filter:blur(5px);padding:30px;display:flex;flex-direction:column;justify-content:space-between;position:relative;isolation:isolate;overflow:hidden;transition:background .25s ease,transform .25s ease,box-shadow .25s ease}
+.card{min-height:255px;background:#06101b38;border:1px solid transparent;backdrop-filter:blur(5px);padding:30px;display:flex;flex-direction:column;justify-content:space-between;position:relative;isolation:isolate;overflow:hidden;transition:background .25s ease,transform .25s ease,box-shadow .25s ease}
 .card:before{content:"";position:absolute;inset:0;padding:1px;background:conic-gradient(from var(--edge-angle,0deg),#24394b 0 70%,#4d8fb2 78%,#8ee7ff 84%,#ffffff 87%,#54d5ff 90%,#467995 95%,#24394b 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:2;filter:drop-shadow(0 0 3px #63d9ff99);animation:edgeSweep 5.8s linear infinite}
 .card:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,#b9ecff0a 49%,transparent 63%);transform:translateX(-120%);transition:transform .8s ease;pointer-events:none;z-index:-1}
-.card:hover{background:#06101b7a;transform:translateY(-3px);box-shadow:0 12px 32px #02091480,0 0 22px #63d9ff2e}
+.card:hover{background:#06101b38;transform:translateY(-3px);box-shadow:0 12px 32px #02091480,0 0 22px #63d9ff2e}
 .card:hover:after{transform:translateX(120%)}
 @property --edge-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
 @keyframes edgeSweep{to{--edge-angle:360deg}}
