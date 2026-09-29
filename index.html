@@ -96,22 +96,10 @@ footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:
 }
 
 </style>
-<link rel="stylesheet" href="mobile-images.css"></head>
+<link rel="stylesheet" href="mobile-images.css"><script src="/adneko-header.js" defer></script>
+</head>
 <body>
-<header>
-<div class="shell nav">
-<a class="brand" href="#inicio" aria-label="ADNEKO, inicio">ADNEKO</a>
-<button class="menu" id="menu" aria-expanded="false" aria-controls="links">Menú</button>
-<nav class="links" id="links" aria-label="Navegación principal">
-<a href="quienes-somos.html">Quiénes somos</a>
-<a href="catalogo.html">Catálogo</a>
-<a href="blog.html">Blog</a>
-<a href="brand-space.html">Brand Space</a>
-<a href="development-board.html">Development Board</a>
-<a href="#contacto" class="nav-cta">Hablemos</a>
-</nav>
-</div>
-</header>
+<adneko-header></adneko-header>
 <main>
 <section class="hero" id="inicio">
 <div class="shell hero-content">
@@ -219,8 +207,8 @@ footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:
 <a href="mailto:adneko.alianzas@adneko.com">adneko.alianzas@adneko.com</a>
 </div>
 </footer>
-<script>document.getElementById('year').textContent=new Date().getFullYear();const menu=document.getElementById('menu'),links=document.getElementById('links');menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))}
-);links.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')}
+<script>document.getElementById('year').textContent=new Date().getFullYear();const menu=document.getElementById('menu'),links=document.getElementById('links');menu?.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))}
+);links?.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false')}
 );const welcome=document.querySelector('.intro h2');if(welcome){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){welcome.classList.add('is-visible');observer.unobserve(welcome)}})},{threshold:.35});observer.observe(welcome)}</script>
 <!-- deployment-sync: unified-header-2026-09-29 -->
 <!-- ADNEKO deployment sync: unified header -->
