@@ -49,7 +49,7 @@ header{background:#07101eea;border-bottom:1px solid #9fb5d139;position:relative;
 .founder{background:#091827a8;border:1px solid #a8c1e453;backdrop-filter:blur(6px);padding:28px 32px}
 .founder h3{font-weight:300;font-size:clamp(25px,3vw,38px);letter-spacing:-.04em;margin:14px 0}
 .founder p{color:#c8d5e6;line-height:1.6;font-size:15px;margin:0;max-width:560px}
-.catalog-head{background:linear-gradient(90deg,#06101b7a,#06101b2d);backdrop-filter:blur(4px);border:1px solid #c1d0ed22;padding:30px 36px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:end;gap:30px}
+.catalog-head{background:linear-gradient(90deg,#06101b7a,#06101b2d);backdrop-filter:blur(4px);border:1px solid transparent;padding:30px 36px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:end;gap:30px;position:relative;isolation:isolate;overflow:hidden}.catalog-head:before{content:"";position:absolute;inset:0;padding:1px;background:conic-gradient(from var(--edge-angle,0deg),#24394b 0 70%,#4d8fb2 78%,#8ee7ff 84%,#fff 87%,#54d5ff 90%,#467995 95%,#24394b 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:2;filter:drop-shadow(0 0 3px #63d9ff99);animation:edgeSweep 5.8s linear infinite}
 .catalog-head p{max-width:330px;color:#d0d9e8;line-height:1.6}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .card{min-height:255px;background:#06101b38;border:1px solid transparent;backdrop-filter:blur(5px);padding:30px;display:flex;flex-direction:column;justify-content:space-between;position:relative;isolation:isolate;overflow:hidden;transition:background .25s ease,transform .25s ease,box-shadow .25s ease}
@@ -90,7 +90,7 @@ footer{background:#06101b6e;border-top:1px solid #a2b7d139;padding:32px 0;color:
 .card{min-height:210px}
 .closing{padding:30px;margin-bottom:65px}
 }
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.card:before,.closing:before{animation:none!important}.intro h2{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}.intro h2:after{animation:none!important}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.card:before,.closing:before,.catalog-head:before{animation:none!important}.intro h2{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}.intro h2:after{animation:none!important}
 }
 
 </style>
