@@ -1,121 +1,74 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#04101a">
 <title>ADNEKO · Development Board</title>
-<meta name="description" content="ADNEKO Development Board: tablero público de desarrollos en evolución, sistemas inteligentes, software y hardware.">
+<meta name="description" content="ADNEKO Development Board: avance verificable de desarrollo, validación y producción de sistemas inteligentes, software y hardware.">
 <style>
-:root{font-family:Arial,Helvetica,sans-serif;color:#e9f2fb;background:#020a11}
+:root{font-family:Arial,Helvetica,sans-serif;color:#fff;background:#020a11}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;background:
-linear-gradient(180deg,rgba(2,8,13,.78),rgba(2,8,13,.9)),
-url('development-board-bg.png') center center/cover no-repeat fixed}
+body{margin:0;min-height:100vh;background:linear-gradient(180deg,rgba(2,8,13,.72),rgba(2,8,13,.9)),url('development-board-bg.png') center/cover fixed no-repeat}
 a{color:inherit;text-decoration:none}
-.shell{width:min(100%,1380px);margin:auto;padding-inline:clamp(22px,5vw,78px)}
-header{position:sticky;top:0;z-index:20;background:#05101bed;border-bottom:1px solid #7dbce638;backdrop-filter:blur(12px)}
-.nav{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:26px}
-.brand{font-size:17px;letter-spacing:.22em}
-.links{display:flex;gap:26px;align-items:center;color:#c7d5e4;font-size:12px;letter-spacing:.06em}
-.nav-cta{border:1px solid #7fa9c86b;padding:11px 16px}
-.hero{position:relative;min-height:720px;display:flex;align-items:flex-end;padding:0;text-align:left;border-bottom:1px solid #153249;background:linear-gradient(180deg,rgba(3,8,14,.12) 0%,rgba(3,8,14,.45) 52%,rgba(2,8,13,.94) 100%),url('development-board-hero-2026.webp') center center/cover no-repeat}.hero .shell{padding-top:90px;padding-bottom:60px}
+.shell{width:min(100%,1480px);margin:auto;padding-inline:clamp(18px,4vw,64px)}
+header{position:sticky;top:0;z-index:20;background:#05101bf2;border-bottom:1px solid #7dbce638}
+.hero{position:relative;min-height:720px;display:flex;align-items:flex-end;border-bottom:1px solid #153249;background:linear-gradient(180deg,rgba(3,8,14,.08),rgba(3,8,14,.34) 50%,rgba(2,8,13,.92)),url('development-board-hero-2026.webp') center/cover no-repeat}
+.hero .shell{padding-top:90px;padding-bottom:60px}
 .kicker{color:#79cfff;font-size:11px;letter-spacing:.28em;text-transform:uppercase}
 h1{font-size:clamp(38px,6vw,74px);font-weight:300;letter-spacing:.015em;margin:18px 0 8px}
-.subtitle{color:#a9cbe2;letter-spacing:.42em;font-size:12px;margin-left:.42em}
-.hero p{max-width:850px;margin:31px 0 0;color:#d2dde6;font-size:16px;line-height:1.7;text-shadow:0 2px 14px #000}
-.statement{margin-top:14px;color:#e9f5ff;font-size:13px;letter-spacing:.18em}
+.hero-brand,.hero-board-title{display:block}
+.hero-board-title{white-space:nowrap;font-size:clamp(28px,5.4vw,68px);line-height:1.05;margin-top:4px}
+.subtitle{letter-spacing:.42em;font-size:12px;margin-left:.42em}
+.hero p{max-width:880px;margin:31px 0 0;font-size:16px;line-height:1.7;text-shadow:0 2px 14px #000}
+.statement{margin-top:14px;font-size:13px;letter-spacing:.18em}
 .checkpoint-wrap{padding:24px 0 18px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end}
 .checkpoint-copy strong{display:block;color:#7fd2ff;font-size:12px;letter-spacing:.08em;margin-bottom:8px}
-.checkpoint-copy p{margin:0;color:#b8c7d3;font-size:13px;line-height:1.6}
-.dates{font-size:11px;line-height:1.9;color:#9aaebb;text-align:right;white-space:nowrap}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0 22px}
-.stat{border:1px solid #23506b;background:#071721cc;padding:20px 20px 18px;border-radius:6px}
+.checkpoint-copy p{margin:0;color:#c1d1dd;font-size:13px;line-height:1.6}
+.dates{font-size:11px;line-height:1.9;color:#bed2df;text-align:right;white-space:nowrap}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0 30px}
+.stat{border:1px solid #23506b;background:#071721e8;padding:20px;border-radius:6px}
 .stat b{display:block;font-size:28px;font-weight:400;margin-bottom:10px}
-.stat span{font-size:10px;letter-spacing:.08em;color:#849baa;font-weight:700}
-.board{padding:8px 0 80px}
-.board-head,.dev-row{display:grid;grid-template-columns:42px minmax(270px,2.5fr) minmax(175px,1.15fr) 80px minmax(170px,1fr);gap:14px;align-items:center}
-.board-head{padding:10px 12px;color:#7891a0;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.dev-row{min-height:57px;padding:0 12px;border:1px solid #163347;border-left-color:#163347;border-right-color:#163347;background:#07131c;margin-bottom:4px}
-.dev-row:nth-child(even){background:#091721}
-.num{color:#497184;font-size:11px}
-.name{font-size:13px;letter-spacing:.015em;display:flex;flex-direction:column;align-items:flex-start;gap:5px}.doc-link{display:inline-block;padding:5px 8px;border:1px solid #4f8cab;color:#85d4ff;font-size:8px;font-weight:700;letter-spacing:.08em;line-height:1.1;background:#071b28}.doc-link:hover{background:#0b2a3d;color:#fff}
-.objective{color:#8da5b7;font-size:10px;font-weight:700;letter-spacing:.04em}
-.objective.hardware{color:#e8a250}
-.percent{color:#a9d9f3;font-size:14px}
-.percent.complete{color:#58e3b6}
-.bar{height:5px;background:#102637;overflow:hidden}
-.bar span{display:block;height:100%;background:#5ac7ff}
-.bar span.hardware{background:#e3a055}
-.bar span.complete{background:#55e3b0}
-.board-group{margin:34px 0 12px;padding:18px 16px 14px;border:1px solid #1d4158;background:linear-gradient(90deg,#091b27,#07131c)}.board-group:first-of-type{margin-top:14px}.board-group h2{margin:0 0 6px;color:#d8effc;font-size:18px;letter-spacing:.04em}.board-group p{margin:0;color:#7896a8;font-size:11px;line-height:1.55;max-width:920px}.legend{display:flex;gap:20px;flex-wrap:wrap;margin:18px 0 0;color:#8da5b7;font-size:11px}
-.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:7px;background:#5ac7ff}
-.legend .hw i{background:#e3a055}.legend .done i{background:#55e3b0}
-footer{border-top:1px solid #153249;padding:34px 0 44px;color:#526b7b;text-align:center;font-size:10px;letter-spacing:.08em}
-@media(max-width:900px){
-.links{gap:13px;font-size:11px}.links a:nth-child(3),.links a:nth-child(4){display:none}
-.checkpoint-wrap{grid-template-columns:1fr}.dates{text-align:left}
-.stats{grid-template-columns:repeat(2,1fr)}
-.board{overflow-x:auto}.board-head,.dev-row{min-width:920px}
-}
-@media(max-width:560px){.hero{min-height:560px;background-position:center}.hero .shell{padding-top:70px;padding-bottom:38px}.subtitle{letter-spacing:.25em}.stats{grid-template-columns:1fr 1fr}.stat{padding:16px}.stat b{font-size:24px}}
-
-/* ADNEKO global visual system — homepage reference */
-.hero h1{margin:18px 0 8px;color:#fff}
-.hero-brand,.hero-board-title{display:block;color:#fff}
-.hero-board-title{white-space:nowrap;font-size:clamp(28px,5.4vw,68px);line-height:1.05;margin-top:4px}
-body,.kicker,.subtitle,.hero p,.statement,.checkpoint-copy strong,.checkpoint-copy p,.dates,.stat span,.board-head,.num,.doc-link,.objective,.objective.hardware,.percent,.percent.complete,.board-group h2,.board-group p,.legend,footer{color:#fff}
-
-.stat,.dev-row,.board-group{
-  background:#06101b38;
-  border:1px solid transparent;
-  backdrop-filter:blur(5px);
-  -webkit-backdrop-filter:blur(5px);
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-}
-.dev-row:nth-child(even){background:#06101b38}
-.board-group{background:#06101b38}
-.stat:before,.dev-row:before,.board-group:before{
-  content:"";position:absolute;inset:0;padding:.35px;
-  background:conic-gradient(from var(--edge-angle,0deg),#24394b 0 70%,#4d8fb2 78%,#8ee7ff 84%,#ffffff 87%,#54d5ff 90%,#467995 95%,#24394b 100%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;
-  pointer-events:none;z-index:2;
-  filter:drop-shadow(0 0 .6px #63d9ff33);
-  animation:edgeSweep 5.8s linear infinite;
-}
-.stat:after,.dev-row:after,.board-group:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(115deg,transparent 35%,#b9ecff0a 49%,transparent 63%);
-  transform:translateX(-120%);transition:transform .8s ease;
-  pointer-events:none;z-index:-1;
-}
-.stat:hover,.dev-row:hover,.board-group:hover{
-  background:#06101b38;
-  box-shadow:0 12px 32px #02091480,0 0 22px #63d9ff2e;
-}
-.stat:hover:after,.dev-row:hover:after,.board-group:hover:after{transform:translateX(120%)}
-@property --edge-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
-@keyframes edgeSweep{to{--edge-angle:360deg}}
-@media(prefers-reduced-motion:reduce){.stat:before,.dev-row:before,.board-group:before{animation:none}}
-@media(max-width:560px){.hero-board-title{font-size:clamp(25px,8.2vw,38px)}}
-
+.stat span{font-size:10px;letter-spacing:.08em;color:#b9cbd7;font-weight:700}
+.board{padding:0 0 80px;overflow-x:auto}
+.board-head,.dev-row{display:grid;grid-template-columns:38px minmax(245px,1.8fr) minmax(160px,1fr) minmax(210px,1.35fr) minmax(190px,1.2fr) minmax(190px,1.2fr);gap:12px;align-items:center;min-width:1190px}
+.board-head{padding:10px 12px;color:#9eb3c0;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.dev-row{min-height:82px;padding:12px;border:1px solid #163347;background:#07131cf2;margin-bottom:5px}
+.dev-row:nth-child(even){background:#091721f2}
+.num{color:#72a7bd;font-size:11px}
+.name{font-size:13px;letter-spacing:.015em;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.doc-link{display:inline-block;padding:5px 8px;border:1px solid #4f8cab;color:#85d4ff;font-size:8px;font-weight:700;letter-spacing:.08em;line-height:1.1;background:#071b28}
+.doc-link:hover{background:#0b2a3d;color:#fff}
+.metric{font-size:12px;line-height:1.45;color:#d8e8f1}
+.metric b{display:block;color:#8bd9ff;font-size:14px;font-weight:500;margin-bottom:4px}
+.metric.validation b{color:#77e5b5}
+.metric.production b{color:#f0b86b}
+.state{font-size:11px;line-height:1.45;color:#c5d4dd}
+.state strong{display:inline-block;border:1px solid #41647a;padding:5px 7px;color:#fff;font-size:9px;letter-spacing:.06em;text-transform:uppercase}
+.state .blocked{border-color:#a55454;color:#ffb1a9}
+.state .pending{border-color:#926c37;color:#ffd08c}
+.state .validated{border-color:#34755f;color:#8ff0c7}
+.board-group{min-width:1190px;margin:34px 0 12px;padding:18px 16px 14px;border:1px solid #1d4158;background:#081924f2}
+.board-group:first-of-type{margin-top:14px}
+.board-group h2{margin:0 0 6px;color:#d8effc;font-size:18px;letter-spacing:.04em}
+.board-group p{margin:0;color:#9ab2c1;font-size:11px;line-height:1.55;max-width:1000px}
+.note{min-width:1190px;margin-top:20px;padding:16px;border:1px solid #315268;background:#071721f2;color:#bcd0dc;font-size:11px;line-height:1.65}
+footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align:center;font-size:10px;letter-spacing:.08em}
+@media(max-width:900px){.checkpoint-wrap{grid-template-columns:1fr}.dates{text-align:left}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.hero{min-height:560px}.hero .shell{padding-top:70px;padding-bottom:38px}.hero-board-title{font-size:clamp(25px,8.2vw,38px)}.subtitle{letter-spacing:.25em}.stats{grid-template-columns:1fr 1fr}.stat{padding:16px}.stat b{font-size:24px}}
 </style>
 <script src="/adneko-header.js" defer></script>
 </head>
 <body>
 <adneko-header></adneko-header>
-
 <main>
 <section class="hero">
   <div class="shell">
     <div class="kicker">Laboratorio ADNEKO · Seguimiento público</div>
     <h1><span class="hero-brand">ADNEKO</span><span class="hero-board-title">DEVELOPMENT BOARD</span></h1>
     <div class="subtitle">desarrollos en evolución</div>
-    <p>Sistemas inteligentes, plataformas, software y hardware avanzando en paralelo desde arquitectura y desarrollo hasta producción. Un tablero vivo que refleja el progreso real de cada proyecto, cada etapa y cada cierre.</p>
+    <p>Sistemas inteligentes, plataformas, software y hardware avanzando en paralelo. El tablero separa lo desarrollado, lo validado y lo realmente certificado para producción.</p>
     <div class="statement">DEL CONCEPTO A LA REALIDAD.</div>
   </div>
 </section>
@@ -123,213 +76,259 @@ body,.kicker,.subtitle,.hero p,.statement,.checkpoint-copy strong,.checkpoint-co
 <section class="shell">
   <div class="checkpoint-wrap">
     <div class="checkpoint-copy">
-      <strong>LABORATORIO ADNEKO · SEGUIMIENTO PÚBLICO</strong>
-      <p>Cada porcentaje representa avance comprobado. Sistemas hasta producción; hardware hasta diseño listo para fabricación.</p>
+      <strong>LABORATORIO ADNEKO · AVANCE VERIFICABLE</strong>
+      <p>Desarrollo e ingeniería, validación y producción/FAT se muestran por separado. Ningún desarrollo se presenta como productivo sin evidencia final.</p>
     </div>
-    <div class="dates">CHECKPOINT · 29 SEP 2026<br>SIGUIENTE · 30 SEP 2026</div>
+    <div class="dates">CHECKPOINT · 02 OCT 2026<br>CONTROL · EVIDENCIA REAL</div>
   </div>
 
   <div class="stats">
     <div class="stat"><b>25</b><span>DESARROLLOS ACTIVOS</span></div>
-    <div class="stat"><b>1</b><span>CIERRE COMPLETO</span></div>
+    <div class="stat"><b>0</b><span>PRODUCCIONES COMPLETAMENTE CERTIFICADAS</span></div>
     <div class="stat"><b>24 h</b><span>CICLO DE REVISIÓN</span></div>
     <div class="stat"><b>REAL</b><span>AVANCE VERIFICABLE</span></div>
   </div>
 
-  <section class="board" aria-label="Estado de desarrollos ADNEKO">
+  <section class="board" aria-label="Estado verificable de desarrollos ADNEKO">
     <div class="board-head">
-      <div>#</div><div>Desarrollo</div><div>Objetivo</div><div>Progreso</div><div></div>
+      <div>#</div><div>Desarrollo</div><div>Desarrollo / ingeniería</div><div>Validación</div><div>Producción / FAT</div><div>Estado</div>
     </div>
-    
-    <div class="board-group"><h2>SISTEMAS INTELIGENTES</h2><p>Inteligencia, autonomía, agentes, interacción y sistemas cognitivos que coordinan decisiones, contexto y operación.</p></div>
-          <div class="dev-row">
-            <div class="num">25</div>
-            <div class="name"><span>ADNEKO DEVELOPMENT ORCHESTRATOR</span><a class="doc-link" href="https://drive.google.com/file/d/1zYIb5UQqpaWOUKVWGZyem6y6o4g4vz1D/view?usp=drive_link" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">5%</div>
-            <div class="bar"><span class="software" style="width:5%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">05</div>
-            <div class="name"><span>AUTONOMOUS COMPANY</span><a class="doc-link" href="https://drive.google.com/file/d/1dn9v97texIsNOyGNljB_qN1_1ERG1KB5/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">94%</div>
-            <div class="bar"><span class="software" style="width:94%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">06</div>
-            <div class="name"><span>NEKO VOICE</span><a class="doc-link" href="https://drive.google.com/file/d/1UFmd6zEnWKG4IWvbVODujI0KsiuJVlEi/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent ">93–95%</div>
-            <div class="bar"><span class="software" style="width:95%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">07</div>
-            <div class="name"><span>AUTONOMOUS AGENT</span><a class="doc-link" href="https://drive.google.com/file/d/1B6ZjRp1tolNHY1euxzjxli_ZGpq10NB1/view" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">88%</div>
-            <div class="bar"><span class="software" style="width:88%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">08</div>
-            <div class="name"><span>INTELLIGENCE OS</span><a class="doc-link" href="INTELLIGENCE_OS_DOCUMENTO_OFICIAL.pdf" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">92%</div>
-            <div class="bar"><span class="software" style="width:92%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">09</div>
-            <div class="name"><span>NEKO PHYSICAL INTELLIGENCE</span><a class="doc-link" href="https://drive.google.com/file/d/1eQdEYlHZKOCDnPVF5N5MHATGAgKwIJcd/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
-            <div class="percent ">≈88%</div>
-            <div class="bar"><span class="hardware" style="width:88%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">10</div>
-            <div class="name"><span>FACE AGENT / NEKO-01</span><a class="doc-link" href="https://drive.google.com/file/d/1kGb2liIAEk_rE9Eck_YMuxErDS1VwCsY/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">86%</div>
-            <div class="bar"><span class="software" style="width:86%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">11</div>
-            <div class="name"><span>CREADOR IA OS</span><a class="doc-link" href="https://drive.google.com/file/d/1ehq-RygIcAX5BRABywuHOYbtMr7pBMeW/view" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">94%</div>
-            <div class="bar"><span class="software" style="width:94%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">12</div>
-            <div class="name"><span>ADVANCED OS</span><a class="doc-link" href="https://drive.google.com/file/d/1TrTOJ4W1qGC9eD3aKVK-eyDT8WhzgEj_" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">88%</div>
-            <div class="bar"><span class="software" style="width:88%"></span></div>
-          </div>
-    <div class="board-group"><h2>SISTEMAS AVANZADOS</h2><p>Software y plataformas especializadas para control, integración, visión, ejecución Edge, reservas y operación empresarial o industrial.</p></div>
-          <div class="dev-row">
-            <div class="num">01</div>
-            <div class="name"><span>PROCESS CONTROL</span><a class="doc-link" href="https://drive.google.com/file/d/1jXX5fJZwveKKiudOrreo_YWFWFHf-mNU/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">72%</div>
-            <div class="bar"><span class="software" style="width:72%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">02</div>
-            <div class="name"><span>BOOKING SYSTEM</span><a class="doc-link" href="https://drive.google.com/file/d/1VvnA3SmSjxuRRzLGrnUNEk0N5A5VED5A/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent ">92–95%</div>
-            <div class="bar"><span class="software" style="width:95%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">04</div>
-            <div class="name"><span>VISIONFIND EDGE</span><a class="doc-link" href="https://drive.google.com/file/d/1yIxplGvMD2YmW-AbY5OWz8VGHjTVnV1J/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent ">≈60%</div>
-            <div class="bar"><span class="software" style="width:60%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">13</div>
-            <div class="name"><span>VISIONFIND SOFTWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1cfFj-_o4a8whHc3f5CeB5TQHMEnvyJpd/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent ">≈88%</div>
-            <div class="bar"><span class="software" style="width:88%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">14</div>
-            <div class="name"><span>NEXUS COMMIT SOFTWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1XhhLnay6BTRwUiwUkVEKCwz84LMHUU1w/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">92%</div>
-            <div class="bar"><span class="software" style="width:92%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">15</div>
-            <div class="name"><span>KIRA SOFTWARE</span><a class="doc-link" href="https://drive.google.com/file/d/12-SkfOdwuH4pQ2GXSatvB95BGjYRk4tX/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">96%</div>
-            <div class="bar"><span class="software" style="width:96%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">18</div>
-            <div class="name"><span>INDUSTRIAL I/O SOFTWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1Y6kk6wc1QtbgVqZG0UxPPc2N081PKEVk/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent ">≈75%</div>
-            <div class="bar"><span class="software" style="width:75%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">20</div>
-            <div class="name"><span>EDGE INTEGRATION</span><a class="doc-link" href="https://drive.google.com/file/d/1owIY8n0BtT0d2fXW3ialGiLoOkuRMwy1/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent complete">100%</div>
-            <div class="bar"><span class="complete" style="width:100%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">22</div>
-            <div class="name"><span>EDGE OS</span><a class="doc-link" href="https://drive.google.com/file/d/1_JhoymZn_mBuQiqwCoVqRXrEiW4dv9ej/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent ">96–98%</div>
-            <div class="bar"><span class="software" style="width:98%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">24</div>
-            <div class="name"><span>MEMBRANE</span><a class="doc-link" href="https://drive.google.com/file/d/1UVdMsgoUkz9s7uW5Luntg-uvIOVTLgjX/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">PRODUCCIÓN</div>
-            <div class="percent">96%</div>
-            <div class="bar"><span class="software" style="width:96%"></span></div>
-          </div>
-    <div class="board-group"><h2>HARDWARE</h2><p>Plataformas y módulos físicos para Edge, I/O, seguridad, ejecución industrial y despliegues integrados.</p></div>
-          <div class="dev-row">
-            <div class="num">03</div>
-            <div class="name"><span>INDUSTRIAL SAFETY MODULE · ISM-01</span><a class="doc-link" href="https://drive.google.com/file/d/1S2aCYIbngYmrSVL_B9QM1bao1Tvt8fZT/view" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
-            <div class="percent ">90–92%</div>
-            <div class="bar"><span class="hardware" style="width:92%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">16</div>
-            <div class="name"><span>NEXUS COMMIT HARDWARE / FARD</span><a class="doc-link" href="https://drive.google.com/file/d/1uATBOZuHCDLN9sZNoVxGB-DhUs53iitf/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
-            <div class="percent">60%</div>
-            <div class="bar"><span class="hardware" style="width:60%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">17</div>
-            <div class="name"><span>EDGE OS VS TERMINAL / EDGE TERMINAL</span><a class="doc-link" href="https://drive.google.com/file/d/11Ff_BhhIBJTLoAQ-O2mPZU1L_ehb59Sk/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
-            <div class="percent ">≈96%</div>
-            <div class="bar"><span class="hardware" style="width:96%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">19</div>
-            <div class="name"><span>INDUSTRIAL I/O HARDWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1vQQnBKQ2ExDJZ68JyKYVFHG-8Wh100VH/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
-            <div class="percent ">≈99%</div>
-            <div class="bar"><span class="hardware" style="width:99%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">21</div>
-            <div class="name"><span>EDGE PLATFORM</span><a class="doc-link" href="https://drive.google.com/file/d/1L8cJlIP1JeuNm6bx9jwyoB0NAlMohFXo/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective hardware">DISEÑO / FABRICACIÓN</div>
-            <div class="percent ">≈97%</div>
-            <div class="bar"><span class="hardware" style="width:97%"></span></div>
-          </div>
-          <div class="dev-row">
-            <div class="num">23</div>
-            <div class="name"><span>KIRA HARDWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1tvxlY1BOGxw9zAH9z93kEb2UWKHoDSSb/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
-            <div class="objective ">DISEÑO / FABRICACIÓN</div>
-            <div class="percent">78%</div>
-            <div class="bar"><span class="software" style="width:78%"></span></div>
-          </div>
-    <div class="legend">
-      <span><i></i>Software / producción</span>
-      <span class="hw"><i></i>Hardware / diseño-fabricación</span>
-      <span class="done"><i></i>Cierre completo</span>
+
+    <div class="board-group"><h2>SISTEMAS INTELIGENTES</h2><p>Inteligencia, autonomía, agentes, interacción y sistemas cognitivos.</p></div>
+
+    <div class="dev-row">
+      <div class="num">25</div>
+      <div class="name"><span>ADNEKO DEVELOPMENT ORCHESTRATOR</span><a class="doc-link" href="https://drive.google.com/file/d/1zYIb5UQqpaWOUKVWGZyem6y6o4g4vz1D/view?usp=drive_link" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>EN RECÁLCULO</b>Registry de 14 repos implementado</div>
+      <div class="metric validation"><b>PENDIENTE</b>Suite final pendiente</div>
+      <div class="metric production"><b>0% DEMOSTRADO</b>Sin cierre productivo</div>
+      <div class="state"><strong class="pending">No publicar global inventado</strong></div>
     </div>
+
+    <div class="dev-row">
+      <div class="num">05</div>
+      <div class="name"><span>AUTONOMOUS COMPANY</span><a class="doc-link" href="https://drive.google.com/file/d/1dn9v97texIsNOyGNljB_qN1_1ERG1KB5/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>94%</b>Desarrollo</div>
+      <div class="metric validation"><b>0% · GATE FAIL</b>Runtime validation falló</div>
+      <div class="metric production"><b>0% DEMOSTRADO</b>Certificación/evidencia omitidas</div>
+      <div class="state"><strong class="blocked">Certificación bloqueada</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">06</div>
+      <div class="name"><span>NEKO VOICE / CONVERSATIONAL RUNTIME</span><a class="doc-link" href="https://drive.google.com/file/d/1UFmd6zEnWKG4IWvbVODujI0KsiuJVlEi/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>93–95%</b>Desarrollo</div>
+      <div class="metric validation"><b>RC AVANZADA</b>Contexto, memoria y autoridad integrados</div>
+      <div class="metric production"><b>PENDIENTE</b>Producción completa no demostrada</div>
+      <div class="state"><strong class="pending">Preproducción avanzada</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">07</div>
+      <div class="name"><span>AUTONOMOUS AGENT</span><a class="doc-link" href="https://drive.google.com/file/d/1B6ZjRp1tolNHY1euxzjxli_ZGpq10NB1/view" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>88%</b>Global actual</div>
+      <div class="metric validation"><b>100% · CI PASS</b>Verify en main</div>
+      <div class="metric production"><b>0% DEPLOY</b>Render, PostgreSQL y cutover pendientes</div>
+      <div class="state"><strong class="validated">CI validado</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">08</div>
+      <div class="name"><span>INTELLIGENCE OS</span><a class="doc-link" href="INTELLIGENCE_OS_DOCUMENTO_OFICIAL.pdf" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>92%</b>Desarrollo</div>
+      <div class="metric validation"><b>100% · CI PASS</b>Quality, build y test</div>
+      <div class="metric production"><b>PENDIENTE</b>Integraciones externas y envío real E2E</div>
+      <div class="state"><strong class="validated">Validación interna cerrada</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">09</div>
+      <div class="name"><span>NEKO PHYSICAL INTELLIGENCE</span><a class="doc-link" href="https://drive.google.com/file/d/1eQdEYlHZKOCDnPVF5N5MHATGAgKwIJcd/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>≈88%</b>Ingeniería</div>
+      <div class="metric validation"><b>MASTER CERRADO</b>M720 arquitectura lista</div>
+      <div class="metric production"><b>PENDIENTE</b>STEP/X_T, masa/COM e integración física</div>
+      <div class="state"><strong class="pending">CAD físico pendiente</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">10</div>
+      <div class="name"><span>FACE AGENT / NEKO-01</span><a class="doc-link" href="https://drive.google.com/file/d/1kGb2liIAEk_rE9Eck_YMuxErDS1VwCsY/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>86%</b>Desarrollo</div>
+      <div class="metric validation"><b>0% CERT BUILD</b>Último gate</div>
+      <div class="metric production"><b>PREVIEW READY</b>Producción no certificada</div>
+      <div class="state"><strong class="blocked">Certificación pendiente</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">11</div>
+      <div class="name"><span>CREADOR IA OS</span><a class="doc-link" href="https://drive.google.com/file/d/1ehq-RygIcAX5BRABywuHOYbtMr7pBMeW/view" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>94%</b>Desarrollo</div>
+      <div class="metric validation"><b>100% · PASS</b>RC2, provenance y admission</div>
+      <div class="metric production"><b>PENDIENTE</b>Promoción, tag y release final</div>
+      <div class="state"><strong class="validated">RC2 validado</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">12</div>
+      <div class="name"><span>ADVANCED OS / ADVANCED CORE</span><a class="doc-link" href="https://drive.google.com/file/d/1TrTOJ4W1qGC9eD3aKVK-eyDT8WhzgEj_" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>97% SOFTWARE</b>Desarrollo</div>
+      <div class="metric validation"><b>445/445 · 100%</b>Hardening reciente: FAIL</div>
+      <div class="metric production"><b>88%</b>Commissioning/FAT físico pendiente</div>
+      <div class="state"><strong class="pending">Producción 88%</strong></div>
+    </div>
+
+    <div class="board-group"><h2>SISTEMAS AVANZADOS</h2><p>Software y plataformas especializadas para control, integración, visión, Edge y operación.</p></div>
+
+    <div class="dev-row">
+      <div class="num">01</div>
+      <div class="name"><span>PROCESS CONTROL ENGINE</span><a class="doc-link" href="https://drive.google.com/file/d/1jXX5fJZwveKKiudOrreo_YWFWFHf-mNU/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>72%</b>Desarrollo</div>
+      <div class="metric validation"><b>SIN RECÁLCULO</b>No hay checkpoint posterior fiable</div>
+      <div class="metric production"><b>NO CERRADO</b>Producción pendiente</div>
+      <div class="state"><strong class="pending">Mantener 72%</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">02</div>
+      <div class="name"><span>BOOKING SYSTEM</span><a class="doc-link" href="https://drive.google.com/file/d/1VvnA3SmSjxuRRzLGrnUNEk0N5A5VED5A/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>92–95%</b>Desarrollo</div>
+      <div class="metric validation"><b>SIN RECÁLCULO</b>Checkpoint posterior insuficiente</div>
+      <div class="metric production"><b>NO RECALCULADO</b>Sin nueva evidencia final</div>
+      <div class="state"><strong class="pending">Mantener rango</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">04</div>
+      <div class="name"><span>VISIONFIND EDGE</span><a class="doc-link" href="https://drive.google.com/file/d/1yIxplGvMD2YmW-AbY5OWz8VGHjTVnV1J/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>≈60%</b>Desarrollo</div>
+      <div class="metric validation"><b>DEMO 100%</b>Contracts 0% · ECAD/KiCad 0%</div>
+      <div class="metric production"><b>NO VALIDADO</b>Físico pendiente</div>
+      <div class="state"><strong class="blocked">Gates críticos pendientes</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">13</div>
+      <div class="name"><span>VISIONFIND SOFTWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1cfFj-_o4a8whHc3f5CeB5TQHMEnvyJpd/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>≈88%</b>Desarrollo</div>
+      <div class="metric validation"><b>DB 100%</b>Contracts 0%</div>
+      <div class="metric production"><b>PENDIENTE</b>Staging y producción no cerrados</div>
+      <div class="state"><strong class="blocked">Contracts bloqueado</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">14</div>
+      <div class="name"><span>NEXUS COMMIT SOFTWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1XhhLnay6BTRwUiwUkVEKCwz84LMHUU1w/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>≈95%</b>Desarrollo</div>
+      <div class="metric validation"><b>100% · CI PASS</b>Core en main</div>
+      <div class="metric production"><b>PENDIENTE</b>Staging/producción sin evidencia final</div>
+      <div class="state"><strong class="validated">Core validado</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">15</div>
+      <div class="name"><span>KIRA SOFTWARE</span><a class="doc-link" href="https://drive.google.com/file/d/12-SkfOdwuH4pQ2GXSatvB95BGjYRk4tX/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>96%</b>Desarrollo</div>
+      <div class="metric validation"><b>0% ACTUAL</b>Quality, PostgreSQL e Independence</div>
+      <div class="metric production"><b>NO CERTIFICADA</b>Sin cierre productivo</div>
+      <div class="state"><strong class="blocked">Certificación 0%</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">18</div>
+      <div class="name"><span>INDUSTRIAL I/O SOFTWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1Y6kk6wc1QtbgVqZG0UxPPc2N081PKEVk/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>≈75%</b>Desarrollo</div>
+      <div class="metric validation"><b>EN CIERRE</b>Integración real del core</div>
+      <div class="metric production"><b>PENDIENTE</b>FAT y operación física</div>
+      <div class="state"><strong class="pending">Mantener 75%</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">20</div>
+      <div class="name"><span>EDGE INTEGRATION</span><a class="doc-link" href="https://drive.google.com/file/d/1owIY8n0BtT0d2fXW3ialGiLoOkuRMwy1/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>100% PACKAGE</b>Manufacturing Dossier</div>
+      <div class="metric validation"><b>PAQUETE CERRADO</b>QC, Assembly WI y manifest</div>
+      <div class="metric production"><b>PENDIENTE</b>Build físico H-019</div>
+      <div class="state"><strong class="validated">Paquete de fabricación listo</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">22</div>
+      <div class="name"><span>EDGE OS</span><a class="doc-link" href="https://drive.google.com/file/d/1_JhoymZn_mBuQiqwCoVqRXrEiW4dv9ej/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>96–98% GLOBAL</b>Software</div>
+      <div class="metric validation"><b>100% CERTIFICADO</b>518 tests · 9/9 gates</div>
+      <div class="metric production"><b>PENDIENTE</b>FAT00 físico P01–P08</div>
+      <div class="state"><strong class="validated">Software certificado</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">24</div>
+      <div class="name"><span>MEMBRANE</span><a class="doc-link" href="https://drive.google.com/file/d/1UVdMsgoUkz9s7uW5Luntg-uvIOVTLgjX/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>96%</b>Desarrollo</div>
+      <div class="metric validation"><b>100% + 100%</b>Core v48 y deployment contract</div>
+      <div class="metric production"><b>PENDIENTE</b>Despliegue productivo final</div>
+      <div class="state"><strong class="validated">Validación cerrada</strong></div>
+    </div>
+
+    <div class="board-group"><h2>HARDWARE E INTEGRACIÓN FÍSICA</h2><p>Plataformas, módulos, fabricación, puesta en marcha y FAT.</p></div>
+
+    <div class="dev-row">
+      <div class="num">03</div>
+      <div class="name"><span>INDUSTRIAL SAFETY MODULE · ISM-01</span><a class="doc-link" href="https://drive.google.com/file/d/1S2aCYIbngYmrSVL_B9QM1bao1Tvt8fZT/view" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>90–92%</b>Ingeniería</div>
+      <div class="metric validation"><b>PAQUETE AVANZADO</b>Ingeniería industrial</div>
+      <div class="metric production"><b>PENDIENTE</b>Construcción y FAT final</div>
+      <div class="state"><strong class="pending">Fabricación pendiente</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">16</div>
+      <div class="name"><span>NEXUS COMMIT HARDWARE / FARD</span><a class="doc-link" href="https://drive.google.com/file/d/1uATBOZuHCDLN9sZNoVxGB-DhUs53iitf/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>≈90% DISEÑO</b>Ready-to-fabricate</div>
+      <div class="metric validation"><b>0% · STATIC GATE FAIL</b>PCB Phase 2</div>
+      <div class="metric production"><b>PENDIENTE</b>Fabricación y FAT</div>
+      <div class="state"><strong class="blocked">Gate PCB pendiente</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">17</div>
+      <div class="name"><span>EDGE TERMINAL</span><a class="doc-link" href="https://drive.google.com/file/d/11Ff_BhhIBJTLoAQ-O2mPZU1L_ehb59Sk/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>≈96%</b>Ingeniería</div>
+      <div class="metric validation"><b>SIN RECÁLCULO</b>Checkpoint posterior insuficiente</div>
+      <div class="metric production"><b>PENDIENTE</b>Físico y FAT</div>
+      <div class="state"><strong class="pending">Mantener 96%</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">19</div>
+      <div class="name"><span>INDUSTRIAL I/O HARDWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1vQQnBKQ2ExDJZ68JyKYVFHG-8Wh100VH/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>≈99%</b>Ingeniería y diseño</div>
+      <div class="metric validation"><b>FAT00 CERRADO</b>Software, host y evidencia</div>
+      <div class="metric production"><b>PENDIENTE</b>FAT físico P01–P08</div>
+      <div class="state"><strong class="pending">Todavía no 100%</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">21</div>
+      <div class="name"><span>EDGE PLATFORM</span><a class="doc-link" href="https://drive.google.com/file/d/1L8cJlIP1JeuNm6bx9jwyoB0NAlMohFXo/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>97–98% BUILD</b>Build Readiness</div>
+      <div class="metric validation"><b>INGENIERÍA AVANZADA</b>Prácticamente cerrada</div>
+      <div class="metric production"><b>≈90%</b>Production Readiness · FAT pendiente</div>
+      <div class="state"><strong class="pending">FAT físico pendiente</strong></div>
+    </div>
+
+    <div class="dev-row">
+      <div class="num">23</div>
+      <div class="name"><span>KIRA HARDWARE</span><a class="doc-link" href="https://drive.google.com/file/d/1tvxlY1BOGxw9zAH9z93kEb2UWKHoDSSb/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">DOCUMENTO OFICIAL</a></div>
+      <div class="metric"><b>100% INGENIERÍA</b>REV-F · BOM 35/35</div>
+      <div class="metric validation"><b>READY_TO_BUILD</b>Paquete de 67 archivos</div>
+      <div class="metric production"><b>78% GLOBAL FÍSICO</b>Procurement 0/35 · FAT pendiente</div>
+      <div class="state"><strong class="pending">Fabricación no iniciada</strong></div>
+    </div>
+
+    <div class="note">Los porcentajes de desarrollo no equivalen automáticamente a producción. Un sistema puede tener software o ingeniería avanzados y mantener validación, despliegue, fabricación o FAT pendientes.</div>
   </section>
 </section>
 </main>
 <footer><div class="shell">ADNEKO · INNOVACIÓN · APP · ECOSISTEMAS · LA EMPRESA DEL FUTURO, HOY.</div></footer>
 </body>
 </html>
-
-
-
