@@ -49,6 +49,9 @@ h1{font-size:clamp(38px,6vw,74px);font-weight:300;letter-spacing:.015em;margin:1
 .state .blocked{border-color:#a55454;color:#ffb1a9}
 .state .pending{border-color:#926c37;color:#ffd08c}
 .state .validated{border-color:#34755f;color:#8ff0c7}
+.change-note{grid-column:2/-1;border-top:1px solid #24465b;padding:10px 0 2px;color:#d4e3ec;font-size:11px;line-height:1.65}
+.change-note span{display:inline-block;margin-right:9px;color:#72cfff;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.change-note strong{color:#fff;font-weight:700}
 .board-group{min-width:1190px;margin:34px 0 12px;padding:18px 16px 14px;border:1px solid #1d4158;background:#081924f2}
 .board-group:first-of-type{margin-top:14px}
 .board-group h2{margin:0 0 6px;color:#d8effc;font-size:18px;letter-spacing:.04em}
@@ -103,6 +106,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>89/247 PASS</b>ZERO_TOUCH parcial</div>
       <div class="metric production"><b>PENDIENTE</b>Certificación y deploy</div>
       <div class="state"><strong class="pending">Recálculo no cerrado</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>Replay dedupe corregido <strong>8/8 PASS</strong>. ZERO_TOUCH llegó a <strong>89/247 PASS</strong>. Certificación/deploy aún pendientes.</div>
     </div>
 
     <div class="dev-row">
@@ -112,6 +116,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>48/48 PASS</b>E2E PostgreSQL · PR #41 merged</div>
       <div class="metric production"><b>HEAD PENDIENTE</b>Misión COMPLETE · ledger/state/checkpoint verificados</div>
       <div class="state"><strong class="pending">Certificación actual pendiente</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>Cambio importante de evidencia: E2E PostgreSQL <strong>48/48 PASS</strong>, misión COMPLETE, ledger/state/checkpoint verificados. PR #41 merged. Certificación del HEAD actual pendiente.</div>
     </div>
 
     <div class="dev-row">
@@ -121,6 +126,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>280/280 PASS</b>Focused 42/42 PASS</div>
       <div class="metric production"><b>E2E COMPLETE</b>NEKO → Autonomous Company → PostgreSQL</div>
       <div class="state"><strong class="pending">Gate acústico GPT-Live pendiente</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span><strong>280/280 PASS</strong>. Vertical slice NEKO→Autonomous Company PostgreSQL <strong>E2E COMPLETE</strong>. Focused <strong>42/42 PASS</strong>. Gate acústico GPT-Live pendiente.</div>
     </div>
 
     <div class="dev-row">
@@ -130,6 +136,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>SIN RECÁLCULO</b>Sin nueva evidencia porcentual formal</div>
       <div class="metric production"><b>PENDIENTE</b>Backbone y certificación productiva</div>
       <div class="state"><strong class="pending">Mantener 88%</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>No existe nuevo recálculo. Backbone/certificación productiva todavía no cerrados.</div>
     </div>
 
     <div class="dev-row">
@@ -139,6 +146,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>LIVE / READY</b>Production y capability smoke PASS · email 2/2</div>
       <div class="metric production"><b>BACKBONE INTEGRADO</b>Intelligence ↔ Advanced E2E PASS</div>
       <div class="state"><strong class="validated">Sin nuevo % formal</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>LIVE/READY demostrado, production/capability smoke PASS, email <strong>2/2</strong>, integración Intelligence↔Advanced E2E PASS y backbone integrado. Sin nuevo % formal.</div>
     </div>
 
     <div class="dev-row">
@@ -148,6 +156,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>M297 / R11</b>Validaciones estructurales</div>
       <div class="metric production"><b>PENDIENTE</b>CAD, materiales, masa/COM e integración</div>
       <div class="state"><strong class="pending">Sin recálculo formal</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>Ingeniería avanzó hasta M297/R11 y validaciones estructurales, pero quedan CAD físico, materiales, masa/COM e integración. Sin recálculo.</div>
     </div>
 
     <div class="dev-row">
@@ -157,6 +166,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>v1.38–v1.51</b>Certificados · signing e imagen PASS</div>
       <div class="metric production"><b>v1.52 PENDIENTE</b>SBOM attestation</div>
       <div class="state"><strong class="pending">SBOM pendiente</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>v1.38–v1.51 certificados; signing/verificación de imagen PASS. SBOM attestation v1.52 sigue pendiente.</div>
     </div>
 
     <div class="dev-row">
@@ -166,6 +176,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>67 GATES · 0 FALLOS</b>1.467/1.479 tests PASS · 12 omitidos</div>
       <div class="metric production"><b>DEMOSTRADO</b>PostgreSQL, conversación real y persistencia</div>
       <div class="state"><strong class="pending">Ledger pendiente</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>RC2: <strong>67 gates / 0 fallos</strong>, <strong>1.467/1.479 tests PASS</strong>, 12 omitidos; PostgreSQL, conversación real y persistencia demostrados. Ledger pendiente.</div>
     </div>
 
     <div class="dev-row">
@@ -175,6 +186,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>PRE-CERT PASS</b>1.000/1.000 · restart 5/5 · shutdown 5/5</div>
       <div class="metric production"><b>PENDIENTE</b>Recovery/idempotency 11/11 PASS · producción externa sin cerrar</div>
       <div class="state"><strong class="validated">Intelligence ↔ Advanced E2E PASS</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>Gran avance: Intelligence↔Advanced E2E PASS; pre-certificación con <strong>1.000/1.000 requests</strong>, restart <strong>5/5</strong>, shutdown <strong>5/5</strong>, recovery/idempotency <strong>11/11 PASS</strong>. Producción externa aún no cerrada.</div>
     </div>
 
     <div class="board-group"><h2>SISTEMAS AVANZADOS</h2><p>Software y plataformas especializadas para control, integración, visión, Edge y operación.</p></div>
@@ -222,6 +234,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>SIN RECÁLCULO</b>No existe respaldo formal para 99%</div>
       <div class="metric production"><b>PENDIENTE</b>Staging y producción final sin cierre completo</div>
       <div class="state"><strong class="pending">Mantener ≈95%</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span><strong>NO subir a 99%</strong>. No existe recálculo posterior formal que lo respalde. Producción/staging final siguen sin cierre completo.</div>
     </div>
 
     <div class="dev-row">
@@ -258,6 +271,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>518 TESTS · 9/9 GATES</b>Evidencia de referencia</div>
       <div class="metric production"><b>PENDIENTE</b>FAT físico</div>
       <div class="state"><strong class="pending">Sin recálculo posterior</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>Mantener. 518 tests y 9/9 gates siguen siendo la evidencia de referencia; FAT físico pendiente. No hay recálculo posterior defendible.</div>
     </div>
 
     <div class="dev-row">
@@ -267,6 +281,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
       <div class="metric validation"><b>GATES 0/1/2/3/5/7 PASS</b>Gate 3: 100 requests · concurrency 10 · 0 errores</div>
       <div class="metric production"><b>BLOQUEO EXTERNO</b>Gate 4 bloqueado · Gate 8 dependiente</div>
       <div class="state"><strong class="pending">Mantener 96%</strong></div>
+      <div class="change-note"><span>Cambio real · 04 OCT</span>Gate 3 canónico PASS: <strong>100 requests</strong>, concurrency 10, <strong>0 errores</strong>; gates <strong>0/1/2/3/5/7 PASS</strong>. Gate 4 bloqueado externamente y Gate 8 depende del cierre anterior.</div>
     </div>
 
     <div class="board-group"><h2>HARDWARE E INTEGRACIÓN FÍSICA</h2><p>Plataformas, módulos, fabricación, puesta en marcha y FAT.</p></div>
