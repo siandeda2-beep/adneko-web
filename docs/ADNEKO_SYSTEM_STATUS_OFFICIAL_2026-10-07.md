@@ -1430,3 +1430,62 @@ Secuencia:
 
 ### Estado
 **R17 ENGINEERING BOUNDARY · INGENIERÍA PRÁCTICAMENTE CERRADA · FAT FÍSICO PENDIENTE**
+
+
+---
+
+## 18. Industrial Safety Module / ISM-01 — ISM-119 pending
+
+### Último checkpoint real
+- Fecha: 02 octubre 2026, 10:06.
+- Es el último hilo específico de avances técnicos recuperado para ISM-01.
+- No existe evidencia aportada de ejecución posterior que permita declarar cierres adicionales.
+
+### Estado del desarrollo
+- Arquitectura safety: **cerrada en diseño**.
+- ISM-96 a ISM-98: **cerrados**.
+- ISM-99 a ISM-114: definiciones documentales desarrolladas.
+- ISM-115 a ISM-117: auditoría y preparación de fabricación.
+- ISM-118 / CFG-001: baseline de componentes recuperada.
+- ISM-119: siguiente auditoría técnica pendiente.
+- CEK-001: pendiente de cierre dimensional.
+- F1–F4: pendientes de verificación.
+- First Article: sin construcción física acreditada.
+- FAT físico: sin ejecución acreditada.
+- Product Release: **NO AUTORIZADO**.
+
+### Baseline CFG-001 recuperada
+- Pilz PNOZ s3 — 750103.
+- Schneider E-STOP — XB4BS84441.
+- Schneider RESET — XB4BA31.
+- Siemens K1/K2 — 3RT2015-1BB41.
+- Auxiliares — 3RH2911-1FA22.
+- Supresión — 3RT2916-1BB00.
+- PATLITE H1 — NE-M1ANN-M.
+- Gabinete Rittal AX 1034000.
+- DIN-R2 — 230 mm / 38 posiciones.
+- STO reservado en X5, no utilizado en CFG-001.
+
+Estas referencias pertenecen a la baseline recuperada. Su compatibilidad eléctrica completa todavía requiere ISM-119.
+
+### Punto exacto de continuidad
+**ISM-119 — CFG-001 ELECTRICAL BASELINE AUDIT**
+
+Pendiente:
+1. Verificar referencias contra datasheets y esquema.
+2. Resolver F1–F4.
+3. Cerrar CEK-001 con diámetros y prensaestopas reales.
+4. Consolidar RC3.
+5. Preparar BUILD-001.
+
+### Precisión de estado
+La ingeniería está avanzada, pero no existe evidencia suficiente para declarar ISM-01:
+- fabricado;
+- probado físicamente;
+- FAT cerrado;
+- listo para producción.
+
+No repetir bloques documentales anteriores salvo que sean necesarios como referencia puntual.
+
+### Estado
+**DISEÑO SAFETY AVANZADO · ISM-119 PENDIENTE · BUILD/FAT NO ACREDITADOS**
