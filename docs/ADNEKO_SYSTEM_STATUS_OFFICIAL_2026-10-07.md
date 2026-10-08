@@ -1157,3 +1157,108 @@ El cuello de botella actual es **routing completo**.
 
 ### Regla operativa sobre PC del usuario
 Antes de descargar, instalar, abrir o cerrar cualquier programa en la PC del usuario, avisar primero y explicar para qué.
+
+
+---
+
+## 15. EDGE OS — software RC verified / FAT00 physical pending
+
+### Base exacta de trabajo
+- Rama: `fix/release-certification-typecheck`
+- HEAD: `c0c8b1142223e72654a17fb7b00df3e840aa8a7d`
+- Checkout: limpio
+- Release hash Module I/O: `7b1f00a2322736c92ddca0df822ab4cbc9d407b373b2857b8da6a99cb2101399`
+
+### Software realmente validado
+- `typecheck`: PASS
+- Suite completa Linux: PASS
+- `test:module-io`: **73 archivos / 518 tests PASS**
+- Build: PASS
+- Verified build: PASS
+- Module I/O proof: PASS
+- Module I/O proof verify: PASS
+- Module I/O release package: PASS
+- Module I/O release verify: PASS
+- Release certification completa: **9/9 gates PASS**
+- Local software certification: PASS
+
+Estado autoritativo:
+`SOFTWARE_RC_VERIFIED_PHYSICAL_FAT_PENDING`
+
+Flags:
+- `physicalWritePerformed = false`
+- `finalIndustrialRelease = false`
+- `nextGate = COMPLETE_FAT00_PHYSICAL`
+
+### Evidencia consolidada
+Ruta local reportada:
+`C:\\Users\\USUARIO\\adneko-certification\\edge-os-evidence\\c0c8b114`
+
+Incluye:
+- `certifier-doctor.json`
+- `local-software-certification.json`
+- `release-status.json`
+- RC freeze
+- release certification
+- logs
+- build evidence
+- Module I/O evidence
+
+### Paquete FAT00 físico preparado
+Ruta local reportada:
+`C:\\Users\\USUARIO\\adneko-certification\\edge-terminal-fat00-c0c8b114`
+
+Incluye:
+- checklist FAT00
+- record físico P01–P08
+- commissioning profile
+- commissioning acceptance
+- secuencia de cierre
+
+### Bloqueo actual
+El bloqueo restante ya no es software.
+
+Falta identificar y verificar con certeza:
+- Terminal / Jetson real
+- ADAM-6050 real
+- endpoint real `host / port / unitId`
+- mapa exacto DO/DI
+- safety-monitor real
+- instalación Terminal activa
+- commissioning aceptado
+
+En LAN apareció:
+- IP: `192.168.0.16`
+- MAC: `B4-E4-54-F8-7D-A4`
+- ICMP: respondió con `TTL=64`
+- pérdida: 0%
+
+Pero ese host no quedó identificado con certeza como Jetson ni ADAM-6050.
+
+No se realizó ninguna escritura física.
+
+### Cadena de cierre obligatoria
+`IDENTIFICAR TERMINAL / JETSON`
+↓
+`IDENTIFICAR ADAM-6050`
+↓
+`INSTALAR / VERIFICAR RELEASE CERTIFICADO`
+↓
+`COMMISSIONING`
+↓
+`PREFLIGHT REAL READ-ONLY`
+↓
+`I/O MAP SEAL`
+↓
+`FAT00 STAGE`
+↓
+`P01–P08 FÍSICO`
+↓
+`FAT00 EVIDENCE BUNDLE V2`
+↓
+`WRITE AUTHORITY`
+↓
+`FINAL INDUSTRIAL RELEASE`
+
+### Estado
+**SOFTWARE RC VERIFICADO · FAT00 FÍSICO PENDIENTE · SIN WRITE AUTHORITY**
