@@ -1015,3 +1015,70 @@ Por tanto:
 
 ### Estado
 **RC23 CERTIFICADO · RC24/V51 EN CIERRE EXACT-HEAD**
+
+
+---
+
+## 13. KIRA Software — v1.0 certification checkpoint
+
+### Último checkpoint real
+- Fecha: 02 octubre 2026, 10:00.
+- Repositorio: `siandeda2-beep/adneko-kira`.
+- SHA base: `563c879089e00eae8a8f56a22a9ec3009e8b5b76`.
+- Entorno Windows: `DESKTOP-FA5MKPC`.
+- Python: 3.13.
+- PostgreSQL: 17.11 en contenedor aislado.
+
+### Estado técnico confirmado
+- Suite focalizada: **53/53 PASS**.
+- Integración completa: pendiente de repetición tras la corrección.
+- Certificación RC: no certificada.
+- Producción: no autorizada.
+
+### Última corrección realizada
+Se detectó un error real en el ejecutor de migraciones SQL.
+
+`0001_core_schema.sql` utiliza `%I` dentro de `format()` de PostgreSQL. psycopg 3 interpretaba incorrectamente ese marcador como parámetro del cliente.
+
+Corrección aplicada en `migration_executor.py`:
+
+`connection.exec_driver_sql(body, execution_options={"no_parameters": True})`
+
+También se adaptó el test del ejecutor.
+
+Resultado comprobado:
+- 53 pruebas PASS.
+- Tiempo: 14,20 s.
+- Cobertura: ejecución de migraciones, contrato SQL y RLS.
+- Migración original: sin cambios.
+- Políticas RLS: sin cambios.
+
+### Precisión de SHA / certificación
+La corrección local modifica el contenido respecto al SHA base `563c879…`.
+
+Por tanto:
+- `563c879…` no debe declararse certificado con esa corrección;
+- antes de certificar debe registrarse el SHA exacto que contiene el fix;
+- cualquier aceptación debe ejecutarse sobre ese exact-head.
+
+### Pendiente obligatorio
+1. Confirmar que el fix y los 53 PASS siguen presentes en el workspace actual.
+2. Ejecutar migraciones reales `0001 → 0043` contra PostgreSQL 17.
+3. Repetir las 105 pruebas de integración y corregir únicamente fallos demostrados.
+4. Ejecutar regresión completa y exigir ausencia de fallos.
+5. Ejecutar `kira-release-candidate-certify` sobre el SHA exacto corregido.
+6. Consolidar logs, manifest, hashes y evidencia.
+7. Integrar PR #1 y PR #2 en el orden establecido.
+8. Recertificar el SHA definitivo de `main`.
+9. Autorizar deployment solo después de cumplir aceptación.
+
+### Situación al 07-oct-2026
+- `DESKTOP-FA5MKPC`: ONLINE.
+- Se puede retomar desde el workspace existente; no hace falta reconstruir desde cero.
+- No existe aún evidencia documentada de certificación final ni de producción.
+
+### Siguiente cierre concreto
+`verificar fix + 53 PASS → PostgreSQL 0001→0043 → 105 integration → full regression → exact-SHA RC certification → evidence → PR #1/#2 → recertify main → deployment decision`
+
+### Estado
+**53/53 PASS · SHA CORREGIDO AÚN NO CERTIFICADO · PRODUCCIÓN NO AUTORIZADA**
