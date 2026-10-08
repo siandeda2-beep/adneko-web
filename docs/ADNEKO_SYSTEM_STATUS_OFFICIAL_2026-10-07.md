@@ -559,34 +559,34 @@ La línea NEKO Voice incluye:
 - Interrupciones / barge-in.
 - Memoria persistente.
 - Bridge NEKO / Advanced OS.
-- Creator/NEKO avanzó hasta **schema v98** con identidad de ejecución y par de estado auditables.
-- Advanced asociado incorpora readiness exacta, reconciliación de cliente, sink fail-closed y un fix específico de freshness de confirmación.
-- Este trabajo es posterior a la base v76/v23; no corresponde retroceder a esas versiones para definir el estado actual.
+- Creator/NEKO actual en HEAD `4ab26c2…`.
+- Advanced asociado actual en HEAD `451b53e…`.
+- Ambos incorporan **readiness evidence** para Creator↔Advanced.
+- El bloque **NEKO-required ya no está pendiente**.
+- Advanced mantiene readiness exacta, reconciliación de cliente, sink fail-closed y freshness de confirmación separada.
 
 ### Pendiente
-El siguiente gate abierto está en los contratos y ejecución actuales:
-- Fijar el candidato exacto Creator/NEKO + Advanced.
-- Ejecutar **E2E** sobre los HEAD actuales.
-- Ejecutar **staging acceptance**.
-- Validar readiness de ambos HEAD.
-- Distinguir explícitamente cualquier parte todavía **contract-only** de lo realmente ejecutado.
-- Probar contra PostgreSQL / servicio real donde corresponda.
-- Verificar deployment real del mismo candidato.
-- No ampliar capacidades antes de cerrar estos gates.
+El siguiente gate real ya no es NEKO-required. Ahora corresponde:
+- Auditar que la readiness evidence de `4ab26c2…` y `451b53e…` esté efectivamente ligada al E2E.
+- Revisar CI realmente ejecutado en ambos HEADs.
+- Ejecutar / confirmar E2E sobre el candidato actual.
+- Ejecutar / confirmar staging acceptance.
+- Validar readiness de ambos HEADs actuales.
+- Identificar cualquier tramo que todavía sea **contract-only**.
+- Probar contra PostgreSQL / servicio real cualquier tramo no demostrado.
+- No ampliar hasta cerrar estas brechas.
 
 ### Producción
 - Producción sostenida de los HEAD actuales: **NO DEMOSTRADA TODAVÍA**.
 - La certificación histórica 282/282 no equivale a certificación automática del estado actual.
 
 ### Estado
-**SCHEMA v98 / ADVANCED FRESHNESS FIX · E2E/STAGING ACCEPTANCE PENDIENTES**
+**HEADS 4ab26c2… / 451b53e… · READINESS EVIDENCE PRESENTE · E2E/CI ACTUAL EN AUDITORÍA**
 
 ### Siguiente cierre concreto
-1. Fijar candidato exacto Creator/NEKO + Advanced.
-2. Verificar contracts actuales de ejecución/confirmación.
-3. Ejecutar E2E completo sobre los HEAD actuales.
+1. Auditar readiness evidence Creator↔Advanced en ambos HEADs actuales.
+2. Confirmar CI real de `4ab26c2…` y `451b53e…`.
+3. Confirmar que la evidencia esté ligada al E2E actual.
 4. Ejecutar staging acceptance.
-5. Validar readiness de ambos HEAD.
-6. Probar PostgreSQL / servicio real para cualquier tramo que siga contract-only.
-7. Verificar deployment real del mismo candidato.
-8. Solo después declarar nuevo estado de validación/producción.
+5. Cerrar cualquier tramo contract-only contra PostgreSQL / servicio real.
+6. Solo después declarar nueva aceptación de NEKO Voice.
