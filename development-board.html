@@ -40,7 +40,9 @@ h1{font-size:clamp(38px,6vw,74px);font-weight:300;letter-spacing:.015em;margin:1
 .name{font-size:13px;letter-spacing:.015em;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
 .doc-link{display:inline-block;padding:5px 8px;border:1px solid #4f8cab;color:#85d4ff;font-size:8px;font-weight:700;letter-spacing:.08em;line-height:1.1;background:#071b28}
 .doc-link:hover{background:#0b2a3d;color:#fff}
-.metric{font-size:12px;line-height:1.45;color:#d8e8f1}
+.metric{font-size:12px;line-height:1.55;color:#d8e8f1;min-width:0;overflow-wrap:anywhere;word-break:normal;padding:8px 12px;align-self:stretch}
+.dev-row>.metric.validation{border-left:1px solid #31566b;background:rgba(15,43,58,.32)}
+.dev-row>.metric.production{border-left:1px solid #31566b}
 .metric b{display:block;color:#8bd9ff;font-size:14px;font-weight:500;margin-bottom:4px}
 .metric.validation b{color:#77e5b5}
 .metric.production b{color:#f0b86b}
