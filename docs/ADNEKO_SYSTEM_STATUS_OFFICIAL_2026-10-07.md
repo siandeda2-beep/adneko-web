@@ -7,42 +7,65 @@
 
 ## 1. Agent Orchestrator / Development Orchestrator — RC2
 
-### Rama / versión
-RC2 congelado. No crear módulos ni versiones nuevas hasta cerrar aceptación real.
+### Checkpoint técnico
+- Fecha: 08 octubre 2026.
+- Release: `1.0.0-rc.2`.
+- RC2 permanece congelado.
+- Prioridad operativa dentro del cierre avanzado: **4**, después de Brain, NEKO Voice y Autonomous Company.
+- No desarrollar nuevas funcionalidades ni módulos.
 
-### Construido
-- Project Registry.
-- Planner/Goals por `projectId`.
-- Perfiles de tests.
-- Coordinación multi-repositorio.
-- Control de aceptación RC2 independiente del runtime.
-- El control exige resultados PASS en H01–H18, Recovery, Gatekeeper, E2E multiagente, idempotencia, rollback y soak.
-- Verifica coincidencia de versión y referencias de evidencia.
-
-### Pruebas ya pasadas
+### Evidencia histórica recuperada
+- H01–H18: **18/18 PASS histórico**.
+- E2E histórico: **PASS**.
 - Control de aceptación: **7/7 PASS**.
-- El control rechaza pruebas faltantes, fallidas o asociadas a otra versión.
 
-### Evidencia
-- H01–H18: PASS histórico, pendiente de repetición sobre la ejecución RC2 actual.
-- El control de aceptación existe y está probado.
-- La autenticidad de los artefactos reales todavía no está certificada.
+El 7/7 PASS corresponde al **control de aceptación**, no a una certificación actual del runtime RC2 completo.
 
-### Pendiente
-- Ejecutar Agent Orchestrator real en Windows.
-- Repetir H01–H18.
-- Ejecutar Recovery, Gatekeeper, E2E multiagente, idempotencia, rollback y soak.
-- Recoger artefactos auténticos.
-- Confirmar que toda la evidencia corresponde exactamente a una única versión RC2.
-- Ejecutar el control de aceptación sobre esas evidencias reales.
+### Ejecución / localización
+- Equipo objetivo: `DESKTOP-FA5MKPC`.
+- Ruta local registrada:
+  `C:\Users\USUARIO\Downloads\ADNEKO-DEVELOPMENT-ORCHESTRATOR`
+- Runtime:
+  `14_AGENT_ORCHESTRATION\10_RUNTIME`
 
-### Bloqueo externo
-El equipo Windows `DESKTOP-FA5MKPC` aparece conectado, pero Desktop Commander bloquea operaciones por límite mensual.
+La búsqueda realizada no identificó un repositorio GitHub independiente de Agent Orchestrator / Development Orchestrator dentro de los repositorios ADNEKO accesibles.
+
+Por tanto:
+- no existe HEAD remoto confirmado para este frente;
+- la identidad que debe cerrarse es la versión RC2 local con evidencia reproducible.
+
+### Bloqueo actual
+La aceptación real en Windows continúa bloqueada por acceso de ejecución previamente limitado por la cuota de Desktop Commander.
+
+No se debe extrapolar la evidencia histórica a la ejecución actual.
+
+### Trabajo de cierre pendiente
+1. Recuperar ejecución real del runtime RC2 en Windows.
+2. Repetir H01–H18.
+3. Ejecutar Recovery.
+4. Ejecutar Gatekeeper.
+5. Validar scheduling multiagente.
+6. Validar idempotencia.
+7. Validar rollback.
+8. Ejecutar E2E real.
+9. Ejecutar soak.
+10. Recoger artefactos auténticos.
+11. Vincular todas las evidencias a una única identidad RC2.
+12. Ejecutar el control de aceptación sobre esa evidencia.
+13. Promover RC2 → v1.0 únicamente si todos los gates reales cumplen.
+
+### Decisión técnica
+- RC2 permanece congelado.
+- No crear nuevas capacidades.
+- No alterar arquitectura.
+- No certificar usando solo resultados históricos.
+- No autorizar promoción a v1.0 todavía.
+
+### Directiva
+`cerrar → integrar → probar → operar → madurar`
 
 ### Estado
-**RC2 — ACCEPTANCE BLOCKED / NOT CERTIFIED**
-
-El 7/7 PASS corresponde al control de aceptación, no al runtime.
+**RC2 · ACCEPTANCE BLOCKED / NOT CERTIFIED**
 
 ---
 
