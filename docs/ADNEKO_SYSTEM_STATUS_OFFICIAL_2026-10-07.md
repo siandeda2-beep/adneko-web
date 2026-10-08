@@ -671,3 +671,57 @@ El trabajo debe continuar únicamente en integración de ecosistema. Si aparece 
 
 ### Estado
 **CERTIFICADO · CERRADO · CONGELADO**
+
+
+---
+
+## 9. Industrial I/O Software — REV D Continuous Service
+
+### Último checkpoint real
+- Fecha: 02 octubre 2026, 10:00.
+- Revisión: **REV D — Continuous Service**.
+- Último paquete identificado: `ADNEKO_INDUSTRIAL_IO_SOFTWARE_REV_D_CONTINUOUS_SERVICE_2026-10-02.zip`.
+- No hay evidencia aportada de una revisión posterior a REV D.
+
+### Construido
+- Servicio continuo integrado.
+- Persistencia de estado.
+- Persistencia de eventos.
+- Generación del scan.
+- Cadena lógica industrial ya desarrollada en la línea del sistema.
+
+### Pruebas ya pasadas
+- Recuperación tras caída real del proceso mediante `SIGKILL`: **PASS**.
+- Cierre seguro con confirmación de readback: **PASS**.
+- Rechazo de segunda instancia: **PASS**.
+- Detección de corrupción del journal y bloqueo del reinicio: **PASS**.
+- 20 pruebas unitarias: **PASS**.
+- 12 pasos de verificación: **PASS**.
+
+### Evidencia
+El checkpoint REV D y el paquete identificado constituyen la última referencia verificable aportada en este hilo.
+
+### Pendiente
+- Conectar `ContinuousService` al driver industrial real.
+- Preparar matriz HIL/FAT ejecutable.
+- Añadir comandos autenticados.
+- Añadir watchdog.
+- Definir / verificar límites del journal.
+- Ejecutar endurance.
+- Completar producción con hardware físico.
+
+### Validación / Producción / FAT
+- Simulador: **VERIFICADO**.
+- Producción: **PENDIENTE**.
+- Hardware físico: **PENDIENTE**.
+- HIL/FAT: **PENDIENTE**.
+
+### Siguiente cierre concreto
+1. Conectar `ContinuousService` al driver industrial real.
+2. Construir matriz HIL/FAT ejecutable.
+3. Ejecutar HIL con evidencia.
+4. Cerrar comandos autenticados, watchdog, límites del journal y endurance.
+5. Pasar al FAT físico correspondiente.
+
+### Estado
+**REV D VERIFICADO EN SIMULADOR · HIL/FAT Y HARDWARE PENDIENTES**
