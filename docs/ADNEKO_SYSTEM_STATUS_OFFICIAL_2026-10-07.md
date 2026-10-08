@@ -544,63 +544,109 @@ FAT físico:
 
 ---
 
-## 7. NEKO Voice / Conversational Runtime — checkpoint parcial verificado
+## 7. NEKO Voice / Conversational Runtime — schema v98 / flujo gobernado
 
-### Estado recuperado
-El hilo actual de NEKO Voice está más avanzado que el último checkpoint visible anterior. La reconstrucción reciente está separando explícitamente:
-- estado histórico certificado;
-- cambios posteriores;
-- HEAD actual;
-- CI realmente ejecutado;
-- contratos de integración;
-- deployment real.
+### HEAD actuales
+Creator / NEKO Voice:
+- Rama: `feature/neko-voice-conversation-bridge-v0.4`
+- HEAD: `4ab26c2b2701a4782873bc0ef21e85c0b6023bdf`
+- PR #39: open, `mergeable=true`
+- Último commit: `test(neko): require Advanced Creator readiness evidence`
+- Schema canónico: **v98**
 
-### Última certificación verde confirmada
-- SHA histórica certificada: `3b3a8275…`.
-- GitHub ejecutó Checkout, Node y tests reales.
-- Resultado: **282/282 PASS**.
+Advanced Core asociado:
+- Rama: `feature/neko-confirmation-proposal-sink-v1`
+- HEAD: `451b53e494a83018fef291fdf32ee163dcc36431`
+- PR #145: open, `mergeable=true`
+- Último commit: `feat(integration): expose Creator readiness evidence`
 
-Este resultado certifica únicamente esa SHA histórica. No debe extenderse automáticamente a los HEAD actuales, porque ambos repositorios avanzaron después.
+### Qué está realmente construido
+NEKO Voice ya no es solo un voice bridge. El hilo actual cierra el primer flujo gobernado completo:
 
-### Construido
-La línea NEKO Voice incluye:
-- Conversational Runtime full-duplex.
-- Continuidad de conversación.
-- Interrupciones / barge-in.
-- Memoria persistente.
-- Bridge NEKO / Advanced OS.
-- Creator/NEKO actual en HEAD `4ab26c2…`.
-- Advanced asociado actual en HEAD `451b53e…`.
-- Ambos incorporan **readiness evidence** para Creator↔Advanced.
-- El bloque **NEKO-required ya no está pendiente**.
-- Advanced mantiene readiness exacta, reconciliación de cliente, sink fail-closed y freshness de confirmación separada.
+`NEKO Voice → Unified Conversation Runtime → Advanced OS → autorización → proposal durable → "confirmo" → Autonomous Company → executor → verifier → effect ledger → estado/checkpoint → evidencia → respuesta NEKO`
 
-### Pendiente
-El siguiente gate real ya no es NEKO-required. Ahora corresponde:
-- Auditar que la readiness evidence de `4ab26c2…` y `451b53e…` esté efectivamente ligada al E2E.
-- Revisar CI realmente ejecutado en ambos HEADs.
-- Ejecutar / confirmar E2E sobre el candidato actual.
-- Ejecutar / confirmar staging acceptance.
-- Validar readiness de ambos HEADs actuales.
-- Identificar cualquier tramo que todavía sea **contract-only**.
-- Probar contra PostgreSQL / servicio real cualquier tramo no demostrado.
-- No ampliar hasta cerrar estas brechas.
+En Creator/NEKO, desde v76 hasta v98 se cerraron de forma acumulativa:
+- proposals operacionales durables;
+- binding proposal↔runtime request;
+- binding de confirmación;
+- autoridad de inserts activos;
+- contratos y cronología de runtime requests;
+- identidad global de misión Advanced;
+- provenance;
+- autoridad del state snapshot;
+- inmutabilidad y temporalidad del estado referenciado;
+- rechazo y receipts terminales;
+- evidencia obligatoria de ejecución;
+- boolean authority;
+- identidad de la operación ejecutada.
 
-### Producción
-- Producción sostenida de los HEAD actuales: **NO DEMOSTRADA TODAVÍA**.
-- La certificación histórica 282/282 no equivale a certificación automática del estado actual.
+### Confirmación Voice endurecida
+Cuando existe una proposal activa, `"confirmo"` ya no debe caer en conversación/memoria normal.
 
-### Estado
-**HEADS 4ab26c2… / 451b53e… · READINESS EVIDENCE PRESENTE · E2E/CI ACTUAL EN AUDITORÍA**
+`UnifiedConversationRuntime`:
+- prioriza la operación durable;
+- reclama una sola ejecución;
+- solo puede terminar en `EXECUTED` si Autonomous Company devuelve ejecución realmente verificada.
 
-### Siguiente cierre concreto
-1. Auditar readiness evidence Creator↔Advanced en ambos HEADs actuales.
-2. Confirmar CI real de `4ab26c2…` y `451b53e…`.
-3. Confirmar que la evidencia esté ligada al E2E actual.
-4. Ejecutar staging acceptance.
-5. Cerrar cualquier tramo contract-only contra PostgreSQL / servicio real.
-6. Solo después declarar nueva aceptación de NEKO Voice.
+`COMPLETE` por sí solo ya no basta.
 
+La evidencia reconstruible exige:
+- `missionRuntimeId`
+- `attemptId`
+- al menos un paso verificado
+- `effectLedgerId`
+- `COMPLETED_VERIFIED`
+- `commandDomain`
+- `policyVersion`
+- coherencia de versiones de estado
+
+### Bridge Creator ↔ Advanced
+- Creator expone estado durable versionado para Advanced.
+- Advanced sincroniza secuencialmente; no puede saltar N→N+k.
+- Se validan tenant, proyecto, snapshotId, provenance, versión y freshness.
+- Advanced mantiene integración NEKO separada del gateway industrial.
+- `direction.create-follow-up-task` es policy NEKO específica, riesgo 0, `DIRECTION_COMMAND`.
+- Advanced se detiene en `AUTHORITY / CONFIRMATION_REQUIRED` antes de resolver dispositivos industriales.
+- Creator y Advanced exponen readiness evidence mutua.
+- El E2E exige los SHAs exactos desplegados antes de aceptar prueba.
+
+### Escenario E2E construido
+`Creator state → Advanced readiness/state synchronization → Advanced intent → confirmation_required → proposalId durable → replay idempotente → "confirmo" → Autonomous Company COMPLETE → effectLedger COMPLETED_VERIFIED → replay de confirmación sin segunda ejecución`
+
+El E2E también comprueba estado/readiness previo de ambos servicios.
+
+### Pruebas / evidencia existente
+Advanced en SHA histórico `e549ea1b…`:
+- `npm ci` PASS
+- TypeScript check PASS
+- build PASS
+- suite focalizada: **66 tests / 65 PASS / 0 FAIL / 1 SKIP**
+- el único skip era una prueba industrial PostgreSQL que requería DB real
+
+Este resultado no se extrapola al HEAD actual `451b53e…`.
+
+Creator:
+- existe certificación histórica verde previa;
+- el HEAD actual `4ab26c2…` todavía no tiene certificación ejecutada válida.
+
+Último run del HEAD Creator:
+- `neko-database-v97` → FAILURE, **0 steps**
+- `neko-voice-v04` → FAILURE, **0 steps**
+
+El rojo ocurrió antes de Checkout/Node; por tanto no demuestra fallo de código, migración o tests. El bloqueo observado es de runner/admission.
+
+Advanced tampoco tiene todavía ejecución certificada sobre `451b53e…`.
+
+### Estado actual
+**SCHEMA v98 · FLUJO GOBERNADO CON EFFECT LEDGER · HEADS ACTUALES PENDIENTES DE CERTIFICACIÓN REAL**
+
+### Pendiente / siguiente cierre concreto
+1. Auditar el E2E actual contra `4ab26c2… / 451b53e…`.
+2. Conseguir ejecución real del schema v98 y suites actuales.
+3. Ejecutar contra PostgreSQL y servicios reales donde corresponda.
+4. Ejecutar `ADNEKO_E2E_01` sobre servicios reales.
+5. Después cerrar aceptación Live / micrófono / soak.
+6. No abrir nuevas capacidades antes de completar esos gates.
 
 ---
 
