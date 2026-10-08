@@ -62,6 +62,16 @@ h1{font-size:clamp(38px,6vw,74px);font-weight:300;letter-spacing:.015em;margin:1
 footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align:center;font-size:10px;letter-spacing:.08em}
 @media(max-width:900px){.checkpoint-wrap{grid-template-columns:1fr}.dates{text-align:left}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.hero{min-height:560px}.hero .shell{padding-top:70px;padding-bottom:38px}.hero-board-title{font-size:clamp(25px,8.2vw,38px)}.subtitle{letter-spacing:.25em}.stats{grid-template-columns:1fr 1fr}.stat{padding:16px}.stat b{font-size:24px}}
+
+/* Separación de columnas: los contenidos técnicos nunca invaden la celda contigua. */
+.board-head,.dev-row{grid-template-columns:38px minmax(245px,1.8fr) minmax(175px,1fr) minmax(230px,1.35fr) minmax(210px,1.2fr) minmax(190px,1.2fr);align-items:start;min-width:1280px}
+.dev-row>*{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.dev-row>.metric{min-width:0;max-width:100%;overflow-wrap:anywhere;word-wrap:break-word;white-space:normal;hyphens:auto;overflow:hidden}
+.dev-row>.metric code,.dev-row>.metric a,.dev-row>.metric strong{white-space:normal;overflow-wrap:anywhere;word-break:break-word}
+.dev-row>.metric.validation{border-left:2px solid #49778f;padding-left:16px}
+.dev-row>.metric.production{border-left:2px solid #49778f;padding-left:16px}
+.dev-row>.state{min-width:0;overflow-wrap:anywhere}
+.dev-row>.state strong{white-space:normal;overflow-wrap:anywhere;max-width:100%}
 </style>
 <script src="/adneko-header.js" defer></script>
 </head>
