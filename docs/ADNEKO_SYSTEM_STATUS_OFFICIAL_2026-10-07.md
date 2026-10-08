@@ -1552,68 +1552,89 @@ No existe todavía verificación en este hilo de commits posteriores al HEAD `a8
 
 ---
 
-## 20. ADNEKO Brain — integration certification P0
+## 20. ADNEKO Brain — continuity audit / certification P0
 
-### Último checkpoint recuperado
-- Fecha: 04–05 octubre 2026.
-- Proyecto: ADNEKO Brain.
-- Rol: memoria, contexto y orquestación integrada del ecosistema.
-- Brain permanece como componente transversal de contexto y memoria institucional; no sustituye Autonomous Company ni asume autoridad directa sobre ejecuciones.
+### Localización confirmada
+- Fecha de auditoría: 08 octubre 2026.
+- Repositorio: `siandeda2-beep/adneko`.
+- Brain forma parte de **ADNEKO ONE**.
+- No corresponde crear un repositorio ni un motor Brain independiente.
 
-### Avances identificados
-1. Brain operativo en ADNEKO ONE:
-   - flujo `Voice → Brain → Action Gateway → PostgreSQL`;
-   - continuidad después de reinicio;
-   - generación de briefing.
+### PR / piezas existentes
+- **PR #99** — contexto canónico, SHA-256, tenant binding y rechazo de contexto obsoleto.
+  - HEAD: `f7bf1a3526441d0f5f53354dfdae7788091728da`
+  - Estado: open / draft / mergeable.
+- **PR #100** — `proposal.prepare`, borrador comercial persistido en PostgreSQL e idempotencia.
+  - HEAD: `103e7d73efe2ce57501eaa8e6adfb58061d909d1`
+  - Estado: open / draft / mergeable.
+- **PR #101** — `company.status`, integración autenticada con Intelligence OS.
+  - HEAD: `4c6116ea98cf347c93fbbc21ac040c2f3afe1176`
+  - Estado: open / draft / mergeable.
+- **PR #89** — continuidad operativa de Voice, Brain, sesiones y tareas después de reiniciar API.
+- **PR #92** — prueba sostenida Voice → Brain → Action Gateway; evidencia histórica de 20 turnos y tres escenarios operativos.
+- **PR #358** fue localizado en `siandeda2-beep/adneko-intelligence-os`, no dentro del código Brain de ADNEKO ONE. Corresponde a Executive Orchestrator v1, continuación durable acotada, lineage y HALT.
 
-2. PR #100 — E2E-02:
-   - implementación de `proposal.prepare`;
-   - draft de cotización;
-   - líneas;
-   - `contextHash`;
-   - idempotencia;
-   - estados `RESULT_READY/VERIFIED`;
-   - CI sin certificación concluyente en el checkpoint recuperado.
+### Código Brain localizado
+- `apps/adneko-one/src/brain.js`
+- `apps/adneko-one/src/neko.js`
+- `apps/adneko-one/src/actions.js`
+- `apps/adneko-one/migrations/012_brain_context_proof.sql`
+- `apps/adneko-one/tests/integration/brain-company-status-e2e.js`
 
-3. PR #101 — E2E-01:
-   - conexión de `company.status` con Intelligence OS;
-   - workflows de certificación con fallos registrados.
+### Controles implementados identificados
+El código inspeccionado incluye:
+- autenticación Bearer;
+- aislamiento por tenant;
+- validación de versión de contrato;
+- SHA esperado de Intelligence OS;
+- control de freshness/antigüedad;
+- rechazo de conexiones inválidas;
+- persistencia/resolución del contexto;
+- idempotencia en las operaciones correspondientes.
 
-4. PR #358:
-   - continuación automática;
-   - execution lineage;
-   - mecanismo HALT.
+### Hallazgo de E2E
+La prueba `brain-company-status-e2e.js` usa un adaptador simulado `intelligenceFetch`.
 
-### Estado de validación
-Existe integración real construida, pero la certificación conjunta de Brain todavía no está cerrada.
+Por tanto, incluso un PASS de esa prueba no basta para acreditar conectividad real entre servicios desplegados.
 
-No se debe declarar producción certificada hasta comprobar:
-- estado real actual de PR #100, #101 y #358;
-- persistencia durable;
-- versionado del contexto;
-- PostgreSQL real;
-- reinicios;
-- recovery;
-- autorización;
-- idempotencia;
-- integración Brain ↔ Intelligence OS ↔ Autonomous Company.
+### Estado de GitHub Actions
+Los workflows asociados al HEAD de PR #101 aparecen fallidos.
 
-### Prioridad P0 / siguiente cierre concreto
-1. Investigar los fallos de GitHub Actions.
-2. Verificar PR #100, #101 y #358 y sus HEAD/merge/deploy actuales.
-3. Cerrar persistencia durable y versionado del contexto.
-4. Ejecutar E2E con PostgreSQL.
-5. Repetir restart/recovery.
-6. Validar autorización e idempotencia.
-7. Certificar funcionamiento conjunto de Brain, Intelligence OS y Autonomous Company.
-8. No abrir nuevas funcionalidades antes del cierre verificable.
+Inspección confirmada:
+- workflow/run Core: `37249509593`
+- job: `core`
+- `conclusion=failure`
+- `steps=null`
 
-### Directiva
-`cerrar → integrar → probar → operar → madurar → ampliar`
+No existe evidencia de que Checkout/tests hayan llegado a ejecutarse. El fallo no puede atribuirse todavía al código Brain.
+
+### Estado de cierre
+- Ubicación del código Brain: **CONFIRMADA**.
+- HEAD / ramas #99–101: **CONFIRMADOS**.
+- Contexto durable + SHA-256: implementación localizada, prueba pendiente.
+- Autenticación / idempotencia: implementación localizada, recertificación pendiente.
+- E2E con PostgreSQL: no ejecutado en esta auditoría.
+- Restart / recovery en HEAD #101: no certificado.
+- E2E con Intelligence OS real: no certificado.
+- Integración final en producción: pendiente.
+
+### Decisión técnica
+- No fusionar PR #99–101 todavía.
+- No modificar código sin fallo reproducible.
+- No declarar Brain integrado/certificado en su versión actual.
+
+### Siguiente cierre concreto
+1. Desbloquear ejecución real sobre HEAD PR #101 `4c6116ea…`.
+2. Ejecutar migraciones PostgreSQL sobre ese HEAD.
+3. Ejecutar integration suite real.
+4. Validar contrato contra Intelligence OS real, no adapter simulado.
+5. Certificar restart / recovery.
+6. Certificar autorización e idempotencia.
+7. Verificar que Brain no ejerza autoridad directa de ejecución.
+8. Solo entonces decidir merge/promoción/certificación.
 
 ### Estado
-**INTEGRACIÓN REAL CONSTRUIDA · CERTIFICACIÓN P0 PENDIENTE**
-
+**BRAIN LOCALIZADO EN ADNEKO ONE · HEAD #101 SIN CERTIFICAR · E2E REAL PENDIENTE**
 
 ---
 
