@@ -600,3 +600,74 @@ El siguiente gate real ya no es NEKO-required. Ahora corresponde:
 4. Ejecutar staging acceptance.
 5. Cerrar cualquier tramo contract-only contra PostgreSQL / servicio real.
 6. Solo después declarar nueva aceptación de NEKO Voice.
+
+
+---
+
+## 8. FACE AGENT — v1.52.2
+
+### Estado general
+**CERRADO Y CONGELADO como desarrollo aislado.**
+
+No corresponde abrir una v1.53 funcional. FACE AGENT solo debe reabrirse si la integración real del ecosistema descubre un defecto o requisito indispensable.
+
+### Versión / HEAD correcto
+- Versión final/hotfix: `v1.52.2 — SBOM Binding Hotfix`
+- Rama: `main`
+- SHA: `8b923e565b7b78f28d6022c7d13c70d605c72b61`
+- Workflow post-merge: **SUCCESS completo**
+
+### Construido
+- Interfaz visual de agente.
+- Estados y presentación.
+- Cadena Brain→Face.
+- Sincronización con Voice.
+- Packaging de release.
+- Imagen inmutable.
+- SBOM SPDX.
+- Firma y evidencia de supply chain.
+
+### Validación / seguridad
+- Release gate: PASS.
+- Immutable image: PASS.
+- Cosign image signature: PASS.
+- SBOM SPDX: PASS.
+- Signed SBOM binding: PASS.
+- Evidence upload: PASS.
+- Grype: PASS.
+- CRITICAL vulnerability gate: PASS.
+- Vulnerabilidades CRITICAL: **0**.
+
+### Hotfix v1.52.2
+El problema cerrado fue específico: `cosign attest` quedaba bloqueado hasta timeout.
+
+Se sustituyó por un binding determinista del SBOM:
+
+`image digest + Git SHA + SBOM SHA-256 → cosign sign-blob → verify-blob → Sigstore bundle`
+
+El binding completó en aproximadamente **2 segundos** y quedó evidenciado en CI.
+
+### Integración posterior
+Después del cierre aislado de FACE, el trabajo pasó al ecosistema bajo la directiva:
+
+`cerrar → integrar → probar → operar → madurar → después ampliar`
+
+Flujo actual:
+
+`NEKO / Voice → UnifiedConversationRuntime → capability gobernada → Autonomous Company → ejecución → evidencia`
+
+Ese flujo posteriormente alcanzó E2E real con PostgreSQL.
+
+### Producción / FAT
+- Desarrollo aislado FACE: **CERTIFICADO**.
+- Estado: **CERRADO Y CONGELADO**.
+- FAT físico: no aplica a este software aislado.
+- Reapertura: solo por defecto de integración o requisito imprescindible.
+
+### Siguiente cierre concreto
+Ninguno dentro de FACE AGENT aislado.
+
+El trabajo debe continuar únicamente en integración de ecosistema. Si aparece un defecto reproducible atribuido a FACE, entonces se reabre con alcance mínimo.
+
+### Estado
+**CERTIFICADO · CERRADO · CONGELADO**
