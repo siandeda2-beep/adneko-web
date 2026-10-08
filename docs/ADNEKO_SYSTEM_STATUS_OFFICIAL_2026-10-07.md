@@ -544,109 +544,97 @@ FAT físico:
 
 ---
 
-## 7. NEKO Voice / Conversational Runtime — schema v98 / flujo gobernado
+## 7. NEKO Voice / Conversational Runtime — cierre de certificación
 
-### HEAD actuales
+### Auditoría de cierre
+- Fecha: 08 octubre 2026.
+- Objetivo: certificar el desarrollo existente, sin expansión funcional.
+
+### Repositorios / HEAD exactos
 Creator / NEKO Voice:
-- Rama: `feature/neko-voice-conversation-bridge-v0.4`
+- Repositorio: `siandeda2-beep/creator-ai-os`
+- PR: #39
 - HEAD: `4ab26c2b2701a4782873bc0ef21e85c0b6023bdf`
-- PR #39: open, `mergeable=true`
-- Último commit: `test(neko): require Advanced Creator readiness evidence`
-- Schema canónico: **v98**
+- PR: open / mergeable
 
-Advanced Core asociado:
-- Rama: `feature/neko-confirmation-proposal-sink-v1`
+Advanced Core:
+- Repositorio: `siandeda2-beep/adneko-advanced-core`
+- PR: #145
 - HEAD: `451b53e494a83018fef291fdf32ee163dcc36431`
-- PR #145: open, `mergeable=true`
-- Último commit: `feat(integration): expose Creator readiness evidence`
+- PR: open / mergeable
 
-### Qué está realmente construido
-NEKO Voice ya no es solo un voice bridge. El hilo actual cierra el primer flujo gobernado completo:
+Ambos commits existen y sus archivos son accesibles.
 
-`NEKO Voice → Unified Conversation Runtime → Advanced OS → autorización → proposal durable → "confirmo" → Autonomous Company → executor → verifier → effect ledger → estado/checkpoint → evidencia → respuesta NEKO`
+### CI actual
+Creator / NEKO:
+- Workflow run: `37727181832`
+- `neko-database-v97`: FAILURE
+- `neko-voice-v04`: FAILURE
+- Ambos jobs presentan `steps=null`.
 
-En Creator/NEKO, desde v76 hasta v98 se cerraron de forma acumulativa:
-- proposals operacionales durables;
-- binding proposal↔runtime request;
-- binding de confirmación;
-- autoridad de inserts activos;
-- contratos y cronología de runtime requests;
-- identidad global de misión Advanced;
-- provenance;
-- autoridad del state snapshot;
-- inmutabilidad y temporalidad del estado referenciado;
-- rechazo y receipts terminales;
-- evidencia obligatoria de ejecución;
-- boolean authority;
-- identidad de la operación ejecutada.
+Por tanto, no hay evidencia de Checkout/tests ejecutados y no corresponde atribuir el FAILURE al producto.
 
-### Confirmación Voice endurecida
-Cuando existe una proposal activa, `"confirmo"` ya no debe caer en conversación/memoria normal.
+Advanced:
+- HEAD `451b53e…`: no se encontraron workflow runs asociados en la consulta efectuada.
 
-`UnifiedConversationRuntime`:
-- prioriza la operación durable;
-- reclama una sola ejecución;
-- solo puede terminar en `EXECUTED` si Autonomous Company devuelve ejecución realmente verificada.
+Conclusión:
+- ninguno de los dos HEAD está certificado por CI actual;
+- un rojo pre-runner/admission no equivale a fallo del código.
 
-`COMPLETE` por sí solo ya no basta.
+### Certificador E2E existente
+Se verificó en Creator HEAD `4ab26c2…`:
+- `tools/neko-advanced-e2e.mjs`
+- `tests/neko-advanced-e2e.test.js`
 
-La evidencia reconstruible exige:
-- `missionRuntimeId`
-- `attemptId`
-- al menos un paso verificado
-- `effectLedgerId`
-- `COMPLETED_VERIFIED`
-- `commandDomain`
-- `policyVersion`
-- coherencia de versiones de estado
+El ejecutor existente de `ADNEKO_E2E_01` exige:
+- `EXPECTED_CREATOR_SHA`;
+- `EXPECTED_ADVANCED_SHA`;
+- readiness real de Creator;
+- readiness real de Advanced;
+- evidencia de gobernanza e integración;
+- identidad de conversación/correlación;
+- replay idempotente con reconocimiento explícito de Advanced;
+- resultado de certificación PASS/FAIL.
 
-### Bridge Creator ↔ Advanced
-- Creator expone estado durable versionado para Advanced.
-- Advanced sincroniza secuencialmente; no puede saltar N→N+k.
-- Se validan tenant, proyecto, snapshotId, provenance, versión y freshness.
-- Advanced mantiene integración NEKO separada del gateway industrial.
-- `direction.create-follow-up-task` es policy NEKO específica, riesgo 0, `DIRECTION_COMMAND`.
-- Advanced se detiene en `AUTHORITY / CONFIRMATION_REQUIRED` antes de resolver dispositivos industriales.
-- Creator y Advanced exponen readiness evidence mutua.
-- El E2E exige los SHAs exactos desplegados antes de aceptar prueba.
+No se debe construir otro certificador: el mecanismo ya existe.
 
-### Escenario E2E construido
-`Creator state → Advanced readiness/state synchronization → Advanced intent → confirmation_required → proposalId durable → replay idempotente → "confirmo" → Autonomous Company COMPLETE → effectLedger COMPLETED_VERIFIED → replay de confirmación sin segunda ejecución`
+### Matriz de cierre
+- Acceso a ambos commits: **CONFIRMADO**.
+- Contratos `ADNEKO_E2E_01`: **LOCALIZADOS**.
+- Schema v98 contra PostgreSQL: **SIN PASS COMPROBADO**.
+- Suites actuales en ambos HEAD: **SIN PASS COMPLETO COMPROBADO**.
+- E2E real entre servicios: **PENDIENTE**.
+- Restart / recovery durable: **PENDIENTE DE EJECUCIÓN CERTIFICADA**.
+- Micrófono / GPT-Live real: **PENDIENTE**.
+- Soak / reconexión / latencia: **PENDIENTE**.
 
-El E2E también comprueba estado/readiness previo de ambos servicios.
+### Discrepancia a resolver
+El workflow inspeccionado todavía identifica el job de base de datos como:
+`neko-database-v97`
 
-### Pruebas / evidencia existente
-Advanced en SHA histórico `e549ea1b…`:
-- `npm ci` PASS
-- TypeScript check PASS
-- build PASS
-- suite focalizada: **66 tests / 65 PASS / 0 FAIL / 1 SKIP**
-- el único skip era una prueba industrial PostgreSQL que requería DB real
+El objetivo actual del cierre es schema **v98**.
 
-Este resultado no se extrapola al HEAD actual `451b53e…`.
+No se afirma que falte la migración; debe comprobarse la correspondencia real entre workflow, migraciones y ejecutor antes de certificar.
 
-Creator:
-- existe certificación histórica verde previa;
-- el HEAD actual `4ab26c2…` todavía no tiene certificación ejecutada válida.
+### Decisión técnica
+- NEKO Voice permanece **NO certificado completamente para producción**.
+- No abrir nuevas capacidades.
+- No modificar arquitectura.
+- No construir otro E2E certifier.
+- Ejecutar sobre los SHA exactos existentes.
+- Corregir exclusivamente fallos demostrados.
 
-Último run del HEAD Creator:
-- `neko-database-v97` → FAILURE, **0 steps**
-- `neko-voice-v04` → FAILURE, **0 steps**
+### Criterio de cierre
+Se requiere evidencia vinculada a los SHA exactos de:
+1. schema v98 PASS;
+2. suites actuales PASS;
+3. `ADNEKO_E2E_01` PASS contra servicios reales;
+4. restart / recovery PASS;
+5. micrófono / GPT-Live real PASS;
+6. soak / reconexión / latencia PASS.
 
-El rojo ocurrió antes de Checkout/Node; por tanto no demuestra fallo de código, migración o tests. El bloqueo observado es de runner/admission.
-
-Advanced tampoco tiene todavía ejecución certificada sobre `451b53e…`.
-
-### Estado actual
-**SCHEMA v98 · FLUJO GOBERNADO CON EFFECT LEDGER · HEADS ACTUALES PENDIENTES DE CERTIFICACIÓN REAL**
-
-### Pendiente / siguiente cierre concreto
-1. Auditar el E2E actual contra `4ab26c2… / 451b53e…`.
-2. Conseguir ejecución real del schema v98 y suites actuales.
-3. Ejecutar contra PostgreSQL y servicios reales donde corresponda.
-4. Ejecutar `ADNEKO_E2E_01` sobre servicios reales.
-5. Después cerrar aceptación Live / micrófono / soak.
-6. No abrir nuevas capacidades antes de completar esos gates.
+### Estado
+**HEADS VERIFICADOS · CERTIFICADOR E2E EXISTENTE · EJECUCIÓN REAL / LIVE PENDIENTES**
 
 ---
 
