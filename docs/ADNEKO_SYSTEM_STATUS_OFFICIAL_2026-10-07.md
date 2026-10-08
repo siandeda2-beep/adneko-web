@@ -530,3 +530,56 @@ FAT físico:
 
 ### Estado
 **RC2 BASE CERTIFICADA · INTEGRACIONES POSTERIORES PENDIENTES · PRODUCCIÓN NO DEMOSTRADA**
+
+
+---
+
+## 7. NEKO Voice / Conversational Runtime — checkpoint parcial verificado
+
+### Estado recuperado
+El hilo actual de NEKO Voice está más avanzado que el último checkpoint visible anterior. La reconstrucción reciente está separando explícitamente:
+- estado histórico certificado;
+- cambios posteriores;
+- HEAD actual;
+- CI realmente ejecutado;
+- contratos de integración;
+- deployment real.
+
+### Última certificación verde confirmada
+- SHA histórica certificada: `3b3a8275…`.
+- GitHub ejecutó Checkout, Node y tests reales.
+- Resultado: **282/282 PASS**.
+
+Este resultado certifica únicamente esa SHA histórica. No debe extenderse automáticamente a los HEAD actuales, porque ambos repositorios avanzaron después.
+
+### Construido
+La línea NEKO Voice incluye:
+- Conversational Runtime full-duplex.
+- Continuidad de conversación.
+- Interrupciones / barge-in.
+- Memoria persistente.
+- Bridge NEKO / Advanced OS.
+
+### Pendiente
+Aún falta fijar con exactitud en el checkpoint consolidado:
+- HEAD actual de NEKO Voice.
+- HEAD actual relacionado de Advanced OS para esta integración.
+- Secuencia de commits posteriores a `3b3a8275…`.
+- Qué cambios están ya validados y cuáles no.
+- Deployment real, si existe, de los HEAD actuales.
+- Reejecución de CI/gates sobre el candidato actual.
+
+### Producción
+- Producción sostenida de los HEAD actuales: **NO DEMOSTRADA TODAVÍA**.
+- La certificación histórica 282/282 no equivale a certificación automática del estado actual.
+
+### Estado
+**BASE HISTÓRICA 282/282 PASS · HEAD ACTUAL PENDIENTE DE REVALIDACIÓN**
+
+### Siguiente cierre concreto
+1. Fijar HEAD exacto actual de NEKO Voice.
+2. Fijar HEAD exacto de Advanced OS asociado al bridge.
+3. Reconstruir cambios desde `3b3a8275…`.
+4. Ejecutar CI/gates sobre el candidato actual.
+5. Verificar deployment real del mismo SHA.
+6. Solo después declarar nuevo estado de validación/producción.
