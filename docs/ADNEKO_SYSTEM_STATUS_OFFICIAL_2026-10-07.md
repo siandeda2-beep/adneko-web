@@ -1365,3 +1365,68 @@ La ingeniería está suficientemente cerrada. El trabajo debe concentrarse en H-
 
 ### Estado
 **INGENIERÍA CERRADA · H-019 OPEN-BUILD-FAT · FIRST ARTICLE FÍSICO PENDIENTE**
+
+
+---
+
+## 17. Industrial I/O Hardware — R17 Engineering Boundary
+
+### Último checkpoint real
+- Fecha: 02 octubre 2026.
+- Estado autoritativo: **R17 — ENGINEERING BOUNDARY**.
+- R17 es posterior al workbook R15 recuperable; operativamente no corresponde volver a R9/R15 salvo para consultar documentación específica.
+
+### Ingeniería cerrada / baseline
+- Referencia exacta: **ADAM-6050-D1**.
+- Terminales: **62 × PT 2,5 + 1 × PT 2,5-PE**.
+- CLIPFIX/FBS y puentes de distribución X5.
+- DIN rail: **Phoenix NS 35/7,5 PERF 1000MM — P/N 0807012**.
+- Ducto: **CD 25×60 — P/N 3240191**.
+- Ethernet: **Phoenix 2832276**.
+- Namespace completo: **X1…X7**.
+- Conductores internos controlados: **0,5 / 0,75 / 1,5 / 2,5 mm²**.
+- **H006D** cerrado documentalmente con **28 circuitos**.
+- Receiving contract: **G0 R01–R19**.
+- Mechanical verification contract: **G1 PV-01–PV-15**.
+- Mechanical closure contract: **H005D**.
+- P/N mecánicos genéricos pendientes en frontera de ingeniería: **0**.
+
+### Precisión de estado
+La ingeniería/diseño está prácticamente cerrada, pero el producto no puede considerarse 100% industrial porque falta evidencia física.
+
+### Gates actuales
+- **G0 — BLOCKED PHYSICAL**: 0/19 receiving checks PASS.
+- **G1 — BLOCKED PHYSICAL**: 0/13 verificaciones mecánicas principales PASS.
+- **G2 — BLOCKED SITE DATA**: faltan tensión real, tierra, fault current/SCCR, protección aguas arriba y datos eléctricos de instalación.
+- **G3 — ENGINEERING READY+**.
+- **G4 — BLOCKED PHYSICAL**: continuidad, polaridad, PE, separación 0V/PE y safety pendientes.
+- **G5 — BLOCKED**: todavía no corresponde energizar.
+- **G6 — FAT-00 BLOCKED PHYSICAL**: **P01–P08 reales pendientes**.
+- **G7 — BLOCKED BY G6**: FAT-01 físico **24/24** después de FAT-00.
+- **G8 — HOLD-MFG**: sin liberación industrial final.
+
+### Separación obligatoria de FAT
+**FAT00 software/host/evidence cerrado ≠ FAT físico cerrado.**
+
+El FAT físico **P01–P08 sigue pendiente**.
+
+### Siguiente cierre concreto
+No continuar diseñando hardware salvo defecto demostrado.
+
+Secuencia:
+1. PROCURE / RECEIVING.
+2. G0.
+3. DRY-LAYOUT + medición real.
+4. G1.
+5. Datos eléctricos de sitio.
+6. G2.
+7. Cableado físico G3.
+8. PRE-ENERGIZATION G4.
+9. POWER-UP G5.
+10. FAT-00 físico P01–P08.
+11. FAT-01 físico 24/24.
+12. AS-BUILT.
+13. G8 RELEASE.
+
+### Estado
+**R17 ENGINEERING BOUNDARY · INGENIERÍA PRÁCTICAMENTE CERRADA · FAT FÍSICO PENDIENTE**
