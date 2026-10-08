@@ -189,40 +189,50 @@ Orden obligatorio:
 
 ---
 
-## 3. Intelligence OS — estado verificado
+## 3. Intelligence OS — V1 READY / LIVE
 
 ### Rama / HEAD correcto
-- `main` en `19fd382…`.
-- PR #354 fue validado y fusionado.
-- PR #356 también figura fusionado en el estado público actual.
-- Render `adneko-intelligence-os` deploy `dep-db37blom7kps73da3rig` está **LIVE** en SHA `19fd382…`.
+- Rama: `main`
+- HEAD exacto: `19fd38219ba77112f504c94d4bef9d4a1f45415e`
+- Deployment Render: **LIVE**
 
-### Construido
+### Construido / operativo
 - Motor de interpretación, planificación y ejecución gobernada.
 - Control plane de dependencias.
 - Evidencia durable.
-- Identidad MEMBRANE read-only dedicada: `service:intelligence-os-main-readonly`.
-- Scope exacto: `membrane:state:read`.
+- PostgreSQL durable operativo.
+- Identidad MEMBRANE dedicada de solo lectura.
+- Integración de email operativa.
 
-### Pruebas / validación ya pasadas
-- TypeScript/build: PASS.
-- Suite autónoma: 184 archivos PASS.
-- `test:production-contract`: PASS.
-- Probe MEMBRANE de arranque: `READY_NO_SNAPSHOT`.
-- `evidencePersisted=true`.
-- Lectura realizada correctamente.
-- Mutaciones / autoridad / dispatch externos: false.
-- Smoke de capacidad durable PostgreSQL: PASS.
+### Validación actual
+- Estado general: **V1 READY**.
+- Email: **2/2 HEALTHY**.
+- Production capability smoke: **PASS**.
+- MEMBRANE read-only probe: `READY_NO_SNAPSHOT`.
+- PostgreSQL durable: funcionando.
+- La base validada conserva además build/tests y production-contract previamente cerrados.
 
-### Pendiente
-El núcleo está operativo, pero el backbone completo todavía no está cerrado:
-- ADVANCE RC2 bridge no configurado en el servicio live.
-- Faltan credenciales CardDAV dedicadas.
-- Faltan reautorizar 3 cuentas Google Drive.
-- Después corresponde cerrar E2E Company/Agent sobre estas dependencias.
+### Dependencias / bloqueos observados por Intelligence OS
+Actualmente reporta:
+- `CONTACT_SOURCE_NOT_READY`
+- Google Drive pendiente de reautorización.
+- `ADVANCED_OS_RC2_BRIDGE_NOT_CONFIGURED`
+
+Estas condiciones pertenecen al estado operativo que Intelligence OS observa en su entorno y backbone. No constituyen, por sí mismas, una regresión demostrada del núcleo de Intelligence OS.
+
+### Producción
+- Servicio actual: **LIVE**.
+- Núcleo Intelligence OS: **V1 READY**.
+- Dependencias externas/backbone: pendientes de cierre.
+
+### Siguiente cierre concreto
+1. Resolver `CONTACT_SOURCE_NOT_READY`.
+2. Reautorizar Google Drive.
+3. Configurar `ADVANCED_OS_RC2_BRIDGE`.
+4. Revalidar el E2E dependiente una vez cerradas esas dependencias.
 
 ### Estado
-**LIVE · NÚCLEO OPERATIVO · DEPENDENCIAS EXTERNAS PENDIENTES**
+**V1 READY · LIVE · DEPENDENCIAS EXTERNAS OBSERVADAS**
 
 ---
 
