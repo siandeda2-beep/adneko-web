@@ -1712,3 +1712,75 @@ No se ha verificado todavía:
 
 ### Estado
 **BASELINE HARDWARE AVANZADA · EDGE-DEMO NO CERRADO · FAT/PRODUCCIÓN BLOQUEADOS**
+
+
+---
+
+## 23. KIRA Hardware — REV-G / P2-MFG-547
+
+### Estado autoritativo
+- Revisión: **REV-G**.
+- Gate activo: **P2-MFG-547**.
+- REV-G: **validado y congelado**.
+- SHA-256 del paquete: `0c26099d8cbb85b61d6faf4ca07ba115c09f062003c5cd190a0334b5c8b38629`.
+- Autoridad documental/fabricación: consolidada.
+
+### Readiness previa
+REV-F ya había dejado:
+- `READY_TO_BUILD=TRUE`.
+- Paquete de 67 archivos.
+- BOM.
+- Arnés/arneses.
+- Traveler.
+- Receiving fail-closed.
+- Evidence groups preparados.
+
+Esto representa readiness de ingeniería, no construcción física.
+
+### Estado operativo actual
+- `UNIT-001 LAUNCH = HOLD`.
+- `PHYSICAL BUILD = NOT STARTED`.
+- `SUPPLIER RESPONSES = 0`.
+- RFQ emitidos: **4**.
+- Unidad física fabricada: **NO**.
+- FAT físico: **NO**.
+- Piloto/serie: **NO**.
+- Production Release físico: **NO**.
+
+No corresponde avanzar físicamente hasta cerrar respuestas/cotizaciones y supplier gate.
+
+### Lifecycle / gobernanza documental
+Existe una línea documental posterior hasta:
+- `P2-MFG-170 — LIFECYCLE DIGITAL THREAD`.
+- P2-MFG-171…180 cerrados para:
+  - lifecycle / EOL;
+  - PCN / PDN;
+  - alternates;
+  - LTB;
+  - recall / stop-ship;
+  - serial configuration;
+  - RMA;
+  - disposal.
+
+Este cierre documental no altera el estado físico del producto.
+
+### Ruta operativa de fabricación
+`PROCUREMENT → SUPPLIER GATE → RECEIVING → WR01-WR20 → BUILD_LAUNCH → TRAVELER 01-16 → PRE-ERC → FIRST ENERGIZATION → FAT-00 → FIRST ARTICLE ACCEPTANCE`
+
+### Siguiente cierre concreto
+1. Obtener respuestas de proveedores.
+2. Comparar cotizaciones.
+3. Cerrar supplier gate.
+4. Autorizar procurement / PO.
+5. Ejecutar receiving.
+6. Completar WR01-WR20.
+7. Autorizar build launch.
+8. Construir UNIT-001.
+9. Ejecutar traveler 01-16.
+10. PRE-ERC.
+11. First energization.
+12. FAT-00.
+13. First Article Acceptance.
+
+### Estado
+**REV-G VALIDADO · P2-MFG-547 ACTIVO · UNIT-001 HOLD · PHYSICAL BUILD NOT STARTED**
