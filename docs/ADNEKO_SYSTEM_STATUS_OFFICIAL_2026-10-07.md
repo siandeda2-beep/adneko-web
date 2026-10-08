@@ -1,0 +1,187 @@
+# ADNEKO — Estado oficial de sistemas
+**Checkpoint:** 07 octubre 2026  
+**Criterio:** último hilo real + evidencia técnica disponible.  
+**Regla:** no inferir porcentajes globales; separar construcción, validación, bloqueos y producción.
+
+---
+
+## 1. Agent Orchestrator / Development Orchestrator — RC2
+
+### Rama / versión
+RC2 congelado. No crear módulos ni versiones nuevas hasta cerrar aceptación real.
+
+### Construido
+- Project Registry.
+- Planner/Goals por `projectId`.
+- Perfiles de tests.
+- Coordinación multi-repositorio.
+- Control de aceptación RC2 independiente del runtime.
+- El control exige resultados PASS en H01–H18, Recovery, Gatekeeper, E2E multiagente, idempotencia, rollback y soak.
+- Verifica coincidencia de versión y referencias de evidencia.
+
+### Pruebas ya pasadas
+- Control de aceptación: **7/7 PASS**.
+- El control rechaza pruebas faltantes, fallidas o asociadas a otra versión.
+
+### Evidencia
+- H01–H18: PASS histórico, pendiente de repetición sobre la ejecución RC2 actual.
+- El control de aceptación existe y está probado.
+- La autenticidad de los artefactos reales todavía no está certificada.
+
+### Pendiente
+- Ejecutar Agent Orchestrator real en Windows.
+- Repetir H01–H18.
+- Ejecutar Recovery, Gatekeeper, E2E multiagente, idempotencia, rollback y soak.
+- Recoger artefactos auténticos.
+- Confirmar que toda la evidencia corresponde exactamente a una única versión RC2.
+- Ejecutar el control de aceptación sobre esas evidencias reales.
+
+### Bloqueo externo
+El equipo Windows `DESKTOP-FA5MKPC` aparece conectado, pero Desktop Commander bloquea operaciones por límite mensual.
+
+### Estado
+**RC2 — ACCEPTANCE BLOCKED / NOT CERTIFIED**
+
+El 7/7 PASS corresponde al control de aceptación, no al runtime.
+
+---
+
+## 2. MEMBRANE — RC19
+
+### Rama / HEAD correcto
+- Rama candidata: `cert/membrane-v1.0-rc19`
+- SHA: `e7180920542ec79e96cf0aa9967536ab60e0cdc4`
+- Coinciden: cert, anchor `anchor/membrane-v1.0-rc19-e718092`, HEAD de PR #76 y deploy staging válido.
+- PR #76: open, merged=false, mergeable=true.
+- Staging válido: deploy `dep-db3aivl9fdbs73ah15b0`, estado **LIVE**, misma SHA.
+- Tres contaminaciones previas con `52dcb366…` quedaron excluidas, auditadas y resealed.
+- Antes de cada gate debe comprobarse: `cert == anchor == PR76 == deploy`.
+
+### Construido
+RC19 incluye:
+- Runtime staging v48.
+- PostgreSQL v48 / 38 migraciones.
+- Auth / tenant / principal binding.
+- Source reads y privacy reads.
+- NEXUS gateway.
+- Issuance y verification de grants.
+- Orchestrator control plane.
+- Google connector con gates fail-closed.
+- OAuth transport / vault.
+- Sync / disconnect runtime.
+- Recovery backup / restore.
+- Network-load certifier.
+- Pilot certifier.
+- Final release certifier.
+- Production entrypoint / predeploy.
+- Rollback runbook.
+
+Fuera del candidato RC19, en ramas `ops`, existen elementos operacionales preparados sin modificar RC19:
+- Recovery cifrado.
+- Restaurador para rotación PostgreSQL free.
+- Gate4 execution window.
+- Production smoke probe.
+
+### Pruebas ya pasadas
+- Gate 0: PASS.
+- Gate 1: PASS.
+- Gate 2 PostgreSQL: **PASS** — v48, 38 migraciones, fingerprint `009243c9…`.
+- Gate 3 load canónico: **PASS** — 100 requests, concurrency 10, p95 305.14 ms, p99 406.51 ms, 0 errores, readiness estable.
+- Gate 5 recovery: **PASS** — PG17 backup/restore, 41 tablas verificadas.
+- Gate 7 CI: **PASS** — RC19 SHA exacta, run `37074160581`.
+- Source reads: 200/200.
+- NEXUS gateway self-probe: PASS.
+- Orchestrator control self-probe: PASS, incluyendo spoof rejection y `mutationExecuted=false`.
+
+Prueba adicional de madurez:
+- Stress 500×50: 0 errores, readiness estable.
+- p95 1100.55 ms > límite 750 ms.
+- No invalida Gate 3; queda como mejora de performance.
+
+### Evidencia preservada
+Ruta: `evidence/membrane-v1.0-rc19`
+
+Incluye:
+- CI.
+- PostgreSQL canónico.
+- Recovery backup/apply/restore.
+- Load canónico.
+- Gate4 preflight.
+- Gate4 atomic activation proof.
+- Gate6 preflight.
+- Gate8 preflight.
+- Secret scan.
+- Promotion preflight.
+- Incidentes de branch drift.
+- Continuity-backup decrypt verification.
+
+Backup operacional cifrado:
+- AES-256-GCM.
+- Ciphertext SHA `af5f4bde…`.
+- Dump SHA `a008a960…`.
+- Magic `PGDMP`.
+- Restore previo PASS sobre 41 tablas.
+- Descifrado real posterior PASS.
+- Clave separada del ciphertext.
+
+### Pendiente
+- Gate 4 real: `connect → OAuth → sync → disconnect → invalidation → reprojection`.
+- Todavía no existe el artifact final `adneko.membrane.google-lifecycle-evidence.v1`.
+- Gate 6 canónico depende de Gate 4.
+- Gate 8 está estructuralmente preparado y se detiene correctamente en el primer artifact ausente: Google lifecycle.
+- Después: Gate 9 production readonly y Gate 10 production smoke.
+
+### Bloqueos externos
+Google:
+- Falta `MEMBRANE_GOOGLE_OAUTH_CLIENT_SECRET`.
+- Falta autenticar la cuenta Google operadora correcta.
+- Falta obtener/verificar su `sub`.
+- Falta consentimiento OAuth interactivo.
+- El `sub` no debe inferirse desde email o profile IDs.
+
+Producción:
+- Gate 8 puede alcanzarse con recursos actuales.
+- Gate 9/10 quedan diferidos hasta disponer de infraestructura recurrente de producción.
+
+### Bloqueo técnico / infraestructura
+Gate4 `complete` y Gate6 oficial requieren acceso directo a PostgreSQL desde el runner canónico.
+- Staging posee `MEMBRANE_DATABASE_URL`.
+- La integración Render disponible no ofrece shell/exec.
+- El runner aislado no posee ese secreto.
+- No debe copiarse ni exponerse.
+- Falta un execution plane DB-capable seguro.
+
+El helper de identity bootstrap ligado a v47 ya fue resuelto operacionalmente mediante una variante v48 probada en `ops`; no es un bloqueo de diseño de RC19.
+
+### Validación / Producción / FAT
+- Staging: **parcialmente certificada**.
+- Gates PASS: 0, 1, 2, 3, 5, 7.
+- Gate 4: bloqueado.
+- Gate 6: pendiente.
+- Gate 8: preparado.
+- Producción: **NO desplegada**.
+- Production Certified: **NO**.
+- FAT físico: **no aplica**.
+
+### PostgreSQL staging
+- Estado: AVAILABLE.
+- PG17 free.
+- Vencimiento registrado: `2026-10-09T16:18:19.842694Z`.
+- Backup cifrado restaurado, descifrado y verificado.
+- Si vence antes de Gate4/6: crear PostgreSQL 17 free, restaurar dump verificado, rebind, revalidar v48/38 y continuar.
+- Riesgo residual: downtime, no pérdida de datos.
+
+### Siguiente cierre concreto
+No crear RC20 ni ampliar alcance.
+
+Orden obligatorio:
+1. Google Client Secret.
+2. Operador Google verificado + `sub` + bootstrap v48.
+3. Execution plane seguro con acceso DB.
+4. Gate 4 PASS.
+5. Volver a cerrar Google fail-closed.
+6. Gate 6 pilot.
+7. Gate 8 final certification.
+
+### Estado
+**RC19 — STAGING PARCIALMENTE CERTIFICADA / GATE 4 BLOQUEADO / PRODUCCIÓN NO DESPLEGADA**
