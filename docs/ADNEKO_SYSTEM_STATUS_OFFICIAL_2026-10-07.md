@@ -835,3 +835,95 @@ Secuencia obligatoria:
 
 ### Estado
 **M297-R24 · RELEASE BLOCKED · CAD REAL PENDIENTE · PROCUREMENT NO AUTORIZADO**
+
+
+---
+
+## 11. NEXUS COMMIT Software — staging certificado / candidato cloud certificado
+
+### Rama / HEAD certificado
+- `main` certificado: `b3b44b48b650858e2330cf4f68b0ed8fc98bad05`.
+- Tag staging certificado: `nexus-v1.0.0-staging-certified`.
+
+### Construido / integración cerrada
+- Ledger causal y estados de compromiso.
+- PostgreSQL 16 real.
+- API + Worker Node 22.
+- HTTPS/TLS de aceptación.
+- Idempotencia.
+- Timeout/fallback.
+- Auth / tenant isolation / principal boundaries.
+- Outbox / journal / reconciliation.
+- Cleanup.
+
+### E2E staging local
+Resultados:
+- `NEXUS_STAGING_E2E_PASS`
+- `NEXUS_STAGING_ACCEPTANCE_PASS`
+- `NEXUS_LOCAL_STAGING_E2E_PASS`
+
+CI remoto del mismo SHA: **SUCCESS**.
+
+### Defectos reales encontrados y corregidos durante E2E
+- `TIMEOUT_TRIGGERED.correlation_id` inválido.
+- `deadline_id/causation_id` no RFC UUID.
+- Bootstrap Windows de `authority-admin`.
+- HTTPS faltante en runner local.
+- Reproducibilidad de lint limpio.
+- Drift de schema policy count.
+- Generación de artifacts SBOM.
+
+### Candidato Render congelado
+- Rama: `deploy/nexus-v1.0.0-staging`
+- SHA: `01d366fcdd70a8b0d191700a4b633ccc5abe09e6`
+- Comparación con release certificado: `RUNTIME_CODE_IDENTICAL=PASS`.
+- Únicos cambios: `render.yaml` y test de blueprint.
+- Tag: `nexus-v1.0.0-render-staging-candidate`.
+- PR #56 se utilizó únicamente para validar el SHA y quedó cerrado sin merge.
+
+### Pipeline del candidato cloud
+**26/26 PASS**:
+- lint
+- typecheck
+- tests
+- migraciones
+- replay
+- schema validation
+- restricted principals
+- build
+- formal certification
+- API container
+- Worker container
+- Migrator container
+- 3 SBOM
+- provenance
+- evidence upload
+
+### Estado exacto
+- Código: **CERRADO / CERTIFICADO**.
+- Integración: **CERRADA / CERTIFICADA**.
+- Staging local: **CERRADO / CERTIFICADO**.
+- Candidato cloud: **CERRADO / CERTIFICADO**.
+- Producción cloud: **PENDIENTE**.
+
+### Bloqueo externo único
+Render Hobby Tier llegó al límite de recursos:
+- 25/25 recursos.
+- Intento real de crear PostgreSQL dedicado NEXUS rechazado con: `Hobby Tier is limited to 25 services`.
+
+No es un fallo del candidato certificado.
+
+### Siguiente cierre concreto
+No abrir expansión nueva.
+
+Secuencia:
+1. Liberar 1 slot Render.
+2. Crear PostgreSQL dedicado NEXUS.
+3. Desplegar `01d366fc…`.
+4. Aplicar migraciones y bootstrap.
+5. Ejecutar `staging:accept` contra HTTPS público.
+6. Verificar SHA / health / E2E cloud.
+7. Promoción final a producción.
+
+### Estado
+**STAGING CERTIFICADO · CANDIDATO CLOUD CERTIFICADO · BLOQUEADO POR CAPACIDAD RENDER**
