@@ -1262,3 +1262,106 @@ No se realizó ninguna escritura física.
 
 ### Estado
 **SOFTWARE RC VERIFICADO · FAT00 FÍSICO PENDIENTE · SIN WRITE AUTHORITY**
+
+
+---
+
+## 16. EDGE Integration — H-019 First Article Physical Build
+
+### Último checkpoint real
+Fecha: 07 octubre 2026.
+
+La ingeniería/documentación está cerrada a nivel de paquete de fabricación.
+
+### Paquete de ingeniería cerrado
+- Manufacturing Dossier cerrado.
+- BOM controlada.
+- Planos eléctricos y mecánicos consolidados.
+- Terminal / wire schedules.
+- I/O Map.
+- Assembly Work Instructions.
+- QC Inspection Sheets.
+- FAT package.
+- Software / configuration manifest.
+- RB01 / Release Manifest.
+- Engineering Evidence Master.
+- First Article Build Record definido.
+- Acceptance Matrix definida.
+- Repeatability / production gate definido.
+- Trazabilidad por unidad estructurada.
+- As-Built estructurado.
+- Evidence Manifest estructurado.
+- Baseline documental congelada.
+- Registro previo: 43 archivos.
+- Baseline identificada: `1a9df05e…`.
+
+### Precisión de estado
+El cierre documental demuestra:
+- cierre de ingeniería;
+- preparación de fabricación;
+- estructura de control y aceptación.
+
+No demuestra que EDGE Integration físico haya sido construido ni aceptado.
+
+### Bloqueo autoritativo actual
+`H-019 = OPEN-BUILD-FAT`
+
+No existe evidencia verificable aportada de:
+- `RECEIVING PASS`
+- `PHYSICAL ASSEMBLY PASS`
+- `WIRING PASS`
+- `QC PASS`
+- `PRE-POWER PASS`
+- `FIRST POWER PASS`
+- `FAT PHYSICAL PASS`
+- `FIRST ARTICLE ACCEPTED`
+- `PRODUCTION RELEASE`
+
+Por tanto tampoco corresponde declarar:
+- SAT real;
+- commissioning real;
+- unidad de producción terminada.
+
+### Punto exacto de continuación
+**H-019 — FIRST ARTICLE PHYSICAL BUILD**
+
+Secuencia obligatoria:
+`FABRICANTE / BUILD AUTHORIZATION`
+↓
+`PROCUREMENT & RECEIVING`
+↓
+`EI-UNIT-001 PHYSICAL BUILD`
+↓
+`QC`
+↓
+`PRE-POWER`
+↓
+`ENERGIZATION`
+↓
+`EDGE COMPUTE / 24V / MODBUS`
+↓
+`I/O`
+↓
+`INTERLOCKS`
+↓
+`E-STOP / RESET`
+↓
+`FAIL-SAFE`
+↓
+`FAT`
+↓
+`EVIDENCE`
+↓
+`AS-BUILT`
+↓
+`FIRST ARTICLE ACCEPTANCE`
+↓
+`PRODUCTION RELEASE`
+
+### Directiva de continuidad
+No abrir nuevas capas P3 teóricas.
+
+La ingeniería está suficientemente cerrada. El trabajo debe concentrarse en H-019 y evidencia física real.
+
+### Estado
+**INGENIERÍA CERRADA · H-019 OPEN-BUILD-FAT · FIRST ARTICLE FÍSICO PENDIENTE**
