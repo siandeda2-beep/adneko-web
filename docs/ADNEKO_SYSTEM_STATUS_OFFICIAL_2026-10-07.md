@@ -771,3 +771,67 @@ El checkpoint REV D y el paquete identificado constituyen la última referencia 
 
 ### Estado
 **REV D VERIFICADO EN SIMULADOR · HIL/FAT Y HARDWARE PENDIENTES**
+
+
+---
+
+## 10. NEKO Physical Intelligence — M297-R24
+
+### Último checkpoint real
+- Fecha: 07 octubre 2026.
+- Línea actual: **M297-R24**.
+- No corresponde volver a M901 ni a R09.
+- Baseline documental R00: transición obligatoria desde arquitectura hacia geometría real mediante intake CAD, verificación de unidades/escala/interfaces, reconciliación de masa, integración `NEKO-ASM-MASTER`, extracción de masa/COM/inercia, dinámica J02, freno, contrabalance y Procurement Gate.
+
+### Estado acumulado por revisión
+- **M297-R12**: screening estructural/interfaz cerrado. `SH-LC-05: Mx=78 N·m, My=222 N·m`. RB14 con adapter 14 mm: 0.607 mm, 0.936°, 181.44 MPa. Bolt-load screening: J01 1.206 kN; J02 0.928 kN.
+- **M297-R13**: feasibility de fasteners/material. J01 quedó como interface restrictiva. M5 clase 8.8 casi consume proof load para μ=0.12; 10.9/12.9 quedaron como candidatos. Para adapter 14 mm: `Sy ≥ 272.2 / 362.9 / 453.6 MPa` para FoS 1.5 / 2.0 / 2.5. Material, espesor, torque/preload y fabricación permanecen HOLD.
+- **M297-R17**: pipeline de CAD intake preparado: manifest, SHA-256, units, datums, `RB-001…RB-007`, frames, `SH-LC-06…10`, fail-closed.
+- **M297-R18**: Dynamics Runtime Newton–Euler J01–J04 preparado y probado; fail-closed ante RB/COM/inercia/ejes/cadena CAD inválidos. Test analítico PASS: −9.80665 N·m; error energético 0.0 J.
+- **M297-R19**: carga estructural extendida `SH-LC-06…10`: controlled stop, E-stop, power loss, hard-stop, service transport; wrench completo, peaks, timestamps, velocidad, aceleración y energía. Integración de 11 muestras PASS. Sin trayectoria/payload/source reales: BLOCKED.
+- **M297-R20**: Brake + Counterbalance Gate preparado y probado.
+- **M297-R21**: Gravity Envelope runtime probado; caso analítico esperado/encontrado 9.80665 N·m en qJ01=0. Sweep coarse/fine/refinement/convergence PASS como algoritmo; no equivale a gravedad física validada.
+- **M297-R22**: Actuator Duty / Current / Concurrency Gate preparado: RMS/peak torque, potencia, márgenes y concurrencia. Sin modelo eléctrico/telemetría real = HOLD. `25 A / 1.2 kW` permanece objetivo condicional, no release.
+- **M297-R23**: Release Orchestrator ejecutado y test PASS. Resultado exacto: `CURRENT RELEASE DECISION = BLOCKED`.
+- **M297-R24**: CAD Acquisition Authority. CubeMars = autoridad primaria. Mirrors solo para intake/hash/unidades/reconciliación, nunca para liberar fabricación. CAD bytes todavía no ingresados; `M297-01 = OPEN`, `M297-03 = PARTIAL`, `M297-04…10 = BLOCKED`.
+
+### Stack físico baseline
+- J01: AKH70-48 V1.0
+- J02: AKH70-16 V1.0
+- J03: AK60-39 V3.0
+- J04: AK45-10 V3.0
+
+La compra permanece bloqueada hasta existir evidencia completa de fit/load/interface.
+
+### Estado técnico actual
+- `RB14 = RETAINED`
+- Intake/dynamics/load/brake/gravity/duty/release: preparados y probados donde aplica.
+- CAD real: **NO INGRESADO**.
+- MASS/COM/INERTIA real: **NO DATA**.
+- Adapter/material/preload/manufacturing release: **HOLD**.
+- J02 brake: **CANDIDATE ONLY**.
+- Counterbalance: **HOLD**.
+- Procurement: **NOT AUTHORIZED**.
+- Physical build / FAT: **NOT STARTED**.
+
+### Validación / producción / FAT
+- Validación algorítmica y de gates: parcial, con PASS donde indicado.
+- Geometría física real: pendiente de CAD autoritativo.
+- Procurement release: bloqueado.
+- Physical build: no iniciado.
+- FAT físico: no iniciado.
+
+### Siguiente cierre concreto
+No ampliar arquitectura ni reabrir revisiones antiguas.
+
+Secuencia obligatoria:
+1. Adquisición/intake de CAD real autoritativo.
+2. Cerrar `M297-01/03`.
+3. Extraer propiedades reales de masa / COM / inercia.
+4. Ejecutar dinámica con datos reales.
+5. Cerrar brake / counterbalance.
+6. Ejecutar release gate.
+7. Solo entonces considerar procurement y build físico.
+
+### Estado
+**M297-R24 · RELEASE BLOCKED · CAD REAL PENDIENTE · PROCUREMENT NO AUTORIZADO**
