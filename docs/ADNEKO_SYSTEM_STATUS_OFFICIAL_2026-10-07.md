@@ -1082,3 +1082,78 @@ Por tanto:
 
 ### Estado
 **53/53 PASS · SHA CORREGIDO AÚN NO CERTIFICADO · PRODUCCIÓN NO AUTORIZADA**
+
+
+---
+
+## 14. NEXUS COMMIT Hardware / NXC-CTRL-01 REV_A
+
+### Evidencia de herramienta / baseline
+- KiCad: 10.0.5.
+- Board: 160 × 120 mm.
+- Capas: 4.
+- PCB importado: **143/143 referencias**.
+- `J401`: off-board.
+
+### Gates / paridad / ECO
+- B5 delta gate: **PASS**.
+- B6 delta gate: **PASS**.
+- ECO `D401 pin 3 → CAN_ISO_GND`: **corregido y reproducible**.
+- ERC posterior al ECO: **0 violaciones**.
+- Schematic ↔ PCB parity: **0 problemas**.
+- Placement Candidate 04: **0 violaciones DRC**.
+
+### Routing real verificado
+El estado de routing ya superó el checkpoint anterior. Existe trabajo verificado hasta:
+
+`DRC_ROUTING_ACCEPTED_16_PARITY.json`
+
+Rutas confirmadas durante el cierre:
+- `SAFE_DO04_LOGIC`
+- `SAFE_DO08_LOGIC`
+- `TERM_H`
+- `TERM_L`
+- `CONTROL_READY`
+- `DI_FAULT_N`
+- `DRIVER_CL_A`
+- `SAFE_DO01_LOGIC`
+- `SAFE_DO05_LOGIC`
+- `SAFE_DO02_LOGIC`
+- `SAFE_DO06_LOGIC`
+- `DI02`
+
+Detalles:
+- `DRIVER_CL_A` resuelto mediante escape `XLEFT2`, DRC=0.
+- `DI_FAULT_N` resuelto con escape, DRC=0.
+- `CONTROL_READY` aceptado con routing `HV`.
+- SAFE_DO01/02/05/06 aceptadas mediante escape directo.
+- `DI02` aceptada posteriormente en batch de inputs.
+- Los intentos fallidos se revirtieron y no quedaron rutas rechazadas contaminando el board.
+- Los field outputs SAFE_DO01…08 probados por ruta rápida fueron rechazados y revertidos.
+- Varias rutas FB todavía requieren solución más elaborada.
+
+### Progresión de unconnected
+Progresión documentada aproximada:
+
+`435 → 431 → 430 → 429 → 427 → 423 → 420 → 419`
+
+Último estado operativo disponible:
+- DRC limpio.
+- Parity limpio.
+- ~16 conexiones aceptadas.
+- **419 unconnected** restantes.
+
+### Estado de fabricación
+Todavía no corresponde generar/liberar fabricación.
+
+Secuencia obligatoria de cierre:
+
+`unconnected = 0 → DRC = 0 → parity = 0 → route contract PASS → Gerber/Drill/CPL → manufacturing gate PASS`
+
+El cuello de botella actual es **routing completo**.
+
+### Estado
+**ROUTING EN CURSO · 419 UNCONNECTED · FABRICACIÓN NO AUTORIZADA**
+
+### Regla operativa sobre PC del usuario
+Antes de descargar, instalar, abrir o cerrar cualquier programa en la PC del usuario, avisar primero y explicar para qué.
