@@ -1548,3 +1548,68 @@ No existe todavía verificación en este hilo de commits posteriores al HEAD `a8
 
 ### Estado
 **P3-47 / RU-01 · 352/352 PASS · FAT FÍSICO PENDIENTE**
+
+
+---
+
+## 20. ADNEKO Brain — integration certification P0
+
+### Último checkpoint recuperado
+- Fecha: 04–05 octubre 2026.
+- Proyecto: ADNEKO Brain.
+- Rol: memoria, contexto y orquestación integrada del ecosistema.
+- Brain permanece como componente transversal de contexto y memoria institucional; no sustituye Autonomous Company ni asume autoridad directa sobre ejecuciones.
+
+### Avances identificados
+1. Brain operativo en ADNEKO ONE:
+   - flujo `Voice → Brain → Action Gateway → PostgreSQL`;
+   - continuidad después de reinicio;
+   - generación de briefing.
+
+2. PR #100 — E2E-02:
+   - implementación de `proposal.prepare`;
+   - draft de cotización;
+   - líneas;
+   - `contextHash`;
+   - idempotencia;
+   - estados `RESULT_READY/VERIFIED`;
+   - CI sin certificación concluyente en el checkpoint recuperado.
+
+3. PR #101 — E2E-01:
+   - conexión de `company.status` con Intelligence OS;
+   - workflows de certificación con fallos registrados.
+
+4. PR #358:
+   - continuación automática;
+   - execution lineage;
+   - mecanismo HALT.
+
+### Estado de validación
+Existe integración real construida, pero la certificación conjunta de Brain todavía no está cerrada.
+
+No se debe declarar producción certificada hasta comprobar:
+- estado real actual de PR #100, #101 y #358;
+- persistencia durable;
+- versionado del contexto;
+- PostgreSQL real;
+- reinicios;
+- recovery;
+- autorización;
+- idempotencia;
+- integración Brain ↔ Intelligence OS ↔ Autonomous Company.
+
+### Prioridad P0 / siguiente cierre concreto
+1. Investigar los fallos de GitHub Actions.
+2. Verificar PR #100, #101 y #358 y sus HEAD/merge/deploy actuales.
+3. Cerrar persistencia durable y versionado del contexto.
+4. Ejecutar E2E con PostgreSQL.
+5. Repetir restart/recovery.
+6. Validar autorización e idempotencia.
+7. Certificar funcionamiento conjunto de Brain, Intelligence OS y Autonomous Company.
+8. No abrir nuevas funcionalidades antes del cierre verificable.
+
+### Directiva
+`cerrar → integrar → probar → operar → madurar → ampliar`
+
+### Estado
+**INTEGRACIÓN REAL CONSTRUIDA · CERTIFICACIÓN P0 PENDIENTE**
