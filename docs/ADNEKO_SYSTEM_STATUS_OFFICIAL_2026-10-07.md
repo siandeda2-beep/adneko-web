@@ -1613,3 +1613,48 @@ No se debe declarar producción certificada hasta comprobar:
 
 ### Estado
 **INTEGRACIÓN REAL CONSTRUIDA · CERTIFICACIÓN P0 PENDIENTE**
+
+
+---
+
+## 21. VisionFind Software — staging certification closure
+
+### Último hilo real localizado
+- Fecha: 07 octubre 2026.
+- Alcance: corrección de fallos, preparación de staging y certificación del entorno de ejecución.
+
+### Estado técnico recuperado
+- PostgreSQL 17.11 / Supabase staging: `ACTIVE_HEALTHY`.
+- Migraciones: **80/80 registradas**.
+- Seguridad DB: RLS, FORCE RLS y runtime verificados.
+- Arquitectura: API + Worker en un único servicio.
+- Imagen Docker: digest registrado y conservado.
+- Commit `0940f1b`: ajuste de arquitectura.
+- Commit `88f168a`: corrección HOST/PORT.
+- Pruebas dirigidas en `88f168a`: **14/14 PASS**.
+- GitHub Actions: continúa fallando sin runner.
+- Render: **25/25 recursos ocupados**.
+- Certificación E2E: pendiente.
+
+### Precisión de certificación
+La evidencia focalizada 14/14 PASS no equivale a certificación integral del HEAD ni a producción.
+
+No existe todavía PASS completo y reproducible del pipeline de certificación.
+
+### Bloqueos pendientes
+1. Resolver `dependency-lock` y fallas de CI.
+2. Conseguir una ejecución reproducible de la certificación completa.
+3. Resolver capacidad Render sin eliminar infraestructura sin autorización.
+4. Validar API, Worker, PostgreSQL, Blob y Gemini de extremo a extremo.
+5. Completar `GET media`, autorización y aislamiento por tenant.
+6. Certificar ingestión, OCR, embeddings, indexación y consultas.
+7. Ejecutar smoke tests, estabilidad y rollback.
+
+### Punto exacto para continuar
+**VISIONFIND SOFTWARE — CIERRE DE CERTIFICACIÓN STAGING Y E2E**
+
+Secuencia recomendada:
+`CI/dependency-lock → ejecución reproducible → staging completo → API+Worker+PostgreSQL+Blob+Gemini E2E → GET media/auth/tenant → OCR/embeddings/index/query → smoke/stability/rollback → decisión de certificación`
+
+### Estado
+**STAGING DB HEALTHY · 14/14 PASS FOCALIZADO · CERTIFICACIÓN E2E PENDIENTE**
