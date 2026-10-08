@@ -927,3 +927,91 @@ Secuencia:
 
 ### Estado
 **STAGING CERTIFICADO · CANDIDATO CLOUD CERTIFICADO · BLOQUEADO POR CAPACIDAD RENDER**
+
+
+---
+
+## 12. Autonomous Agent — RC23 certificado / RC24-V51 en cierre
+
+### Release certificado actual
+- Versión: `v1.0.0-rc23`
+- `main` SHA: `f773ff761e78822b9dbd80357a880a4c601b1b18`
+- Exact-head certificado.
+
+### Certificación RC23
+- 151/151 contratos PASS.
+- 894/894 tests de contrato PASS.
+- 465/465 archivos PASS.
+- 2131/2131 tests PASS.
+- PostgreSQL 17 en V50.
+- Provisioning de roles PASS.
+- Identity verification PASS.
+
+### Defecto descubierto en validación real de producción
+Después de RC23, el servidor arrancaba pero `/health/ready` devolvía:
+- HTTP 503
+- `PERSISTENCE_NOT_READY`
+
+Causa:
+`PUBLIC_PRIVILEGE_SURFACE_FORBIDDEN:FUNCTION:@public.sales_enforce_human_escalation_lifecycle_authority:EXECUTE`
+
+La auditoría PostgreSQL encontró dos funciones trigger internas aún ejecutables por `PUBLIC`:
+- `sales_enforce_human_escalation_lifecycle_authority()`
+- `sales_enforce_notification_recovery_lifecycle_authority()`
+
+RC23 permanece intacto y certificado; la corrección se abrió como RC24 / schema V51.
+
+### RC24 / V51
+- Rama: `fix/rc23-public-trigger-hardening-20261001`
+- PR: #38 DRAFT
+- Candidato congelado: `8d64d4d1f6a7466746452d3be83bce4009ea2959`
+
+V51 añade:
+- `051_trigger_function_public_execute_hardening.sql`
+- REVOKE EXECUTE FROM PUBLIC sobre las dos funciones trigger.
+- `ProductionSchemaContractV51Verifier`.
+- Runtime, database identities, certification, provisioning, rollback y acceptance migrados V50→V51.
+- V50 conservado como contrato histórico padre.
+- Migration ledger esperado: 51.
+
+### Hardening adicional cerrado en V51
+- Firma de `sales_reset_product_verification_to_extracted` corregida a 6 argumentos también en migration gate.
+- `SecurityDefinerSurfaceGate` actualizado.
+- `SecurityDefinerOwnerPrivilegeGate` actualizado con `sales_funnel_events.event_id`.
+- `SecurityDefinerOwnerRoleGate` endurecido para aceptar solo el migrador administrativo correcto como maintainer.
+- `TriggerSecurityContractGate` ampliado para auditar los 3 triggers reales.
+
+### Evidencia ejecutada sobre árbol de trabajo V51
+- Typecheck: PASS.
+- Security-focused: 31/31 PASS.
+- Preflight posterior: 43/43 PASS.
+- Release contracts: 152/152 archivos · 898/898 tests PASS.
+- Full suite: 466/466 archivos · 2130/2130 tests PASS.
+- PostgreSQL 17: `currentVersion: 51`.
+- `migrationCount: 51`.
+- Sin drift.
+
+### Limitación crítica de esa evidencia
+La corrida completa coexistía con 26 cambios locales adicionales no comprometidos en structural gates/tests.
+
+Por tanto:
+- no se acepta como certificación exact-head de `8d64d4d…`;
+- esos cambios paralelos se separaron;
+- no fueron borrados ni mezclados ciegamente;
+- `8d64d4d…` quedó subido como candidato aislado al PR #38.
+
+### Estado exacto
+- RC23: **CERTIFICADO Y ESTABLE**.
+- RC24 / V51: **CANDIDATO EN CIERRE**.
+- Producción RC24: no promovida aún.
+
+### Siguiente cierre concreto
+1. Verificar CI exact-head de `8d64d4d1…`.
+2. Ejecutar `verify:release` sobre checkout limpio de ese SHA.
+3. Ejecutar PostgreSQL 17 V51 sobre ese mismo SHA.
+4. Repetir `/health/ready` y exigir HTTP 200.
+5. Ejecutar `certify:exact-head` y exigir `certified:true`.
+6. Solo entonces promover RC24 a `main`, tag y release.
+
+### Estado
+**RC23 CERTIFICADO · RC24/V51 EN CIERRE EXACT-HEAD**
