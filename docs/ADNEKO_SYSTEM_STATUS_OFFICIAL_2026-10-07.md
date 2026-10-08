@@ -559,27 +559,34 @@ La línea NEKO Voice incluye:
 - Interrupciones / barge-in.
 - Memoria persistente.
 - Bridge NEKO / Advanced OS.
+- Creator/NEKO avanzó hasta **schema v98** con identidad de ejecución y par de estado auditables.
+- Advanced asociado incorpora readiness exacta, reconciliación de cliente, sink fail-closed y un fix específico de freshness de confirmación.
+- Este trabajo es posterior a la base v76/v23; no corresponde retroceder a esas versiones para definir el estado actual.
 
 ### Pendiente
-Aún falta fijar con exactitud en el checkpoint consolidado:
-- HEAD actual de NEKO Voice.
-- HEAD actual relacionado de Advanced OS para esta integración.
-- Secuencia de commits posteriores a `3b3a8275…`.
-- Qué cambios están ya validados y cuáles no.
-- Deployment real, si existe, de los HEAD actuales.
-- Reejecución de CI/gates sobre el candidato actual.
+El siguiente gate abierto está en los contratos y ejecución actuales:
+- Fijar el candidato exacto Creator/NEKO + Advanced.
+- Ejecutar **E2E** sobre los HEAD actuales.
+- Ejecutar **staging acceptance**.
+- Validar readiness de ambos HEAD.
+- Distinguir explícitamente cualquier parte todavía **contract-only** de lo realmente ejecutado.
+- Probar contra PostgreSQL / servicio real donde corresponda.
+- Verificar deployment real del mismo candidato.
+- No ampliar capacidades antes de cerrar estos gates.
 
 ### Producción
 - Producción sostenida de los HEAD actuales: **NO DEMOSTRADA TODAVÍA**.
 - La certificación histórica 282/282 no equivale a certificación automática del estado actual.
 
 ### Estado
-**BASE HISTÓRICA 282/282 PASS · HEAD ACTUAL PENDIENTE DE REVALIDACIÓN**
+**SCHEMA v98 / ADVANCED FRESHNESS FIX · E2E/STAGING ACCEPTANCE PENDIENTES**
 
 ### Siguiente cierre concreto
-1. Fijar HEAD exacto actual de NEKO Voice.
-2. Fijar HEAD exacto de Advanced OS asociado al bridge.
-3. Reconstruir cambios desde `3b3a8275…`.
-4. Ejecutar CI/gates sobre el candidato actual.
-5. Verificar deployment real del mismo SHA.
-6. Solo después declarar nuevo estado de validación/producción.
+1. Fijar candidato exacto Creator/NEKO + Advanced.
+2. Verificar contracts actuales de ejecución/confirmación.
+3. Ejecutar E2E completo sobre los HEAD actuales.
+4. Ejecutar staging acceptance.
+5. Validar readiness de ambos HEAD.
+6. Probar PostgreSQL / servicio real para cualquier tramo que siga contract-only.
+7. Verificar deployment real del mismo candidato.
+8. Solo después declarar nuevo estado de validación/producción.
