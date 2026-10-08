@@ -71,144 +71,91 @@ No se debe extrapolar la evidencia histórica a la ejecución actual.
 
 ## 2. MEMBRANE — RC19
 
-### Rama / HEAD correcto
-- Rama candidata: `cert/membrane-v1.0-rc19`
-- SHA: `e7180920542ec79e96cf0aa9967536ab60e0cdc4`
-- Coinciden: cert, anchor `anchor/membrane-v1.0-rc19-e718092`, HEAD de PR #76 y deploy staging válido.
-- PR #76: open, merged=false, mergeable=true.
-- Staging válido: deploy `dep-db3aivl9fdbs73ah15b0`, estado **LIVE**, misma SHA.
-- Tres contaminaciones previas con `52dcb366…` quedaron excluidas, auditadas y resealed.
-- Antes de cada gate debe comprobarse: `cert == anchor == PR76 == deploy`.
+### Checkpoint técnico
+- Fecha: 08 octubre 2026.
+- Repositorio: `siandeda2-beep/adneko-membrane`.
+- Candidato congelado: `cert/membrane-v1.0-rc19`.
+- SHA exacto: `e7180920542ec79e96cf0aa9967536ab60e0cdc4`.
+- PR #76: open / mergeable.
+- PR #77: autorización explícita de resource subjects para Intelligence OS.
 
-### Construido
-RC19 incluye:
-- Runtime staging v48.
-- PostgreSQL v48 / 38 migraciones.
-- Auth / tenant / principal binding.
-- Source reads y privacy reads.
-- NEXUS gateway.
-- Issuance y verification de grants.
-- Orchestrator control plane.
-- Google connector con gates fail-closed.
-- OAuth transport / vault.
-- Sync / disconnect runtime.
-- Recovery backup / restore.
-- Network-load certifier.
-- Pilot certifier.
-- Final release certifier.
-- Production entrypoint / predeploy.
-- Rollback runbook.
+### CI RC19 exact-SHA
+Workflow run:
+- `37074160581`
+- `deployment-contract`: PASS
+- `core-v48-candidate`: PASS
+- Checkout y gates ejecutados sobre el SHA congelado.
 
-Fuera del candidato RC19, en ramas `ops`, existen elementos operacionales preparados sin modificar RC19:
-- Recovery cifrado.
-- Restaurador para rotación PostgreSQL free.
-- Gate4 execution window.
-- Production smoke probe.
+Este PASS confirma CI exact-SHA, pero **no equivale a certificación operativa completa**.
 
-### Pruebas ya pasadas
+### Gates
 - Gate 0: PASS.
 - Gate 1: PASS.
-- Gate 2 PostgreSQL: **PASS** — v48, 38 migraciones, fingerprint `009243c9…`.
-- Gate 3 load canónico: **PASS** — 100 requests, concurrency 10, p95 305.14 ms, p99 406.51 ms, 0 errores, readiness estable.
-- Gate 5 recovery: **PASS** — PG17 backup/restore, 41 tablas verificadas.
-- Gate 7 CI: **PASS** — RC19 SHA exacta, run `37074160581`.
-- Source reads: 200/200.
-- NEXUS gateway self-probe: PASS.
-- Orchestrator control self-probe: PASS, incluyendo spoof rejection y `mutationExecuted=false`.
+- Gate 2: PASS.
+- Gate 3: PASS.
+- Gate 5: PASS.
+- Gate 7: PASS.
+- Gate 4: **BLOQUEADO**.
+- Gate 6: preflight aprobado; cierre operativo pendiente.
+- Gate 8: dependiente de los gates restantes.
+- Producción: no certificada.
 
-Prueba adicional de madurez:
-- Stress 500×50: 0 errores, readiness estable.
-- p95 1100.55 ms > límite 750 ms.
-- No invalida Gate 3; queda como mejora de performance.
+### Bloqueos activos
+Google OAuth:
+- falta confirmar `MEMBRANE_GOOGLE_OAUTH_CLIENT_SECRET` operativo;
+- no activar mutaciones mientras no exista validación completa.
 
-### Evidencia preservada
-Ruta: `evidence/membrane-v1.0-rc19`
+Operator identity:
+- falta identidad Google `sub` verificada y autorizada;
+- mantener fail-closed.
 
-Incluye:
-- CI.
-- PostgreSQL canónico.
-- Recovery backup/apply/restore.
-- Load canónico.
-- Gate4 preflight.
-- Gate4 atomic activation proof.
-- Gate6 preflight.
-- Gate8 preflight.
-- Secret scan.
-- Promotion preflight.
-- Incidentes de branch drift.
-- Continuity-backup decrypt verification.
+Execution plane:
+- falta cerrar un execution plane seguro y DB-capable para la validación final de PostgreSQL / gates operativos.
 
-Backup operacional cifrado:
-- AES-256-GCM.
-- Ciphertext SHA `af5f4bde…`.
-- Dump SHA `a008a960…`.
-- Magic `PGDMP`.
-- Restore previo PASS sobre 41 tablas.
-- Descifrado real posterior PASS.
-- Clave separada del ciphertext.
+### PR #77 — Intelligence OS resource authorization
+- Rama: `integration/orchestrator-subject-permissions-20261003`.
+- HEAD: `c9a01df402ec06d268ee60cb7a77c075a005788c`.
+- Estado: open / draft / no-mergeable en la inspección actual.
 
-### Pendiente
-- Gate 4 real: `connect → OAuth → sync → disconnect → invalidation → reprojection`.
-- Todavía no existe el artifact final `adneko.membrane.google-lifecycle-evidence.v1`.
-- Gate 6 canónico depende de Gate 4.
-- Gate 8 está estructuralmente preparado y se detiene correctamente en el primer artifact ausente: Google lifecycle.
-- Después: Gate 9 production readonly y Gate 10 production smoke.
+El cambio:
+- separa identidad criptográfica del servicio Intelligence OS de los recursos que puede leer;
+- mantiene el token ligado a `service:intelligence-os-orchestrator`;
+- usa una allowlist explícita de resource subjects;
+- rechaza wildcards;
+- mantiene comportamiento fail-closed si falta configuración;
+- reduce effective capability scopes del orchestrator a `membrane:state:read`.
 
-### Bloqueos externos
-Google:
-- Falta `MEMBRANE_GOOGLE_OAUTH_CLIENT_SECRET`.
-- Falta autenticar la cuenta Google operadora correcta.
-- Falta obtener/verificar su `sub`.
-- Falta consentimiento OAuth interactivo.
-- El `sub` no debe inferirse desde email o profile IDs.
+Evidencia declarada en PR #77:
+- 6/6 pruebas locales PASS.
 
-Producción:
-- Gate 8 puede alcanzarse con recursos actuales.
-- Gate 9/10 quedan diferidos hasta disponer de infraestructura recurrente de producción.
+CI nativa del PR #77:
+- run `37157023699`;
+- `core-v48-candidate`: FAILURE con `steps=null`;
+- `deployment-contract`: FAILURE con `steps=null`.
 
-### Bloqueo técnico / infraestructura
-Gate4 `complete` y Gate6 oficial requieren acceso directo a PostgreSQL desde el runner canónico.
-- Staging posee `MEMBRANE_DATABASE_URL`.
-- La integración Render disponible no ofrece shell/exec.
-- El runner aislado no posee ese secreto.
-- No debe copiarse ni exponerse.
-- Falta un execution plane DB-capable seguro.
+Por tanto, no hubo ejecución real de steps y ese rojo no demuestra fallo del código.
 
-El helper de identity bootstrap ligado a v47 ya fue resuelto operacionalmente mediante una variante v48 probada en `ops`; no es un bloqueo de diseño de RC19.
-
-### Validación / Producción / FAT
-- Staging: **parcialmente certificada**.
-- Gates PASS: 0, 1, 2, 3, 5, 7.
-- Gate 4: bloqueado.
-- Gate 6: pendiente.
-- Gate 8: preparado.
-- Producción: **NO desplegada**.
-- Production Certified: **NO**.
-- FAT físico: **no aplica**.
-
-### PostgreSQL staging
-- Estado: AVAILABLE.
-- PG17 free.
-- Vencimiento registrado: `2026-10-09T16:18:19.842694Z`.
-- Backup cifrado restaurado, descifrado y verificado.
-- Si vence antes de Gate4/6: crear PostgreSQL 17 free, restaurar dump verificado, rebind, revalidar v48/38 y continuar.
-- Riesgo residual: downtime, no pérdida de datos.
+### Decisión técnica
+1. No modificar RC19 congelado para resolver bloqueos de infraestructura.
+2. No cerrar PR #77 hasta tener CI efectiva y validación de autorización/transporte real.
+3. Mantener mutaciones Google desactivadas.
+4. No declarar MEMBRANE v1.0 / producción certificada sin Gate 4, Gate 6 y Gate 8.
+5. Mantener MEMBRANE como frente importante, pero no permitir que bloquee Brain → NEKO → Autonomous Company mientras existan cierres ejecutables con infraestructura disponible.
 
 ### Siguiente cierre concreto
-No crear RC20 ni ampliar alcance.
-
-Orden obligatorio:
-1. Google Client Secret.
-2. Operador Google verificado + `sub` + bootstrap v48.
-3. Execution plane seguro con acceso DB.
-4. Gate 4 PASS.
-5. Volver a cerrar Google fail-closed.
-6. Gate 6 pilot.
-7. Gate 8 final certification.
+1. Obtener CI efectiva de PR #77.
+2. Validar transporte real Intelligence OS → MEMBRANE `/v1/state/current` con resource subject autorizado.
+3. Confirmar Google Client Secret.
+4. Verificar operator identity + `sub`.
+5. Habilitar execution plane seguro con PostgreSQL.
+6. Ejecutar Gate 4 real.
+7. Re-cerrar Google fail-closed.
+8. Ejecutar Gate 6.
+9. Ejecutar Gate 8.
+10. Solo entonces considerar promoción/certificación v1.0.
 
 ### Estado
-**RC19 — STAGING PARCIALMENTE CERTIFICADA / GATE 4 BLOQUEADO / PRODUCCIÓN NO DESPLEGADA**
-
+**RC19 · CERTIFICACIÓN INCOMPLETA · GATE 4 / PR #77 PENDIENTES**
 
 ---
 
