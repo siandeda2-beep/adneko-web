@@ -185,3 +185,104 @@ Orden obligatorio:
 
 ### Estado
 **RC19 — STAGING PARCIALMENTE CERTIFICADA / GATE 4 BLOQUEADO / PRODUCCIÓN NO DESPLEGADA**
+
+
+---
+
+## 3. Intelligence OS — estado verificado
+
+### Rama / HEAD correcto
+- `main` en `19fd382…`.
+- PR #354 fue validado y fusionado.
+- PR #356 también figura fusionado en el estado público actual.
+- Render `adneko-intelligence-os` deploy `dep-db37blom7kps73da3rig` está **LIVE** en SHA `19fd382…`.
+
+### Construido
+- Motor de interpretación, planificación y ejecución gobernada.
+- Control plane de dependencias.
+- Evidencia durable.
+- Identidad MEMBRANE read-only dedicada: `service:intelligence-os-main-readonly`.
+- Scope exacto: `membrane:state:read`.
+
+### Pruebas / validación ya pasadas
+- TypeScript/build: PASS.
+- Suite autónoma: 184 archivos PASS.
+- `test:production-contract`: PASS.
+- Probe MEMBRANE de arranque: `READY_NO_SNAPSHOT`.
+- `evidencePersisted=true`.
+- Lectura realizada correctamente.
+- Mutaciones / autoridad / dispatch externos: false.
+- Smoke de capacidad durable PostgreSQL: PASS.
+
+### Pendiente
+El núcleo está operativo, pero el backbone completo todavía no está cerrado:
+- ADVANCE RC2 bridge no configurado en el servicio live.
+- Faltan credenciales CardDAV dedicadas.
+- Faltan reautorizar 3 cuentas Google Drive.
+- Después corresponde cerrar E2E Company/Agent sobre estas dependencias.
+
+### Estado
+**LIVE · NÚCLEO OPERATIVO · DEPENDENCIAS EXTERNAS PENDIENTES**
+
+---
+
+## 4. Advanced OS / Core — RC2
+
+### Rama / HEAD correcto
+- RC2 industrial congelado en `f7b119…`.
+- SHA completo registrado: `f7b119525ba56d18774a6b0a3c1b445f1fdeb007`.
+- Rama operacional: `ops/advanced-os-v1.0-rc2-deployment`.
+- Tooling operacional actual: `d423be90…`.
+- La rama operacional está 150 commits ahead / 0 behind del RC2 y no modifica `src/sql/test/package/lockfile/tsconfig` del runtime certificado.
+
+### Construido
+- Runtime de intents.
+- Health / readiness.
+- Idempotencia.
+- Aislamiento tenant.
+- Gateway industrial.
+- Recovery.
+- De-energizing fail-closed.
+- Tooling operacional de deployment sin alterar el runtime RC2 congelado.
+
+### Pruebas / certificación ya pasadas
+- Advanced exact-SHA: **445/445 PASS**.
+- EDGE Gateway: **30/30 PASS**.
+- Pre-FAT authority: **40/40 PASS**.
+- Commissioning / FAT00 software readiness: **72/72 PASS**.
+- DB authority: PASS.
+- Bootstrap: PASS.
+- Startup: PASS.
+- Control surface: PASS.
+- Evidence authority: PASS.
+- Privilege separation: PASS.
+- Provenance: PASS.
+- Closure checker: PASS.
+- Políticas Render: PASS.
+- CLI real de activación ejecutado end-to-end con marcador `ADVANCE_OS_PRODUCTION_ACTIVATION_CLI_E2E=PASS`.
+- Runner histórico restaurado a su SHA exacto.
+
+### Bloqueo externo / infraestructura
+Render está en capacidad máxima:
+- 24 servicios.
+- 1 PostgreSQL.
+- Total: **25/25 recursos**.
+
+Para ADVANCE todavía no existen:
+- PostgreSQL 16 durable de producción.
+- Web service de producción autorizado.
+
+Esto es un bloqueo externo/de infraestructura, no un fallo del RC2.
+
+### Pendiente de producción / FAT
+Después de disponer de infraestructura autorizada faltan:
+- Tenant/runtime DB reales.
+- Commissioning EDGE Terminal.
+- ADAM-6050 + DO/DI + safety profile.
+- FAT00 físico P01–P08.
+- Autorización post-FAT.
+- E2E hardware con readback independiente.
+- Confirmación de idempotencia de un único efecto.
+
+### Estado
+**SOFTWARE CERTIFIED · INFRA/FAT PENDING · PRODUCTION NO**
