@@ -286,3 +286,141 @@ Después de disponer de infraestructura autorizada faltan:
 
 ### Estado
 **SOFTWARE CERTIFIED · INFRA/FAT PENDING · PRODUCTION NO**
+
+
+---
+
+## 5. ADNEKO ONE — 1.0.0-rc.1
+
+### Rama / HEAD correcto
+- Rama: `feature/adneko-one-dogfood-ops-v22`
+- HEAD: `75552a159d16e5e08d501e37502466249546a2af`
+- PR actual: #94 — ADNEKO ONE Dogfood Operations v0.22
+- Base: `feature/adneko-one-rc-closure-v21`
+- Estado PR: OPEN · mergeable · no draft
+
+### Construido
+ADNEKO ONE está en `1.0.0-rc.1`.
+
+Requisitos y base:
+- Node 22.
+- PostgreSQL 16.
+- 11 migraciones: `001_core.sql` a `011_auth_sessions.sql`.
+
+Capacidades incluidas:
+- Multi-tenant + RLS.
+- RBAC y auditoría.
+- Sesiones revocables.
+- Bootstrap controlado y sellable.
+- Customers / conversations / tasks.
+- Scheduling / reservations.
+- Catálogo / quotes / orders / payments.
+- Comunicaciones con outbox transaccional.
+- Action Gateway con idempotencia, aprobación y evidencia.
+- Sesiones NEKO.
+- Brain ingress autenticado.
+- Voice handoff.
+- Briefing determinista.
+- PWA.
+- Nginx same-origin.
+- Migraciones con checksum.
+- Runtime DB least-privilege.
+- Backup / restore.
+- Request correlation.
+- Métricas internas.
+- Soak programado.
+
+### Pruebas ya pasadas
+Sobre RC1 HEAD `68a27ca575d…`:
+- Core #236 — PASS.
+- PWA #41 — PASS.
+- Recovery Drill #100 — PASS.
+- Release Candidate #6 — PASS.
+- Sustained Soak #4 — PASS.
+- Production Stack #125 — PASS.
+
+Sobre HEAD actual v0.22 `75552a159d…`:
+- Release Candidate #7 — PASS.
+- Dogfood Rehearsal #2 — PASS.
+- Production Stack #131 — PASS.
+
+E2E certificados:
+1. `humano → Voice ticket → NEKO → Brain → Action Gateway → PostgreSQL → briefing/audit`
+2. `inbound → Brain → communication.send → approval/rejection → outbox → adapter → delivery`
+3. `estado persistido → restart API → mismo JWT/Brain/NEKO → replay → nueva acción`
+
+### Evidencia existente
+Documentos/scripts versionados:
+- `OPERATIONAL_EVIDENCE`
+- `CRITICAL_DELIVERY_EVIDENCE`
+- `RESTART_CONTINUITY_EVIDENCE`
+- `SUSTAINED_SOAK_EVIDENCE`
+- `RECOVERY`
+- `RELEASE_CANDIDATE`
+- `DOGFOOD_RUNBOOK`
+- `DOGFOOD_EVIDENCE`
+
+Primer soak certificado:
+- 0 HTTP 5xx.
+- 0 PostgreSQL waiters.
+- 58 requests completados antes del restart.
+- Latencia media 35.184 ms.
+- Latencia máxima 352.246 ms.
+- Después del restart: nuevamente 0×5xx y 0 waiters.
+
+Dogfood rehearsal:
+- Primer bootstrap: `replayed=false`.
+- Segundo bootstrap idempotente: `replayed=true`.
+- Mismo tenant/user.
+- Bootstrap posteriormente sellado.
+- Nuevo bootstrap: 403 `BOOTSTRAP_DISABLED`.
+- Owner original continúa autenticando.
+- Briefing continúa funcionando.
+- 0×5xx.
+- 0 PostgreSQL waiters.
+
+Artifact real preservado:
+- `adneko-one-dogfood-37142538356`
+
+### Pendiente
+No hay defecto técnico conocido bloqueando RC1.
+
+Dos cierres reales:
+1. Integración Git definitiva de la cadena stacked: PRs #78, #80, #82, #83, #84, #86, #87, #89, #92, #93 y #94. Todos aparecen open y mergeable. Debe revalidarse el HEAD integrado antes de declarar consolidación.
+2. Producción persistente real. Existe packaging Compose, recovery, runbooks y rehearsal, pero no hay evidencia de un host ADNEKO-controlado ejecutando ADNEKO ONE de forma continua.
+
+### Bloqueos
+- Técnico del RC1: ninguno demostrado actualmente.
+- Interno de ingeniería: consolidar la cadena de PRs sin romper gates.
+- Externo para madurez: host persistente ADNEKO-controlado, almacenamiento persistente, HTTPS/dominio y secretos reales.
+
+### Validación / Producción / FAT
+- Validación: **PASS — RC1 certificado**.
+- Production packaging: **PASS**.
+- Producción real sostenida: **NO todavía**.
+- FAT físico: **N/A**.
+- Equivalente FAT software: **PASS** mediante Production Stack + Recovery + E2E + Dogfood Rehearsal.
+- SAT en entorno persistente real: **PENDIENTE**.
+- Final v1.0: **NO declarado**; versión actual `1.0.0-rc.1`.
+
+### Siguiente cierre concreto
+No abrir v0.23 funcional.
+
+Secuencia:
+1. PR consolidation.
+2. Verificar HEAD integrado.
+3. Reejecutar Core + PWA + Production + Recovery + Soak + RC.
+4. Congelar SHA integrado.
+5. Preparar deployment persistente.
+6. Deploy RC1 real.
+7. Bootstrap `adneko-internal`.
+8. Sellar bootstrap.
+9. Dogfood real.
+10. Backup real.
+11. Restore drill.
+12. Operación sostenida durante días.
+13. Revisión de métricas/errores.
+14. Decidir v1.0.
+
+### Estado
+**RC1 CERTIFICADO · PRODUCTION PACKAGING PASS · HOST REAL / SAT PENDIENTE**
