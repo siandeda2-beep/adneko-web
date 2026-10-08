@@ -1839,3 +1839,72 @@ El checkpoint recuperado no identifica repositorio específico del runtime, SHA 
 **EN CONSTRUCCIÓN · IMPLEMENTACIÓN NO VERIFICADA · E2E NO CERTIFICADO · SIN RELEASE INTERNO CERTIFICADO**
 
 No asignar porcentaje de avance sin evidencias técnicas verificables.
+
+---
+
+## 25. Autonomous Company — P0 operational closure
+
+### Auditoría de continuidad
+- Fecha: 08 octubre 2026.
+- Prioridad: **ALTA**.
+- Objetivo: cierre operativo y certificación de producción, sin expansión funcional.
+
+### Localización confirmada
+- Repositorio principal: `siandeda2-beep/creator-ai-os`.
+- PR principal: **#51 — ADNEKO Outreach Runtime v1**.
+- Rama P0: `feature/adneko-outreach-runtime-v1-p0`.
+- Rama relacionada: `feature/adneko-outreach-runtime-v1`.
+- HEAD exacto PR #51: `bad04498936194804733c1e3f2b164155256596c`.
+- PR #51: open / draft / no mergeable en la inspección actual.
+- Integración con Intelligence OS: `siandeda2-beep/adneko-intelligence-os`, PR #359.
+- HEAD PR #359: `5fa4442618266bfe3b91e786010e9e9da6aa1d14`.
+- PR #359: open / mergeable.
+
+### Cadena operativa existente
+`Instrucción → planificación → validación/deduplicación → MEMBRANE → Gmail → reconciliation → replies → NEXUS → informe final`
+
+La certificación de producción todavía no está demostrada.
+
+### Gate declarado por PR #51
+No declarar Production Ready hasta demostrar:
+- certificación del core PostgreSQL;
+- adapters/readiness de producción;
+- E2E real Gmail / MEMBRANE / NEXUS;
+- diez campañas reales consecutivas con recipient/content/attachments/message IDs/logs/states verificados.
+
+### CI del HEAD exacto P0
+Workflow run `37720416281`:
+- `outreach-core-postgres`: **FAILURE**, `steps=null`;
+- `outreach-production-10x`: **SKIPPED**, `steps=null`.
+
+No existe evidencia de que las pruebas del core hayan llegado a ejecutarse. El FAILURE no se atribuye al código Autonomous Company.
+
+El job 10x quedó omitido por dependencia; no constituye una prueba fallida del runtime.
+
+### Bloques de cierre
+- PostgreSQL: persistencia, transacciones, restart/recovery e idempotencia.
+- MEMBRANE: snapshot de autorización válido, revocación y rechazo seguro.
+- Gmail: envío autorizado, destinatarios/adjuntos correctos e IDs reales.
+- Reconciliation: recuperación tras timeout sin duplicación de efectos.
+- Replies: asociación real de respuestas con mensajes, threads y campañas.
+- NEXUS: exportación verificable, acuses, replay y trazabilidad.
+- E2E: recorrido completo con evidencia durable y repetibilidad.
+
+### Reglas de certificación
+- No sustituir pruebas reales por mocks.
+- Un envío exitoso no equivale a operación totalmente conciliada.
+- No habilitar efectos externos sin autorización verificable.
+- No ampliar funciones antes del cierre P0.
+
+### Orden de ejecución
+1. Certificar PostgreSQL sobre el HEAD exacto `bad044989…`.
+2. Verificar credenciales, permisos y readiness de adapters.
+3. Ejecutar MEMBRANE ↔ Gmail ↔ NEXUS real con autorización controlada.
+4. Forzar fallos de red, retries, reinicios y reconciliation.
+5. Certificar reply capture / correlation real.
+6. Ejecutar diez campañas consecutivas con destinatarios autorizados.
+7. Integrar resultado con Brain, NEKO Voice e Intelligence OS.
+
+### Estado
+**P0 LOCALIZADO · HEAD EXACTO CONFIRMADO · CERTIFICACIÓN OPERATIVA PENDIENTE**
+
