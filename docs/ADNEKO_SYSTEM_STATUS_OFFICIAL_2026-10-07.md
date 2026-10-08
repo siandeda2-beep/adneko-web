@@ -1489,3 +1489,62 @@ No repetir bloques documentales anteriores salvo que sean necesarios como refere
 
 ### Estado
 **DISEÑO SAFETY AVANZADO · ISM-119 PENDIENTE · BUILD/FAT NO ACREDITADOS**
+
+
+---
+
+## 19. Process Control Engine — P3-47 / RU-01
+
+### Último checkpoint real localizado
+- Fecha: 02 octubre 2026.
+- Proyecto: PROCESS CONTROL ENGINE.
+- Repositorio: `siandeda2-beep/adneko`.
+- Rama: `pce/v1.0-c01`.
+- Último HEAD registrado: `a803deaa5a8a12ac387e50638a170b3d71397f34`.
+- FAT físico: pendiente.
+
+### Avances confirmados
+- P3-44 / P3-47: contratos de KPI de producción cerrados.
+- Gates de aceptación cerrados.
+- Validador ejecutable implementado.
+- CLI disponible: `npm run production-kpi:check -- <run.json>`.
+- Schemas V1.
+- Validación estricta.
+- Corrección de UTF-8 BOM.
+- Último registro de pruebas: **352/352 PASS**.
+- Baseline del fabricante: **4/4 intacto**.
+
+### Punto exacto donde quedó
+El bloqueo principal es la evidencia física **RU-01**.
+
+Falta completar:
+- construcción física;
+- timestamps reales;
+- inspección QC;
+- FAT;
+- registro de ejecución real.
+
+Los indicadores de producción permanecen en `NO_DATA` hasta completar la cadena:
+
+`CAPTURED → VALIDATED → RELEASED`
+
+No está autorizada la declaración de producción física completada.
+
+### Siguiente cierre concreto
+Retomar desde **P3-47 / RU-01**, sin reiniciar arquitectura ni repetir bloques cerrados.
+
+Prioridad:
+1. Verificar evidencia física RU-01.
+2. Completar registros de fabricación.
+3. Contrastar los registros contra el contrato de aceptación.
+4. Ejecutar QC/FAT físico.
+5. Ejecutar certificación final.
+6. Solo después declarar release físico.
+
+### Precisión de alcance
+Este checkpoint recupera el último estado documentado del 02-oct-2026.
+
+No existe todavía verificación en este hilo de commits posteriores al HEAD `a803deaa…`.
+
+### Estado
+**P3-47 / RU-01 · 352/352 PASS · FAT FÍSICO PENDIENTE**
