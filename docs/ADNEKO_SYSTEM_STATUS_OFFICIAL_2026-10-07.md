@@ -1784,3 +1784,49 @@ Este cierre documental no altera el estado físico del producto.
 
 ### Estado
 **REV-G VALIDADO · P2-MFG-547 ACTIVO · UNIT-001 HOLD · PHYSICAL BUILD NOT STARTED**
+
+
+---
+
+## 24. NEKO Remote Runtime — checkpoint recuperado 07 octubre 2026
+
+### Identidad y alcance
+Sistema independiente de ADNEKO, Windows-first, para que NEKO y sistemas autorizados operen computadoras previamente autorizadas sin dependencia estructural de Desktop Commander, TeamViewer o AnyDesk. Primera etapa: uso interno, no comercial.
+
+### Arquitectura y requisitos definidos
+- Conexión segura entre agente y dispositivo autorizado.
+- Identidad, autenticación y autorización por dispositivo.
+- Operaciones acotadas sobre archivos y carpetas: listar, leer, escribir, crear, mover y renombrar.
+- Terminal controlada mediante permisos granulares, comandos permitidos y bloqueo de acciones peligrosas.
+- Confirmación explícita de acciones sensibles.
+- Auditoría trazable de cada operación.
+- Reconexión, recuperación y soporte multidispositivo.
+- Interfaz API/MCP para integración con ADNEKO.
+
+### Evidencia recuperada
+- Arquitectura Windows-first: **definida**, no certificada en ejecución.
+- Requisitos de seguridad: **especificados**, no certificados en ejecución.
+- Agente Windows ejecutable: **no verificado**.
+- Servicio de conexión remota: **no verificado**.
+- Auth por dispositivo: **sin prueba certificada**.
+- Filesystem remoto: **sin prueba certificada**.
+- Terminal controlada: **sin prueba certificada**.
+- Auditoría operativa: **sin prueba certificada**.
+- Integración API/MCP: **pendiente de validación**.
+- E2E Windows: **sin evidencia recuperada**.
+- Release interno: **no verificado**.
+
+### Trazabilidad y limitaciones
+El checkpoint recuperado no identifica repositorio específico del runtime, SHA de implementación, PR ni resultados de pruebas ejecutables atribuibles a NEKO Remote Runtime. Los commits `fbff159` y `305ca4f` de `adneko-web` documentan inventario/enlace y **no** son evidencia de runtime operativo. La documentación recuperada no sustituye auditoría del código vigente.
+
+### Próximo cierre verificable
+1. Identificar el repositorio o directorio real del runtime y su HEAD.
+2. Inspeccionar servicio Windows, controles de autenticación/autorización y límites de filesystem/terminal.
+3. Ejecutar pruebas reales de operaciones autorizadas y denegadas, auditoría y recuperación.
+4. Demostrar secuencia E2E: Windows Agent → Device Auth → Secure Connection → Filesystem → Controlled Terminal → Audit.
+5. Validar integración API/MCP y emitir evidencia reproducible antes de declarar un release.
+
+### Estado
+**EN CONSTRUCCIÓN · IMPLEMENTACIÓN NO VERIFICADA · E2E NO CERTIFICADO · SIN RELEASE INTERNO CERTIFICADO**
+
+No asignar porcentaje de avance sin evidencias técnicas verificables.
