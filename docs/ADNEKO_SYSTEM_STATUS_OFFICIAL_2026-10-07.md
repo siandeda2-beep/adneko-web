@@ -1658,3 +1658,57 @@ Secuencia recomendada:
 
 ### Estado
 **STAGING DB HEALTHY · 14/14 PASS FOCALIZADO · CERTIFICACIÓN E2E PENDIENTE**
+
+
+---
+
+## 22. VisionFind Edge — baseline hardware / edge-demo unresolved
+
+### Último hilo recuperado
+- Último registro técnico identificado: 30 septiembre 2026.
+- Última auditoría documental: 07 octubre 2026.
+- Desarrollo separado de VisionFind Software y EDGE OS.
+
+### Desarrollo técnico identificado
+- Hardware: `VF-ISB-01 Rev A`.
+- Rama histórica: `hardware/vf-isb-01-rev-a`.
+- Arquitectura y baseline congeladas con ECO 001–006.
+- PH2-B: cerrado.
+- PH2-C: cerrado.
+- PH2-D: cerrado.
+- PH2-E1: KiCad 9.0.9, nueve hojas interpretadas, ERC estructural 0 errores / 0 advertencias.
+- Evidencia histórica: commit `2294152c…`.
+
+### Evidencia de hojas
+- Sheet 01 `INPUT_PROTECTION`: captura realizada, ERC 0/0.
+- Sheet 02 `CURRENT_DISTRIBUTION`: captura realizada, ERC 0 errores / 2 advertencias asociadas a INA228.
+
+### Problemas pendientes
+Los días 29 y 30 de septiembre se registraron fallos repetidos en VisionFind Edge Demo Gate, job `edge-demo`.
+
+No existe evidencia recuperada que confirme la resolución de esos fallos.
+
+La auditoría del 07-oct tampoco acredita:
+- unidad física validada;
+- FAT aprobado;
+- integración Edge → VisionFind Core demostrada.
+
+### Precisión de estado
+Los datos anteriores representan continuidad histórica recuperada, no certificación del HEAD actual.
+
+No se ha verificado todavía:
+- HEAD actual del repositorio;
+- commits posteriores al 30-sep;
+- resolución de `edge-demo`;
+- estado real actual de fabricación/FAT.
+
+### Punto exacto de continuidad
+1. Verificar HEAD, rama y commits posteriores al 30 de septiembre.
+2. Inspeccionar los fallos de `edge-demo` y corregir la causa demostrada.
+3. Verificar cierre de INA228, MCU, TMP117 y watchdog.
+4. Ejecutar validaciones de esquemáticos, ERC y pruebas disponibles.
+5. Comprobar integración Edge → Core bajo conectividad intermitente.
+6. Mantener FAT físico y producción bloqueados hasta obtener evidencia verificable.
+
+### Estado
+**BASELINE HARDWARE AVANZADA · EDGE-DEMO NO CERRADO · FAT/PRODUCCIÓN BLOQUEADOS**
