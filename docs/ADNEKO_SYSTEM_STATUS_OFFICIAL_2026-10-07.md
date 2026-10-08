@@ -424,3 +424,109 @@ Secuencia:
 
 ### Estado
 **RC1 CERTIFICADO · PRODUCTION PACKAGING PASS · HOST REAL / SAT PENDIENTE**
+
+
+---
+
+## 6. Creador IA OS — RC2 base certificada
+
+### Rama / HEAD correcto
+Repositorio: `siandeda2-beep/creator-ai-os`
+
+- RC2 base: `main` y `presentation/creator-os-final`
+- HEAD certificado: `69472fba04a3b589c44721042288798f7bb5a8b4`
+- Esquema base: 21
+
+Líneas posteriores verificadas:
+- PR40 → `a264e188…` — corrección del registro de consumo IA — borrador, sin integrar.
+- PR47 → `d7a25cd5…` — lectura de contexto para Company — borrador, sin integrar.
+- PR48 → `7c1561ee…` — autoridad y promoción atómica del aprendizaje — borrador; propone esquema 22.
+- PR39 / `feature/neko-voice-conversation-bridge-v0.4` → `77834c3af4f2fae5e84c5ce9a7b68ecc21d2dac8` — abierta; catálogo declara esquema 98.
+
+Corrección importante:
+PR39 conserva archivos de NEKO y runtime autónomo y su historia diverge de `main`. No debe tratarse como actualización lineal del esquema 21. El último archivo SQL numerado es 096, mientras el catálogo declara versión 98.
+
+### Construido
+RC2 base:
+- Aplicación.
+- Autenticación.
+- Proyectos.
+- Estado.
+- Memoria.
+- Persistencia.
+- Controles de operación.
+
+Evoluciones posteriores implementadas en código:
+- PR40: corrección del registro obligatorio del consumo IA.
+- PR47: lectura autenticada del contexto con aislamiento entre propietarios y sin permiso de ejecución.
+- PR48: controles del aprendizaje y promoción transaccional.
+- PR39: propuestas persistentes, confirmación, ejecución gobernada, evidencia, checkpoints y recuperación tras reinicios.
+
+Estas líneas tienen distintos niveles de validación y no constituyen una única versión terminada.
+
+### Pruebas y evidencia
+RC2 confirmado:
+- Workflow run `37010245566`: PASS.
+- PostgreSQL aislado ejecutado.
+- Control RC2 ejecutado.
+- Generación/verificación del comprobante ejecutada.
+- Regresión general: **1.467 PASS, 0 FAIL, 12 omitidas**.
+- Pruebas específicas adicionales ejecutadas por separado.
+- Artifact del run aún disponible al momento de la revisión.
+
+PR40:
+- Evidencia histórica con Qwen real + PGlite.
+- Incluye consumo, restart y repetición sin consumo adicional.
+- No certifica automáticamente el HEAD actual ni PostgreSQL nativo con Qwen.
+
+PR47:
+- Evidencia anterior marcada expresamente `STALE_REQUIRES_RERUN`.
+
+PR48:
+- Comprobaciones parciales registradas.
+- Falta validación completa del candidato actual.
+
+NEKO / PR39:
+- Existe certificación anterior exitosa en `eac430e3…`.
+- No certifica el HEAD actual `77834c3a…`.
+
+Esta revisión no ejecutó nuevas pruebas del producto.
+
+### Pendientes y bloqueos
+Técnico:
+- Reconciliar ramas y migraciones.
+- Validar HEAD actuales.
+- Demostrar integración completa.
+- Demostrar restart, recovery e idempotencia.
+
+Externo confirmado:
+- Últimos trabajos PR39/40/47/48 muestran `runner_id=0` y cero pasos ejecutados.
+- La causa exacta no está establecida.
+
+Despliegue:
+- El último hilo reportó Render lleno.
+- No fue reconfirmado en esta revisión por falta de workspace seleccionado.
+
+Producción:
+- Falta evidencia del deployment exacto y de operación sostenida.
+
+FAT físico:
+- N/A para este cierre de software.
+
+### Estado exacto
+- RC2 base: **CERTIFICADO**.
+- Correcciones e integraciones posteriores: **PENDIENTES DE ACEPTACIÓN**.
+- Producción pública: **NO DEMOSTRADA**.
+- Operación sostenida: **NO DEMOSTRADA**.
+
+### Siguiente cierre concreto
+1. Reconciliar Creador RC2 con las integraciones existentes.
+2. Fijar un único candidato reproducible.
+3. Ejecutar sobre ese SHA:
+   - regresión completa;
+   - PostgreSQL;
+   - autorización → ejecución → evidencia → recuperación.
+4. Solo después decidir nueva preparación para producción.
+
+### Estado
+**RC2 BASE CERTIFICADA · INTEGRACIONES POSTERIORES PENDIENTES · PRODUCCIÓN NO DEMOSTRADA**
