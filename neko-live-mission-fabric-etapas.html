@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#04101a">
+<title>ADNEKO · NEKO LIVE MISSION FABRIC · Historial oficial de desarrollo</title>
+<meta name="description" content="Etapas de desarrollo y avances comprobados de NEKO LIVE MISSION FABRIC hasta el 18 de octubre de 2026.">
+<style>
+:root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif;color:#ecf5fc;background:#04101a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#143751 0%,transparent 55%),#04101a}a{color:#8bdaff}a:hover{color:#fff}
+main{max-width:1100px;margin:auto;padding:54px 24px 100px}
+header{border-bottom:1px solid #315b73;padding-bottom:28px;margin-bottom:38px}
+.eyebrow{color:#7dcfff;font-size:12px;letter-spacing:.23em;text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,54px);font-weight:400;line-height:1.13;margin:18px 0}
+h2{font-size:22px;font-weight:500;margin:0 0 12px;color:#9ee0ff}
+p,li{line-height:1.7;color:#c9dbe8}
+.lede{font-size:17px;max-width:890px}
+.meta{font-size:13px;color:#9bbace}
+nav{margin:0 0 28px}.back{display:inline-block;padding:11px 14px;border:1px solid #3b728f;text-decoration:none;font-size:13px;border-radius:5px}
+.stage{border:1px solid #29536c;background:#0a1c2ad9;padding:24px 28px;margin:16px 0;border-radius:8px}
+.stage-head{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.tag{border:1px solid #47856e;color:#9bedd0;padding:5px 9px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.05em}
+.tag.partial{border-color:#8c704b;color:#f3c889}
+.stage ul{margin:9px 0 0;padding-left:23px}
+.evidence{font-size:13px;color:#a4bbc9;border-top:1px solid #274b60;margin-top:18px;padding-top:12px}
+.summary{background:#102839;border-left:3px solid #7ecffd;padding:18px 22px;margin:25px 0 35px}
+table{width:100%;border-collapse:collapse;margin:15px 0 32px;font-size:14px}
+th,td{border-bottom:1px solid #28485b;text-align:left;padding:13px 10px;vertical-align:top}
+th{color:#a9dfff;font-size:12px}
+small{color:#9eb6c6}
+footer{border-top:1px solid #23465d;padding-top:26px;margin-top:50px;color:#8ca8bb;font-size:12px;line-height:1.7}
+@media(max-width:600px){main{padding:28px 16px 60px}.stage{padding:19px}table{font-size:12px}}
+</style>
+<script src="/adneko-header.js" defer></script>
+</head>
+<body><adneko-header></adneko-header>
+<main>
+<nav><a class="back" href="/development-board.html">← Volver a la tabla de desarrollos</a></nav>
+<header>
+<div class="eyebrow">ADNEKO · Documento oficial de avances</div>
+<h1>NEKO LIVE MISSION FABRIC<br>Historial de desarrollo por etapas</h1>
+<p class="lede">Registro cronológico y técnico del trabajo acumulado en la infraestructura de misiones de NEKO. Distingue construcción, pruebas locales, ejecución real, integración de código y certificación operativa, sin convertir un PASS parcial en certificación de producción.</p>
+<p class="meta"><strong>Corte:</strong> 18 de octubre de 2026 · <strong>Proyecto:</strong> NEKO LIVE MISSION FABRIC · <strong>Repositorio:</strong> <a href="https://github.com/siandeda2-beep/adneko">siandeda2-beep/adneko</a> · <strong>Rama de integración:</strong> feature/neko-live-host-once-20261017</p>
+</header>
+
+<div class="summary"><strong>Resultado acumulado al corte.</strong><p>El núcleo de misiones, persistencia, reservas, validación de evidencias y transporte Remote V3 está desarrollado. Se reportó y documentó una primera misión real Windows con respuesta PASS. Posteriormente se consolidaron componentes, se endurecieron los gates del host, se incorporó el soporte de tres slots Codex y se fusionó el contrato durable Codex–Mission. La ejecución concurrente real de tres agentes, la identidad autenticada de tres cuentas distintas y la operación sostenida de extremo a extremo no estaban certificadas en este corte.</p></div>
+
+<section class="stage"><div class="stage-head"><h2>Etapa 1 · Arquitectura y contrato de misiones</h2><span class="tag">CONSTRUIDA</span></div>
+<ul><li>Definición de Mission Fabric como capa de coordinación de objetivos autorizados: misión, tareas, dependencias, reservas, permisos y estados.</li><li>Separación de responsabilidades: NEKO Brain interpreta objetivos; Agent Orchestrator coordina sistemas; Mission Fabric gestiona ejecución y evidencia; NEKO Remote V3 transporta solicitudes autorizadas a Windows.</li><li>Implementación del modelo persistente de misiones, eventos, snapshots y control de revisión/CAS.</li></ul>
+<div class="evidence">Base técnica: <code>tools/neko-mission/mission.mjs</code>, <code>store.mjs</code> y documentación de Mission Fabric en el repositorio.</div></section>
+
+<section class="stage"><div class="stage-head"><h2>Etapa 2 · Motor, scheduler, reservas y validación</h2><span class="tag">PASS DE COMPONENTES</span></div>
+<ul><li>Implementación de despacho acotado, reserva de tareas, correlación de solicitudes e idempotencia.</li><li>Incorporación del flujo <code>read-cycle</code> y la verificación de recibos Remote V3 antes de registrar resultados PASS.</li><li>Certificación nativa reportada en Windows con Node 22.16.0: <strong>122/122 pruebas PASS</strong> sobre el commit <code>b7ea2253</code>.</li></ul>
+<div class="evidence">Evidencia: <a href="https://github.com/siandeda2-beep/adneko/issues/129#issuecomment-6231128013">recibo de pruebas nativas en GitHub</a>. El PASS corresponde al alcance ejecutado en ese commit.</div></section>
+
+<section class="stage"><div class="stage-head"><h2>Etapa 3 · Primera misión LIVE hacia Windows</h2><span class="tag">PASS OPERACIONAL REPORTADO</span></div>
+<ul><li>Mission Fabric generó una solicitud LIVE autorizada <code>workspace-info</code> y la entregó mediante NEKO Remote V3.</li><li>El host Windows devolvió respuesta <strong>PASS, exitCode 0</strong>, con correlación de solicitud y recibo.</li><li>Se demostró la comunicación real para esa operación; no supone operación autónoma continua.</li></ul>
+<div class="evidence">Evidencia: <a href="https://github.com/siandeda2-beep/adneko/issues/129#issuecomment-6232284326">recibo operacional Windows en GitHub</a>.</div></section>
+
+<section class="stage"><div class="stage-head"><h2>Etapa 4 · Consolidación de la cadena Mission Fabric</h2><span class="tag">CÓDIGO INTEGRADO</span></div>
+<ul><li>Consolidación de dependencias y trabajo asociado a los PR <a href="https://github.com/siandeda2-beep/adneko/pull/148">#148</a>, <a href="https://github.com/siandeda2-beep/adneko/pull/149">#149</a> y <a href="https://github.com/siandeda2-beep/adneko/pull/155">#155</a>, conservando el código certificado según el checkpoint de coordinación.</li><li>Se mantuvo separado el avance del código de la certificación de operación sostenida.</li></ul>
+<div class="evidence">Alcance: consolidación técnica reportada; no significa que todos los PR citados estén individualmente fusionados a <code>main</code>.</div></section>
+
+<section class="stage"><div class="stage-head"><h2>Etapa 5 · Supervisor Windows y endurecimiento de gates</h2><span class="tag">FUSIONADO EN RAMA DE INTEGRACIÓN</span></div>
+<ul><li>Supervisor <code>host-once</code> con exclusión de ejecución mediante lease local.</li><li>Mejoras de diagnóstico y sanitización de errores: PR <a href="https://github.com/siandeda2-beep/adneko/pull/168">#168</a> y <a href="https://github.com/siandeda2-beep/adneko/pull/173">#173</a>.</li><li>Endurecimiento de Native Gate, procesos y pruebas: PR <a href="https://github.com/siandeda2-beep/adneko/pull/171">#171</a>.</li><li>Pruebas locales reportadas tras PR #173: <strong>21/21</strong> de host y <strong>171/171</strong> de Native Gate PASS.</li></ul>
+<div class="evidence">Límite: el fallo anterior del lanzador PowerShell PR #158 (<code>PR158_GATE_INTERNAL_FAILED</code>) no tiene cierre demostrado; la certificación del supervisor en operación sostenida sigue pendiente.</div></section>
+
+<section class="stage"><div class="stage-head"><h2>Etapa 6 · Tres slots Codex y ejecución vinculada a Mission</h2><span class="tag">B1 + B2 FUSIONADOS</span></div>
+<ul><li><strong>B1:</strong> soporte de hasta tres slots Codex, con worktrees y <code>CODEX_HOME</code> independientes y rechazo de configuraciones fuera del límite; PR <a href="https://github.com/siandeda2-beep/adneko/pull/169">#169</a>.</li><li><strong>B2:</strong> registro durable de inicio y resultado <code>COMPLETED_UNVERIFIED</code>, enlazado a misión, reserva, intento, slot, participante, worktree y <code>requestId</code>.</li><li>Persistencia de hash y tamaño de respuesta sin almacenar el texto; protección fail-closed ante ejecución incierta tras reinicio; PASS solo tras evidencia Remote V3 validada.</li><li>Codex 3 reportó <strong>138/138 pruebas locales PASS</strong> con dobles controlados. PR <a href="https://github.com/siandeda2-beep/adneko/pull/175">#175</a> fusionado en la rama autorizada; sus <strong>10/10 blobs</strong> se comprobaron después de la fusión.</li></ul>
+<div class="evidence">Commit de integración B2: <a href="https://github.com/siandeda2-beep/adneko/commit/8549ecc15463aac5d53dc7b1f4fd8362c33dd03e"><code>8549ecc15463aac5d53dc7b1f4fd8362c33dd03e</code></a>. Los dobles controlados no certifican tres cuentas reales.</div></section>
+
+<section class="stage"><div class="stage-head"><h2>Etapa 7 · Recuperación controlada y límites conocidos</h2><span class="tag">B5 PASS CONTROLADO</span></div>
+<ul><li>ChatGPT 3 reportó pruebas sintéticas de locks huérfanos en almacenamiento y host: <code>EEXIST</code> y <code>HOST_LOCK_BUSY_OR_RECOVERY_REQUIRED</code>.</li><li>Snapshot, revisión, reserva, <code>requestId</code> y claves de idempotencia conservados; reanudación tras retirada manual controlada del lock.</li><li>No se modificó código: la recuperación manual conservadora es el diseño actual. <strong>No existe recuperación automática tras crash certificada.</strong></li></ul>
+<div class="evidence">Registro de B5: <a href="https://github.com/siandeda2-beep/adneko/blob/docs/equipo3-dictamenes-20261018/docs/neko-live-mission-fabric/evidence/equipo-3/E3-07E-B5-recuperacion-locks-20261018.md">informe E3-07E en GitHub</a>; ejecución reportada, sin TAP independiente adjunto.</div></section>
+
+<section class="stage"><div class="stage-head"><h2>Etapa 8 · Concurrencia real y cierre integral</h2><span class="tag partial">EN DESARROLLO / PENDIENTE</span></div>
+<ul><li><strong>E3-08A:</strong> implementación y prueba de tres tareas concurrentes con ejecutores controlados. Al corte se había actualizado el checkout al merge B2 y emitido la instrucción de implementación; todavía no existía resultado PASS de esta etapa.</li><li><strong>B4:</strong> <code>codex login status</code> detecta sesión, pero no demuestra que tres perfiles correspondan a tres cuentas autenticadas distintas. Requiere mecanismo confiable y oficialmente soportado.</li><li>Faltan demostrar ejecución periódica autónoma, operación sostenida, recuperación de fallos integrada, tres agentes Codex reales y E2E conjunto de Agent Orchestrator + Mission Fabric + Remote V3 con misiones de varios pasos.</li><li>Las capacidades de colaboración ampliada, voz, móvil y continuidad offline permanecen en el alcance evolutivo; este checkpoint no las declara certificadas.</li></ul>
+<div class="evidence">Estado al 18/10/2026: pendientes operativos, no defectos automáticamente atribuidos a los módulos que ya aprobaron sus pruebas.</div></section>
+
+<h2>Control de estado al corte</h2>
+<table><thead><tr><th>Área</th><th>Resultado técnico</th><th>Alcance / limitación</th></tr></thead><tbody>
+<tr><td>Motor + persistencia + evidencias</td><td>Construido y probado</td><td>Sin certificación global de producción</td></tr>
+<tr><td>Primera misión LIVE Windows</td><td>PASS operacional</td><td>Una operación autorizada; no servicio permanente</td></tr>
+<tr><td>Supervisor / gate</td><td>Código fusionado y pruebas locales PASS</td><td>Operación sostenida y PR #158 pendientes</td></tr>
+<tr><td>B1 / B2</td><td>Fusionados en rama de integración</td><td>138/138 PASS B2 con dobles; 10/10 blobs verificados</td></tr>
+<tr><td>B5</td><td>PASS sintético reportado</td><td>Recuperación manual; no automática</td></tr>
+<tr><td>B4 + E2E-3</td><td>Pendientes</td><td>Identidad real y concurrencia integral no certificadas</td></tr>
+</tbody></table>
+<p><small><strong>Criterio documental:</strong> “PASS” identifica la prueba y el entorno especificados. “Fusionado” identifica integración de código en la rama indicada. Ninguno implica por sí solo certificación de producción, despliegue en <code>main</code>, operación sin supervisión ni cumplimiento de capacidades futuras.</small></p>
+
+<footer>ADNEKO · Innovación · APP · Ecosistemas · La empresa del futuro, hoy.<br>Documento de evolución técnica del proyecto, elaborado a partir de los checkpoints y evidencias disponibles hasta el 18 de octubre de 2026.</footer>
+</main></body></html>
