@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#04101a">
 <title>ADNEKO · NEKO LIVE MISSION FABRIC · Historial oficial de desarrollo</title>
-<meta name="description" content="Etapas de desarrollo y avances comprobados de NEKO LIVE MISSION FABRIC hasta el 18 de octubre de 2026.">
+<meta name="description" content="Etapas de desarrollo de NEKO LIVE MISSION FABRIC y certificación Windows de misión real completada el 26 de octubre de 2026.">
 <style>
 :root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif;color:#ecf5fc;background:#04101a}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#143751 0%,transparent 55%),#04101a}a{color:#8bdaff}a:hover{color:#fff}
@@ -40,7 +40,7 @@ footer{border-top:1px solid #23465d;padding-top:26px;margin-top:50px;color:#8ca8
 <div class="eyebrow">ADNEKO · Documento oficial de avances</div>
 <h1>NEKO LIVE MISSION FABRIC<br>Historial de desarrollo por etapas</h1>
 <p class="lede">Registro cronológico y técnico del trabajo acumulado en la infraestructura de misiones de NEKO. Distingue construcción, pruebas locales, ejecución real, integración de código y certificación operativa, sin convertir un PASS parcial en certificación de producción.</p>
-<p class="meta"><strong>Corte:</strong> 18 de octubre de 2026 · <strong>Proyecto:</strong> NEKO LIVE MISSION FABRIC · <strong>Repositorio:</strong> <a href="https://github.com/siandeda2-beep/adneko">siandeda2-beep/adneko</a> · <strong>Rama de integración:</strong> feature/neko-live-host-once-20261017</p>
+<p class="meta"><strong>Corte histórico:</strong> 18 de octubre de 2026 · <strong>Actualización operacional:</strong> 26 de octubre de 2026 · <strong>Proyecto:</strong> NEKO LIVE MISSION FABRIC · <strong>Repositorio:</strong> <a href="https://github.com/siandeda2-beep/adneko">siandeda2-beep/adneko</a> · <strong>Rama de integración:</strong> feature/neko-live-host-once-20261017</p>
 </header>
 
 <div class="summary"><strong>Resultado acumulado al corte.</strong><p>El núcleo de misiones, persistencia, reservas, validación de evidencias y transporte Remote V3 está desarrollado. Se reportó y documentó una primera misión real Windows con respuesta PASS. Posteriormente se consolidaron componentes, se endurecieron los gates del host, se incorporó el soporte de tres slots Codex y se fusionó el contrato durable Codex–Mission. La ejecución concurrente real de tres agentes, la identidad autenticada de tres cuentas distintas y la operación sostenida de extremo a extremo no estaban certificadas en este corte.</p></div>
@@ -77,6 +77,19 @@ footer{border-top:1px solid #23465d;padding-top:26px;margin-top:50px;color:#8ca8
 <ul><li><strong>E3-08A:</strong> implementación y prueba de tres tareas concurrentes con ejecutores controlados. Al corte se había actualizado el checkout al merge B2 y emitido la instrucción de implementación; todavía no existía resultado PASS de esta etapa.</li><li><strong>B4:</strong> <code>codex login status</code> detecta sesión, pero no demuestra que tres perfiles correspondan a tres cuentas autenticadas distintas. Requiere mecanismo confiable y oficialmente soportado.</li><li>Faltan demostrar ejecución periódica autónoma, operación sostenida, recuperación de fallos integrada, tres agentes Codex reales y E2E conjunto de Agent Orchestrator + Mission Fabric + Remote V3 con misiones de varios pasos.</li><li>Las capacidades de colaboración ampliada, voz, móvil y continuidad offline permanecen en el alcance evolutivo; este checkpoint no las declara certificadas.</li></ul>
 <div class="evidence">Estado al 18/10/2026: pendientes operativos, no defectos automáticamente atribuidos a los módulos que ya aprobaron sus pruebas.</div></section>
 
+
+<section class="stage" id="certificacion-windows-20261026">
+  <div class="stage-head"><h2>Etapa 10 · Integración LIVE Windows y misión real (26/10/2026)</h2><span class="tag">PASS OPERATIVO</span></div>
+  <ul>
+    <li>NEKO Remote V3 completó el mantenimiento de Operations: <a href="https://github.com/siandeda2-beep/adneko/pull/230">PR #230 fusionado en <code>main</code></a> y liberación formal de la exclusividad para LIVE.</li>
+    <li>Instalación real de Fase B del puente Mission Fabric → RC7/8791: <strong><code>CUTOVER_PASS</code></strong>, recuperación del runtime y conservación verificada de descriptores NTFS y ledger histórico.</li>
+    <li>Suite nativa ejecutada en Windows: <strong>122/122 casos PASS, 0 fallos</strong>. Este resultado corresponde a las pruebas nativas; la misión real dispone de evidencia adicional independiente.</li>
+    <li>Misión nueva <code>console-live228-e2e-20261026-01</code>: aprobación efectiva del fundador, ejecución real, estado terminal <strong><code>COMPLETED</code></strong> y comprobación de persistencia mediante lectura del estado y consulta desde consola 8792.</li>
+    <li><a href="https://github.com/siandeda2-beep/adneko/pull/228">PR #228 fusionado en <code>main</code></a> (merge <code>43f12356</code>). El sistema está validado para el flujo E2E comprobado; no se declara autonomía general ilimitada ni CI global verde.</li>
+  </ul>
+  <div class="evidence"><strong>Evidencia Windows:</strong> <a href="https://github.com/siandeda2-beep/adneko/issues/231#issuecomment-6417063730">cutover Fase B L05</a> · <a href="https://github.com/siandeda2-beep/adneko/issues/231#issuecomment-6423652404">122/122 native-gate</a> · <a href="https://github.com/siandeda2-beep/adneko/pull/228#issuecomment-6424019984">expediente de misión, aprobación y persistencia</a>. La incidencia GitHub Actions sigue separada de esta certificación Windows.</div>
+</section>
+<p class="meta"><strong>Nota de lectura:</strong> la tabla que sigue corresponde al corte histórico del 18/10/2026; la etapa 10 anterior recoge la actualización verificada del 26/10/2026.</p>
 <h2>Control de estado al corte</h2>
 <table><thead><tr><th>Área</th><th>Resultado técnico</th><th>Alcance / limitación</th></tr></thead><tbody>
 <tr><td>Motor + persistencia + evidencias</td><td>Construido y probado</td><td>Sin certificación global de producción</td></tr>
@@ -88,5 +101,5 @@ footer{border-top:1px solid #23465d;padding-top:26px;margin-top:50px;color:#8ca8
 </tbody></table>
 <p><small><strong>Criterio documental:</strong> “PASS” identifica la prueba y el entorno especificados. “Fusionado” identifica integración de código en la rama indicada. Ninguno implica por sí solo certificación de producción, despliegue en <code>main</code>, operación sin supervisión ni cumplimiento de capacidades futuras.</small></p>
 
-<footer>ADNEKO · Innovación · APP · Ecosistemas · La empresa del futuro, hoy.<br>Documento de evolución técnica del proyecto, elaborado a partir de los checkpoints y evidencias disponibles hasta el 18 de octubre de 2026.</footer>
+<footer>ADNEKO · Innovación · APP · Ecosistemas · La empresa del futuro, hoy.<br>Documento de evolución técnica: historial al 18 de octubre y actualización operativa del 26 de octubre de 2026.</footer>
 <div class="actions"><a class="btn" href="https://docs.google.com/document/d/1S5uVET9ufIv_Ga0rFuFZbpsUVxqvQwgT/edit" target="_blank" rel="noopener noreferrer">Ver avance Fase 2 ↗</a></div></main></body></html>
