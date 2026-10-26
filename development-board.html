@@ -63,6 +63,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
 @media(max-width:900px){.checkpoint-wrap{grid-template-columns:1fr}.dates{text-align:left}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.hero{min-height:560px}.hero .shell{padding-top:70px;padding-bottom:38px}.hero-board-title{font-size:clamp(25px,8.2vw,38px)}.subtitle{letter-spacing:.25em}.stats{grid-template-columns:1fr 1fr}.stat{padding:16px}.stat b{font-size:24px}}
 
+.operational-summary{margin:12px 0 26px;padding:22px;border:1px solid #26755f;border-radius:8px;background:rgba(7,35,35,.94)}.operational-summary h2{font-size:19px;color:#9cf3d2;margin:0 0 8px}.operational-summary p{color:#c6e4df;font-size:12px;line-height:1.6;margin:0 0 18px}.operational-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.operational-cards article{display:flex;flex-direction:column;gap:10px;padding:18px;background:#0c2e32;border:1px solid #3c947c;border-radius:6px}.operational-cards strong{font-size:13px;color:#fff}.operational-cards b{font-size:15px;color:#86efbd}.operational-cards span{font-size:12px;line-height:1.5;color:#d7ece5}@media(max-width:750px){.operational-cards{grid-template-columns:1fr}}
 /* Separación de columnas: los contenidos técnicos nunca invaden la celda contigua. */
 .board-head,.dev-row{grid-template-columns:38px minmax(245px,1.8fr) minmax(175px,1fr) minmax(230px,1.35fr) minmax(210px,1.2fr) minmax(190px,1.2fr);align-items:start;min-width:1280px}
 .dev-row>*{min-width:0;max-width:100%;overflow-wrap:anywhere}
@@ -85,7 +86,7 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
 .dev-row.readability-row>.metric::before{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:7px;color:#90d8ff}
 .dev-row.readability-row>.metric:not(.validation):not(.production)::before{content:"TRABAJO CONSTRUIDO · INGENIERÍA"}
 .dev-row.readability-row>.metric.validation::before{content:"EVIDENCIA · VALIDACIÓN";color:#83e6bf}
-.dev-row.readability-row>.metric.production::before{content:"OPERACIÓN · PRODUCCIÓN / FAT · ALCANCE";color:#f5c589}
+.dev-row.readability-row>.metric.production::before{content:"OPERACIÓN REAL · SIGUIENTE ETAPA";color:#f5c589}
 .dev-row.readability-row>.state{padding:4px 0}
 </style>
 <script src="/adneko-header.js" defer></script>
@@ -121,8 +122,8 @@ footer{border-top:1px solid #153249;padding:34px 0 44px;color:#839aa9;text-align
   </div>
 
   <section class="board" aria-label="Estado verificable de desarrollos ADNEKO">
-    <div class="board-head">
-      <div>#</div><div>Desarrollo</div><div>Trabajo construido · Ingeniería</div><div>Evidencia · Validación</div><div>Operación · Producción/FAT · Alcance</div><div>Estado</div>
+    <div class="operational-summary" aria-label="Hitos operativos certificados de octubre 2026"><h2>SISTEMAS FUNCIONANDO REALMENTE EN WINDOWS</h2><p>26 de octubre de 2026 · Estados respaldados por ejecuciones y recibos reales. La etapa comercial se evalúa por separado.</p><div class="operational-cards"><article><strong>NEKO REMOTE V3</strong><b>OPERATIVO REAL</b><span>Acceso autorizado a Windows, canal #231 y operaciones ejecutadas.</span></article><article><strong>ORCHESTRATOR RC7</strong><b>OPERATIVO REAL</b><span>Consola 8792, aprobaciones, misión completada y persistencia.</span></article><article><strong>NEKO LIVE</strong><b>OPERATIVO REAL</b><span>Fase B instalada · E2E COMPLETED · 122/122 PASS.</span></article></div></div><div class="board-head">
+      <div>#</div><div>Desarrollo</div><div>Trabajo construido · Ingeniería</div><div>Evidencia · Validación</div><div>Operación real · Siguiente etapa</div><div>Estado</div>
     </div>
 
 <div class="board-group"><h2>INTELIGENCIA Y AUTONOMÍA</h2><p>11 componentes</p></div>
